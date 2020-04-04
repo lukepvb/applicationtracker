@@ -14,6 +14,4 @@ const userSchema = new Schema({
 const User = mongoose.model('user', userSchema);
 
 // exports all the models in an object to be used in the controller
-module.exports = {
-  User,
-};
+module.exports = User;
