@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -13,13 +13,11 @@ const appSchema = new Schema({
   dubDown: { type: Boolean, default: false },
   notes: String,
   dateSubmitted: { type: Date, default: Date.now },
-  followUp: Date
+  followUp: Date,
 });
 
 // creates a model for the 'user' collection that will be part of the export
-const App = mongoose.model("app", appSchema);
+const App = mongoose.model('app', appSchema);
 
 // exports all the models in an object to be used in the controller
-module.exports = {
-  App
-};
+module.exports = App;
