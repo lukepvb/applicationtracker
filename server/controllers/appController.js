@@ -15,7 +15,7 @@ appController.createApp = (req, res, next) => {
     dubDown,
     notes,
     dateSubmitted,
-    followUp,
+    followUp
   } = req.body;
 
   appController
@@ -29,7 +29,7 @@ appController.createApp = (req, res, next) => {
       dubDown: dubDown,
       notes: notes,
       dateSubmitted: dateSubmitted,
-      followUp: followUp,
+      followUp: followUp
     })
     .then((newApp) => {
       res.locals.newApp = newApp;
@@ -38,7 +38,7 @@ appController.createApp = (req, res, next) => {
     .catch((err) => {
       return next({
         log: `ERROR appController.createApp: ERROR ${err}`,
-        message: `ERROR: appController.createApp: ERROR see server log for details`,
+        message: `ERROR: appController.createApp: ERROR see server log for details`
       });
     });
 };
@@ -62,7 +62,7 @@ appController.deleteApp = (req, res, next) => {
     .catch((err) => {
       return next({
         log: `ERROR: appController.deleteApp: ERROR: ${err}`,
-        message: `ERROR: appController.deleteApp: ERROR: see server log for details`,
+        message: `ERROR: appController.deleteApp: ERROR: see server log for details`
       });
     });
 };
