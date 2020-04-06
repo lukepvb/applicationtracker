@@ -1,9 +1,18 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 // initialize express
 const app = express();
+
+// bring in the database key and connect w/ mongoose
+const db = require('./config/keys').mongoURI;
+
+mongoose
+  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected...'))
+  .catch((err) => console.log('Error connecting to the database', err));
 
 // create a PORT variable for server listener
 const PORT = process.env.PORT || 3000;
