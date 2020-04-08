@@ -1,13 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+// const webpack = require("webpack-dev-server"); // we will see if we need this
 
 module.exports = {
   mode: 'development',
-  entry: './index.js',
+  entry: './client/src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
     filename: 'index_bundle.js',
   },
   module: {
@@ -17,6 +16,10 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: ['@babel/plugin-proposal-class-properties'],
+          },
         },
       },
       {
@@ -43,22 +46,11 @@ module.exports = {
           },
         ],
       },
-
-      {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
-        },
-      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html',
+      template: './client/assets/index.html',
     }),
   ],
   devServer: {
