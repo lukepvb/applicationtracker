@@ -1,12 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const webpack = require("webpack-dev-server"); // we will see if we need this
+const webpack = require('webpack');
 
 module.exports = {
-  mode: process.env.NODE_ENV,
+  mode: 'development',
   entry: './index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
     filename: 'index_bundle.js',
   },
   module: {

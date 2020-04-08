@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
-import "../assets/styles.css";
+import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import '../assets/styles.css';
 
-const App = props => {
+const App = (props) => {
   return (
     <div className="router">
       <main>

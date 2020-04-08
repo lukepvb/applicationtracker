@@ -15,7 +15,6 @@ userController.verifyUser = (req, res, next) => {
         const isVerified = true;
         res.locals.isVerified = isVerified;
         res.locals.user = userData; // storing user document in res.locals once verified
-        return next(); // JJ: In response to your comment below, I think this one is no longer needed
       }
       return next(); // I'm not 100% sure why this is here, but I had it in another project so we will see
     })
