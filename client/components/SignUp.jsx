@@ -1,6 +1,4 @@
-/* eslint-disable react/button-has-type */
-/* eslint react/no-multi-comp: 0, react/prop-types: 0 */
-
+import 'bootstrap/dist/css/bootstrap.css';
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
@@ -12,15 +10,15 @@ const SignUp = (props) => {
   const toggle = () => setModal(!modal);
 
   const closeBtn = (
-    <button className="close" onClick={toggle}>
+    <Button className="close" onClick={toggle}>
       &times;
-    </button>
+    </Button>
   );
 
   return (
     <div>
       <Button color="danger" onClick={toggle}>
-        {buttonLabel}
+        Don't have an account? Sign up.
       </Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle} close={closeBtn}>
