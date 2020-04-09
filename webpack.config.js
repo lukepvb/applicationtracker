@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack-dev-server'); // we will see if we need this
 
 module.exports = {
-  mode: 'development',
+  mode: process.env.NODE_ENV,
   entry: './client/src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
