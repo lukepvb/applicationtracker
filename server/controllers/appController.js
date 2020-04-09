@@ -20,16 +20,16 @@ appController.createApp = (req, res, next) => {
 
   appController
     .create({
-      company: company,
-      location: location,
-      role: role,
-      status: status,
-      salary: salary,
-      contact: contact,
-      dubDown: dubDown,
-      notes: notes,
-      dateSubmitted: dateSubmitted,
-      followUp: followUp,
+      company,
+      location,
+      role,
+      status,
+      salary,
+      contact,
+      dubDown,
+      notes,
+      dateSubmitted,
+      followUp,
     })
     .then((newApp) => {
       res.locals.newApp = newApp;
