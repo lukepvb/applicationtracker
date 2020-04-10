@@ -1,11 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Button, Form } from 'reactstrap';
 import '../assets/styles.css';
 import Login from './Login.jsx';
-import SignUp from './SignUp.jsx';
-import Dashboard from './Dashboard';
+import DashboardContainer from '../containers/DashboardContainer';
 
 const App = (props) => {
   const [modal, setModal] = useState(false);
@@ -17,7 +15,7 @@ const App = (props) => {
       <Switch>
         <div className="router">
           <Route exact path="/" component={Login} />
-          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/dashboard" component={DashboardContainer} />
         </div>
       </Switch>
     </Router>
