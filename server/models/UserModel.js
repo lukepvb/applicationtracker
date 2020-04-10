@@ -4,7 +4,8 @@ const { Schema } = mongoose;
 
 // sets a schema for the 'user' collection
 const userSchema = new Schema({
-  name: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   apps: Array,
