@@ -4,8 +4,16 @@ import SignUp from './SignUp';
 import { MdMail, MdTrackChanges } from 'react-icons/md';
 import { FaLock } from 'react-icons/fa';
 import { FiSend } from 'react-icons/fi';
+import { useHistory } from 'react-router-dom';
+import Dashboard from './Dashboard';
 
 const Login = (props) => {
+  let history = useHistory();
+
+  const handleClick = () => {
+    history.push('/dashboard');
+  };
+
   return (
     <div className="login-container">
       <MdTrackChanges className="icon-tracker" />
@@ -25,7 +33,7 @@ const Login = (props) => {
         </FormGroup>
         <br />
         <div id="login-button">
-          <Button color="primary">
+          <Button color="primary" onClick={handleClick}>
             Submit <FiSend className="icon-submit" />
           </Button>
         </div>
