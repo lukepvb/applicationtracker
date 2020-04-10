@@ -13,7 +13,8 @@ import {
   Col,
   Row,
 } from 'reactstrap';
-
+import { FaUserEdit, FaUserLock, FaUserCheck, FaLock, FaUserCircle, FaEdit } from 'react-icons/fa';
+import { MdMail } from 'react-icons/md';
 const SignUp = (props) => {
   const { buttonLabel, className } = props;
 
@@ -35,20 +36,26 @@ const SignUp = (props) => {
       </button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle} close={closeBtn}>
-          Sign Up
+          <FaUserEdit className="icon-signup" /> Sign Up
         </ModalHeader>
         <ModalBody>
           <Form>
             <Row form>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="firstName">First Name</Label>
+                  <Label for="firstName">
+                    <FaEdit className="icon-pencil" />
+                    First Name
+                  </Label>
                   <Input type="text" name="firstName" id="first-name" placeholder="ex. Jane/John" />
                 </FormGroup>
               </Col>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="lastName">Last Name</Label>
+                  <Label for="lastName">
+                    <FaEdit className="icon-pencil" />
+                    Last Name
+                  </Label>
                   <Input type="text" name="lastName" id="last-name" placeholder="Doe" />
                 </FormGroup>
               </Col>
@@ -56,7 +63,11 @@ const SignUp = (props) => {
             <Row form>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="email">Email</Label>
+                  <Label for="email">
+                    {' '}
+                    <MdMail id="icon-signup-email" />
+                    Email
+                  </Label>
                   <Input
                     type="email"
                     name="email"
@@ -67,20 +78,31 @@ const SignUp = (props) => {
               </Col>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="username">Username</Label>
+                  <Label for="username">
+                    <FaUserCircle className="icon-username" />
+                    Username
+                  </Label>
                   <Input type="text" name="username" id="username" placeholder="ex. janeDoe2" />
                 </FormGroup>
               </Col>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="password">Password</Label>
+                  <Label for="password">
+                    {' '}
+                    <FaLock className="icon-password" id="icon-signup-password" />
+                    Password
+                  </Label>
                   <Input type="password" name="password" id="password" placeholder="********" />
                 </FormGroup>
               </Col>
 
               <Col md={6}>
                 <FormGroup className="password-confirm">
-                  <Label for="password-confirm">Confirm Password</Label>
+                  <Label for="password-confirm">
+                    {' '}
+                    <FaUserLock className="icon-user-lock" />
+                    Confirm Password
+                  </Label>
                   <Input
                     type="password"
                     name="password-confirm"
@@ -90,7 +112,7 @@ const SignUp = (props) => {
                 </FormGroup>
               </Col>
             </Row>
-            <FormGroup check>
+            <FormGroup className="terms-and-conditions" check>
               <Label check>
                 <Input type="checkbox" id="terms" /> I agree to Terms and Conditions
               </Label>
@@ -99,7 +121,7 @@ const SignUp = (props) => {
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>
-            Sign Up
+            Sign Up <FaUserCheck className="icon-signup-submit" />
           </Button>{' '}
           <Button color="secondary" onClick={toggle}>
             Cancel

@@ -1,27 +1,33 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import SignUp from './SignUp';
+import { MdMail, MdTrackChanges } from 'react-icons/md';
+import { FaLock } from 'react-icons/fa';
+import { FiSend } from 'react-icons/fi';
 
-const Example = (props) => {
+const Login = (props) => {
   return (
     <div className="login-container">
+      <MdTrackChanges className="icon-tracker" />
       <Form>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Label for="exampleEmail" className="mr-sm-2">
-            Email
+            <MdMail className="icon-email" /> Email
           </Label>
           <Input type="email" name="email" id="exampleEmail" placeholder="something@idk.cool" />
         </FormGroup>
         <br />
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Label for="examplePassword" className="mr-sm-2">
-            Password
+            <FaLock className="icon-password" /> Password
           </Label>
-          <Input type="password" name="password" id="examplePassword" placeholder="don't tell!" />
+          <Input type="password" name="password" id="examplePassword" placeholder="********" />
         </FormGroup>
         <br />
         <div id="login-button">
-          <Button color="primary">Submit</Button>
+          <Button color="primary">
+            Submit <FiSend className="icon-submit" />
+          </Button>
         </div>
       </Form>
       <SignUp />
@@ -29,4 +35,4 @@ const Example = (props) => {
   );
 };
 
-export default Example;
+export default Login;
