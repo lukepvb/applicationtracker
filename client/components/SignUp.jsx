@@ -39,7 +39,7 @@ const SignUp = (props) => {
           <FaUserEdit className="icon-signup" /> Sign Up
         </ModalHeader>
         <ModalBody>
-          <Form>
+          <Form className="sign-up-form">
             <Row form>
               <Col md={6}>
                 <FormGroup>

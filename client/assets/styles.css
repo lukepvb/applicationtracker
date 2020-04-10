@@ -8,6 +8,14 @@
   width: 100%;
 }
 
+body.modal-open .login-container {
+  -webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(1px);
+}
+
 /* main login container styling */
 .login-container {
   border: solid;
@@ -18,6 +26,14 @@
   border-radius: 15px;
   width: max-content;
   height: max-content;
+}
+
+.login-container label {
+  font-weight: normal;
+}
+
+.sign-up-form label {
+  font-weight: normal;
 }
 
 body.modal-open .login-container {
@@ -124,4 +140,28 @@ just playing around */
   padding: 2em;
   /* border: solid black 4px; */
   margin: 2em;
+}
+
+label {
+  font-weight: bold;
+}
+
+.apps-list-group {
+  display: flex;
+  width: 90%;
+  margin-left: 5%;
+  justify-content: center;
+}
+
+.list-group {
+  width: 90%;
+}
+
+.apps-container {
+}
+
+.apps-container h1 {
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 0.5em;
 }
