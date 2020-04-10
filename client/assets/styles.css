@@ -21,10 +21,18 @@ body.modal-open .login-container {
   border-color: rgb(89, 88, 88);
   box-shadow: 11px 19px 28px -10px rgba(156, 150, 156, 1);
   padding: 5%;
-  margin-top: 20%;
+  margin-top: 10%;
   border-radius: 15px;
   width: max-content;
   height: max-content;
+}
+
+body.modal-open .login-container {
+  -webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(1px);
 }
 
 /* login submit button */
@@ -46,7 +54,6 @@ body.modal-open .login-container {
   text-decoration: underline;
 }
 
-/* removes standard focus */
 .sign-up:focus {
   outline: 0;
 }

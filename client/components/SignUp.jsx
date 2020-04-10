@@ -1,6 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Col,
+  Row,
+} from 'reactstrap';
 
 const SignUp = (props) => {
   const { buttonLabel, className } = props;
@@ -23,19 +35,71 @@ const SignUp = (props) => {
       </button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle} close={closeBtn}>
-          Modal title
+          Sign Up
         </ModalHeader>
         <ModalBody>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
+          <Form>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="firstName">First Name</Label>
+                  <Input type="text" name="firstName" id="first-name" placeholder="ex. Jane/John" />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="lastName">Last Name</Label>
+                  <Input type="text" name="lastName" id="last-name" placeholder="Doe" />
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="email">Email</Label>
+                  <Input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="ex. needsjob@gmail.com"
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="username">Username</Label>
+                  <Input type="text" name="username" id="username" placeholder="ex. janeDoe2" />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="password">Password</Label>
+                  <Input type="password" name="password" id="password" placeholder="********" />
+                </FormGroup>
+              </Col>
+
+              <Col md={6}>
+                <FormGroup className="password-confirm">
+                  <Label for="password-confirm">Confirm Password</Label>
+                  <Input
+                    type="password"
+                    name="password-confirm"
+                    id="password-confirm"
+                    placeholder="********"
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+            <FormGroup check>
+              <Label check>
+                <Input type="checkbox" id="terms" /> I agree to Terms and Conditions
+              </Label>
+            </FormGroup>
+          </Form>
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>
-            Do Something
+            Sign Up
           </Button>{' '}
           <Button color="secondary" onClick={toggle}>
             Cancel
