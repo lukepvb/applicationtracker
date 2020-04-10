@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+.router {
+  display: flex;
+  justify-content: center;
+}
+
+/* main login container styling */
+.login-container {
+  border: solid;
+  border-color: rgb(89, 88, 88);
+  box-shadow: 11px 19px 28px -10px rgba(156, 150, 156, 1);
+  padding: 5%;
+  margin-top: 20%;
+  border-radius: 15px;
+  width: max-content;
+  height: max-content;
+}
+
+/* login submit button */
+#login-button {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5%;
+}
+
+/* unvisited link */
+.sign-up {
+  color: dodgerblue;
+  border: none;
+}
+
+/* mouse over link */
+.sign-up:hover {
+  color: blue;
+  text-decoration: underline;
+}
