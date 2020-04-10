@@ -4,7 +4,7 @@ import SignUp from './SignUp';
 
 const Example = (props) => {
   return (
-    <div>
+    <div className="login-container">
       <Form>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Label for="exampleEmail" className="mr-sm-2">
@@ -19,7 +19,10 @@ const Example = (props) => {
           </Label>
           <Input type="password" name="password" id="examplePassword" placeholder="don't tell!" />
         </FormGroup>
-        <Button>Submit</Button>
+        <br />
+        <div id="login-button">
+          <Button color="primary">Submit</Button>
+        </div>
       </Form>
       <SignUp />
     </div>

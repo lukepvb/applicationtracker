@@ -17,9 +17,10 @@ const SignUp = (props) => {
 
   return (
     <div>
-      <Button color="danger" onClick={toggle}>
-        Don't have an account? Sign up.
-      </Button>
+      Don't have an account?
+      <button type="button" className="sign-up" onClick={toggle}>
+        Sign up
+      </button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle} close={closeBtn}>
           Modal title
