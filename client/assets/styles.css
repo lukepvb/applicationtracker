@@ -5,6 +5,7 @@
 .router {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 body.modal-open .login-container {
@@ -120,4 +121,15 @@ just playing around */
 .icon-signup-submit {
   margin-bottom: 0.1em;
   margin-left: 0.3em;
+}
+
+/* Dashboard styling */
+.dash-container {
+  width: 100%;
+}
+
+.dash-main {
+  padding: 2em;
+  /* border: solid black 4px; */
+  margin: 2em;
 }
