@@ -7,6 +7,14 @@
   justify-content: center;
 }
 
+body.modal-open .login-container {
+  -webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(1px);
+}
+
 /* main login container styling */
 .login-container {
   border: solid;
@@ -36,4 +44,9 @@
 .sign-up:hover {
   color: blue;
   text-decoration: underline;
+}
+
+/* removes standard focus */
+.sign-up:focus {
+  outline: 0;
 }
