@@ -5,7 +5,6 @@ import { MdMail, MdTrackChanges } from 'react-icons/md';
 import { FaLock } from 'react-icons/fa';
 import { FiSend } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
-import Dashboard from './Dashboard';
 
 const Login = (props) => {
   let history = useHistory();
