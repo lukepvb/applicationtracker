@@ -49,3 +49,67 @@ body.modal-open .login-container {
 .sign-up:focus {
   outline: 0;
 }
+
+/* Icons on sign-in (we can discuss what we want to keep
+just playing around */
+
+/** login icons **/
+
+.icon-tracker {
+  font-size: 80px;
+  margin-left: 1em;
+  color: crimson;
+}
+
+.icon-email {
+  margin-bottom: 0.1em;
+}
+
+.icon-password {
+  margin-bottom: 0.3em;
+}
+
+.icon-submit {
+  margin-bottom: 0.1em;
+}
+
+/** signup icons **/
+
+.icon-signup {
+  margin-bottom: 0.1em;
+  margin-right: 0.3em;
+}
+
+#icon-signup-password {
+  margin-bottom: 0.1em;
+  margin-right: 0.3em;
+}
+
+#icon-signup-email {
+  margin-bottom: 0.1em;
+  margin-right: 0.3em;
+}
+
+.icon-user-lock {
+  margin-bottom: 0.1em;
+  margin-right: 0.3em;
+}
+
+.icon-username {
+  margin-bottom: 0.1em;
+  margin-right: 0.3em;
+}
+
+.icon-pencil {
+  margin-bottom: 0.1em;
+  margin-right: 0.3em;
+}
+
+.terms-and-conditions {
+  margin-left: 6em;
+}
+
+.icon-signup-submit {
+  margin-bottom: 0.1em;
+  margin-left: 0.3em;
+}
