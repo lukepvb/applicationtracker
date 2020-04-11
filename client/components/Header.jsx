@@ -1,8 +1,9 @@
 import React from 'react';
-import { Jumbotron, Button } from 'reactstrap';
+import { Jumbotron, Button, Input } from 'reactstrap';
 import { MdAddCircle } from 'react-icons/md';
 import { TiArrowForwardOutline } from 'react-icons/ti';
 import { useHistory } from 'react-router-dom';
+import Avatar from 'react-avatar';
 
 const Header = (props) => {
   let history = useHistory();
@@ -13,15 +14,19 @@ const Header = (props) => {
   return (
     <div>
       <Jumbotron>
-        <h1 className="display-3">Hello, Luke and Jason{props.name}!</h1>
+        <h1 className="display-3">
+          <Avatar className="avatar" size={160} round={true} />
+          Hello, Luke and Jason
+          {props.name}!
+        </h1>
         <p className="lead">
-          This simple app is intended to help add structure to the application process -
+          This simple app is intended to help add structure to your application process -
         </p>
         <hr className="my-2" />
-        <p>
+        <h4>
           Click the icon below to get started!{' '}
           <TiArrowForwardOutline className="jumbo-arrow" size={130} />
-        </p>
+        </h4>
         <p className="lead">
           <Button outline className="button-new-app" color="success" onClick={handleClick}>
             <MdAddCircle size={60} />

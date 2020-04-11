@@ -6,6 +6,7 @@ import '../assets/styles.css';
 import Login from './Login.jsx';
 import DashboardContainer from '../containers/DashboardContainer';
 import NewApp from '../components/NewApp';
+import Data from '../components/Data';
 
 const App = (props) => {
   const [modal, setModal] = useState(false);
@@ -19,6 +20,7 @@ const App = (props) => {
           <Route exact path="/" component={Login} />
           <Route path="/dashboard" component={DashboardContainer} />
           <Route path="/dashboard/newApp" component={NewApp} />
+          <Route path="/data" component={Data} />
         </div>
       </Switch>
     </Router>
