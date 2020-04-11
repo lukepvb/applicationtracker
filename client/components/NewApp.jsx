@@ -13,8 +13,20 @@ import {
   Col,
   Row,
 } from 'reactstrap';
-import { FaUserEdit, FaUserLock, FaUserCheck, FaLock, FaUserCircle, FaEdit } from 'react-icons/fa';
-import { MdSave, MdList } from 'react-icons/md';
+import { IoMdStats } from 'react-icons/io';
+import {
+  FaUserEdit,
+  FaUserLock,
+  FaUserCheck,
+  FaLock,
+  FaUserCircle,
+  FaEdit,
+  FaRegBuilding,
+  FaListOl,
+} from 'react-icons/fa';
+import { TiLocationOutline } from 'react-icons/ti';
+import { GiReceiveMoney } from 'react-icons/gi';
+import { MdSave, MdList, MdDateRange, MdSpeakerNotes } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 
 const NewApp = (props) => {
@@ -49,19 +61,28 @@ const NewApp = (props) => {
           <Form className="form-new-app">
             <Row>
               <Col>
-                <Label for="company">Company:</Label>
+                <Label for="company">
+                  <FaRegBuilding className="icon-company" />
+                  Company:
+                </Label>
                 <Input type="text" name="company" className="company">
                   {props.companyName}
                 </Input>
               </Col>
               <Col>
-                <Label for="role">Role:</Label>
+                <Label for="role">
+                  <FaUserCircle className="icon-username" />
+                  Role:
+                </Label>
                 <Input type="text" name="role" className="role">
                   {props.companyRole}
                 </Input>
               </Col>
               <Col>
-                <Label for="started">Started On:</Label>
+                <Label for="started">
+                  <MdDateRange className="icon-date" />
+                  Started On:
+                </Label>
                 <Input type="date" name="started" className="started">
                   {props.startedOn}
                 </Input>
@@ -70,13 +91,19 @@ const NewApp = (props) => {
             <br />
             <Row>
               <Col>
-                <Label for="location">Location:</Label>
+                <Label for="location">
+                  <TiLocationOutline className="icon-location" />
+                  Location:
+                </Label>
                 <Input type="text" name="location" className="location">
                   {props.companyLocation}
                 </Input>
               </Col>
               <Col>
-                <Label for="salary">Salary:</Label>
+                <Label for="salary">
+                  <GiReceiveMoney className="icon-salary" />
+                  Salary:
+                </Label>
                 <Input type="select" name="salary" className="salary">
                   <option></option>
                   <option>Under 80k</option>
@@ -90,7 +117,11 @@ const NewApp = (props) => {
                 </Input>
               </Col>
               <Col>
-                <Label for="last-updated">Last Updated:</Label>
+                <Label for="last-updated">
+                  {' '}
+                  <MdDateRange className="icon-date" />
+                  Last Updated:
+                </Label>
                 <Input type="date" name="last-updated" className="last-updated">
                   {props.lastUpdated}
                 </Input>
@@ -99,7 +130,10 @@ const NewApp = (props) => {
             <br />
             <Row>
               <Col>
-                <Label for="status">Status:</Label>
+                <Label for="status">
+                  <IoMdStats className="icon-status" />
+                  Status:
+                </Label>
                 <Input type="select" name="status" className="status">
                   <option>In Progress</option>
                   <option>Complete</option>
@@ -107,7 +141,10 @@ const NewApp = (props) => {
                 </Input>
               </Col>
               <Col>
-                <Label for="status">Stage:</Label>
+                <Label for="status">
+                  <FaListOl className="icon-stage" />
+                  Stage:
+                </Label>
                 <Input type="select" name="status" className="status">
                   <option>Research</option>
                   <option>App Submitted</option>
@@ -123,7 +160,10 @@ const NewApp = (props) => {
             <br />
             <Row>
               <Col>
-                <Label for="notes">Notes:</Label>
+                <Label for="notes">
+                  <MdSpeakerNotes className="icon-notes" />
+                  Notes:
+                </Label>
                 <Input type="textarea" name="notes" className="notes">
                   {props.companyNotes}
                 </Input>
