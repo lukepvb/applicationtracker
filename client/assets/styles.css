@@ -73,8 +73,9 @@ just playing around */
 /** login icons **/
 
 .icon-tracker {
-  font-size: 80px;
-  margin-left: 1em;
+  font-size: 7rem;
+  margin-left: 0.55em;
+  margin-bottom: 0.1em;
   color: crimson;
 }
 
@@ -131,9 +132,24 @@ just playing around */
   margin-left: 0.3em;
 }
 
+.icon-save {
+  margin-bottom: 0.2em;
+  margin-left: 0.2em;
+}
+
+.icon-application {
+  margin-bottom: 0.1em;
+  margin-right: 0.3em;
+}
+
 /* Dashboard styling */
 .dash-container {
   width: 100%;
+}
+
+.navbar-container .icon-tracker {
+  font-size: 2em;
+  margin-left: -0.05em;
 }
 
 .dash-main {
@@ -157,11 +173,25 @@ label {
   width: 90%;
 }
 
-.apps-container {
-}
-
 .apps-container h1 {
   width: 90%;
   margin-left: 5%;
   margin-bottom: 0.5em;
+}
+
+.button-new-app {
+  border-radius: 0.75em;
+  color: white;
+  border-color: rgb(255, 94, 0);
+  border-width: 0.3em;
+  background-color: dodgerblue;
+  box-shadow: 11px 19px 28px -10px rgba(156, 150, 156, 1);
+  margin-left: 47.05%;
+}
+
+.jumbo-arrow {
+  transform: rotate(40deg);
+  margin-left: 2em;
+  margin-top: 0.5em;
+  color: crimson;
 }

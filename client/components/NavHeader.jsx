@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { MdTrackChanges } from 'react-icons/md';
 
 const NavHeader = (props) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -10,7 +11,7 @@ const NavHeader = (props) => {
     <div className="navbar-container">
       <Navbar color="dark" dark>
         <NavbarBrand href="/" className="mr-auto">
-          AppTrack
+          AppTrack <MdTrackChanges className="icon-tracker" />
         </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
