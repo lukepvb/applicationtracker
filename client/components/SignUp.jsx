@@ -15,6 +15,7 @@ import {
 } from 'reactstrap';
 import { FaUserEdit, FaUserLock, FaUserCheck, FaLock, FaUserCircle, FaEdit } from 'react-icons/fa';
 import { MdMail } from 'react-icons/md';
+
 const SignUp = (props) => {
   const { buttonLabel, className } = props;
 
@@ -36,7 +37,7 @@ const SignUp = (props) => {
       </button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle} close={closeBtn}>
-          <FaUserEdit className="icon-signup" /> Sign Up
+          <FaEdit className="icon-signup" /> Sign Up
         </ModalHeader>
         <ModalBody>
           <Form className="sign-up-form">

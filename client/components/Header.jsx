@@ -1,24 +1,30 @@
 import React from 'react';
 import { Jumbotron, Button } from 'reactstrap';
-import { MdLibraryAdd } from 'react-icons/md';
+import { MdAddCircle } from 'react-icons/md';
+import { TiArrowForwardOutline } from 'react-icons/ti';
+import { useHistory } from 'react-router-dom';
 
 const Header = (props) => {
+  let history = useHistory();
+
+  const handleClick = () => {
+    history.push('/dashboard/newApp');
+  };
   return (
     <div>
       <Jumbotron>
-        <h1 className="display-3">Hello, {props.name}</h1>
+        <h1 className="display-3">Hello, Luke and Jason{props.name}!</h1>
         <p className="lead">
-          This is a simple hero unit, a simple Jumbotron-style component for calling extra attention
-          to featured content or information.
+          This simple app is intended to help add structure to the application process -
         </p>
         <hr className="my-2" />
         <p>
-          It uses utility classes for typography and spacing to space content out within the larger
-          container.
+          Click the icon below to get started!{' '}
+          <TiArrowForwardOutline className="jumbo-arrow" size={130} />
         </p>
         <p className="lead">
-          <Button color="success">
-            <MdLibraryAdd size={25} />
+          <Button outline className="button-new-app" color="success" onClick={handleClick}>
+            <MdAddCircle size={60} />
           </Button>
         </p>
       </Jumbotron>
