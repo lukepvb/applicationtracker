@@ -30,9 +30,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/assets', express.static(path.resolve(__dirname, '../client/assets')));
 
 // define route handlers
-app.use('/api/user', userRouter);
-app.use('/api/app', appRouter);
-app.use('/api', router);
+app.use('/api/users', userRouter);
+app.use('/api/apps', appRouter);
+// app.use('/api', router);
 
 // respond with main app
 app.get('/', (req, res) =>
