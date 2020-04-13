@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import SignUp from './SignUp';
+import { useHistory } from 'react-router-dom';
 import { MdMail, MdTrackChanges } from 'react-icons/md';
 import { FaLock } from 'react-icons/fa';
 import { FiSend } from 'react-icons/fi';
-import { useHistory } from 'react-router-dom';
+import { runtime } from 'regenerator-runtime'; // weird quirk needed while current method of form submission is in place
+import SignUp from './SignUp';
 
 const Login = (props) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [userEmail, setEmail] = useState('');
+  const [userPassword, setPassword] = useState('');
 
-  let history = useHistory();
+  const history = useHistory();
 
   const handleClick = () => {
     history.push('/dashboard');
@@ -26,12 +27,30 @@ const Login = (props) => {
     setPassword(updatedPassword);
   };
 
+  async function handleLoginSubmit(event) {
+    const data = { email: userEmail, password: userPassword };
+    event.preventDefault();
+
+    fetch('/api/users/login', {
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    // invoke handleClick to navigate to dashboard after form submission
+    // TODO: Control flow here to avoid moving to dashboard without successful login
+    handleClick();
+  }
+
   return (
     <div className="login-container">
       <MdTrackChanges className="icon-tracker" />
       <Form>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Label for="exampleEmail" className="mr-sm-2">
+          <Label for="email" className="mr-sm-2">
             <MdMail className="icon-email" /> Email
           </Label>
           <Input
@@ -39,27 +58,27 @@ const Login = (props) => {
             name="email"
             id="exampleEmail"
             placeholder="something@idk.cool"
-            value={email}
+            value={userEmail}
             onChange={handleEmailChange}
           />
         </FormGroup>
         <br />
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Label for="examplePassword" className="mr-sm-2">
+          <Label for="password" className="mr-sm-2">
             <FaLock className="icon-password" /> Password
           </Label>
           <Input
             type="password"
             name="password"
-            id="examplePassword"
+            id="password"
             placeholder="********"
-            value={password}
+            value={userPassword}
             onChange={handlePasswordChange}
           />
         </FormGroup>
         <br />
         <div id="login-button">
-          <Button color="primary" onClick={handleClick}>
+          <Button color="primary" type="button" onClick={handleLoginSubmit}>
             Submit <FiSend className="icon-submit" />
           </Button>
         </div>
