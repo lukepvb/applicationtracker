@@ -17,16 +17,6 @@ const Login = (props) => {
     history.push('/dashboard');
   };
 
-  const handleEmailChange = (e) => {
-    const updatedEmail = e.target.value;
-    setEmail(updatedEmail);
-  };
-
-  const handlePasswordChange = (e) => {
-    const updatedPassword = e.target.value;
-    setPassword(updatedPassword);
-  };
-
   async function handleLoginSubmit(event) {
     const data = { email: userEmail, password: userPassword };
     event.preventDefault();
@@ -59,7 +49,7 @@ const Login = (props) => {
             id="exampleEmail"
             placeholder="something@idk.cool"
             value={userEmail}
-            onChange={handleEmailChange}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </FormGroup>
         <br />
@@ -73,7 +63,7 @@ const Login = (props) => {
             id="password"
             placeholder="********"
             value={userPassword}
-            onChange={handlePasswordChange}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </FormGroup>
         <br />

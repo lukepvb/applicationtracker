@@ -18,8 +18,13 @@ import { MdMail } from 'react-icons/md';
 
 const SignUp = (props) => {
   const { buttonLabel, className } = props;
-
   const [modal, setModal] = useState(false);
+  const [userFirstName, setFirstName] = useState('');
+  const [userLastName, setLastName] = useState('');
+  const [userEmail, setEmail] = useState('');
+  const [usernameInput, setUsername] = useState('');
+  const [userPassword, setPassword] = useState('');
+  const [userConfirmPassword, setConfirmPassword] = useState('');
 
   const toggle = () => setModal(!modal);
 
@@ -48,7 +53,14 @@ const SignUp = (props) => {
                     <FaEdit className="icon-pencil" />
                     First Name
                   </Label>
-                  <Input type="text" name="firstName" id="first-name" placeholder="ex. Jane/John" />
+                  <Input
+                    type="text"
+                    name="firstName"
+                    id="first-name"
+                    placeholder="ex. Jane/John"
+                    value={userFirstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
                 </FormGroup>
               </Col>
               <Col md={6}>
@@ -57,7 +69,14 @@ const SignUp = (props) => {
                     <FaEdit className="icon-pencil" />
                     Last Name
                   </Label>
-                  <Input type="text" name="lastName" id="last-name" placeholder="Doe" />
+                  <Input
+                    type="text"
+                    name="lastName"
+                    id="last-name"
+                    placeholder="Doe"
+                    value={userLastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
                 </FormGroup>
               </Col>
             </Row>
@@ -65,7 +84,6 @@ const SignUp = (props) => {
               <Col md={6}>
                 <FormGroup>
                   <Label for="email">
-                    {' '}
                     <MdMail id="icon-signup-email" />
                     Email
                   </Label>
@@ -74,6 +92,8 @@ const SignUp = (props) => {
                     name="email"
                     id="email"
                     placeholder="ex. needsjob@gmail.com"
+                    value={userEmail}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </FormGroup>
               </Col>
@@ -83,7 +103,15 @@ const SignUp = (props) => {
                     <FaUserCircle className="icon-username" />
                     Username
                   </Label>
-                  <Input type="text" name="username" id="username" placeholder="ex. janeDoe2" />
+                  <Input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="ex. janeDoe2"
+                    autoComplete="username"
+                    value={usernameInput}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
                 </FormGroup>
               </Col>
               <Col md={6}>
@@ -93,7 +121,15 @@ const SignUp = (props) => {
                     <FaLock className="icon-password" id="icon-signup-password" />
                     Password
                   </Label>
-                  <Input type="password" name="password" id="password" placeholder="********" />
+                  <Input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="********"
+                    autoComplete="new-password"
+                    value={userPassword}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                 </FormGroup>
               </Col>
 
@@ -109,6 +145,9 @@ const SignUp = (props) => {
                     name="password-confirm"
                     id="password-confirm"
                     placeholder="********"
+                    autoComplete="new-password"
+                    value={userConfirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                 </FormGroup>
               </Col>
