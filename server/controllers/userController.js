@@ -2,21 +2,22 @@ const User = require('../models/UserModel');
 
 const userController = {};
 
-/* Verify User */
-userController.verifyUser = (req, res, next) => {
+/* Check to see if a User exists in the database */
+userController.userExists = (req, res, next) => {
   const { email } = req.body;
 
   // check database to see if user already exists
   User.find({ email })
     .exec()
     .then((userData) => {
-      res.locals.isVerified = false;
+      res.locals.exists = false;
       if (userData.length === 1) {
-        const isVerified = true;
-        res.locals.isVerified = isVerified;
-        res.locals.user = userData; // storing user document in res.locals once verified
+        const exists = true;
+        res.locals.exists = exists;
+        res.locals.user = userData;
+        console.log(res.locals.user, 'User exists');
+        return next();
       }
-      return next(); // I'm not 100% sure why this is here, but I had it in another project so we will see
     })
     .catch((err) => {
       return next({
@@ -28,13 +29,15 @@ userController.verifyUser = (req, res, next) => {
 
 /* Create new user  */
 userController.createUser = (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { firstName, lastName, username, email, password } = req.body;
 
   User.create({
-    name: name,
-    email: email,
-    password: password,
-    apps: Array,
+    firstName,
+    lastName,
+    username,
+    email,
+    password,
+    apps: [],
   })
     .then((newUser) => {
       res.locals.newUser = newUser;
