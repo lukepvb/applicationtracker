@@ -21,7 +21,7 @@ const Login = (props) => {
     const data = { email: userEmail, password: userPassword };
     event.preventDefault();
 
-    fetch('/api/users/login', {
+    fetch('/api/users/login/', {
       method: 'post',
       headers: {
         Accept: 'application/json',
