@@ -27,6 +27,7 @@ const SignUp = (props) => {
   const [usernameInput, setUsername] = useState('');
   const [userPassword, setPassword] = useState('');
   const [userConfirmPassword, setConfirmPassword] = useState('');
+  const [validateEmail, setEmailValidation] = useState();
 
   const toggle = () => setModal(!modal);
 
@@ -67,6 +68,17 @@ const SignUp = (props) => {
       handleSignUpSubmit();
     }
   };
+
+  function validateUserEmail(e) {
+    const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let validate;
+    if (emailRex.test(e.target.value) && e.target.value !== '') {
+      validate = true;
+    } else if (e.target.value !== '') {
+      validate = false;
+    }
+    setEmailValidation(validate);
+  }
 
   return (
     <div>
@@ -122,13 +134,19 @@ const SignUp = (props) => {
                     Email
                   </Label>
                   <Input
+                    valid={validateEmail}
+                    invalid={!validateEmail}
                     type="email"
                     name="email"
                     id="email"
                     placeholder="ex. needsjob@gmail.com"
                     value={userEmail}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      validateUserEmail(e);
+                    }}
                   />
+                  <FormFeedback valid>That's a tasty looking email you've got there.</FormFeedback>
                 </FormGroup>
               </Col>
               <Col md={6}>

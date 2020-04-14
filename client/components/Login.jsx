@@ -64,7 +64,6 @@ const Login = (props) => {
             placeholder="********"
             value={userPassword}
             onChange={(e) => setPassword(e.target.value)}
-            // keypress={handleLoginSubmit}
           />
         </FormGroup>
         <br />
