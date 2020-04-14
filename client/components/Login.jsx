@@ -64,16 +64,17 @@ const Login = (props) => {
             placeholder="********"
             value={userPassword}
             onChange={(e) => setPassword(e.target.value)}
+            // keypress={handleLoginSubmit}
           />
         </FormGroup>
         <br />
         <div id="login-button">
-          <Button color="primary" type="button" onClick={handleLoginSubmit}>
+          <Button color="primary" type="submit" onClick={handleLoginSubmit}>
             Submit <FiSend className="icon-submit" />
           </Button>
         </div>
       </Form>
-      <SignUp />
+      <SignUp history={history} />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import React, { useState } from 'react';
+import React, { useState, useHistory } from 'react';
 import {
   Button,
   Modal,
@@ -33,6 +33,38 @@ const SignUp = (props) => {
       &times;
     </Button>
   );
+
+  const handleClick = () => {
+    props.history.push('/dashboard');
+  };
+
+  async function handleSignUpSubmit() {
+    const data = {
+      firstName: userFirstName,
+      lastName: userLastName,
+      email: userEmail,
+      username: usernameInput,
+      password: userPassword,
+    };
+
+    fetch('/api/users/create/', {
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    // nav to dashboard after signup
+    handleClick();
+  }
+
+  const handleKeyPress = (target) => {
+    if (target.key === 'Enter') {
+      handleSignUpSubmit();
+    }
+  };
 
   return (
     <div>
@@ -148,6 +180,7 @@ const SignUp = (props) => {
                     autoComplete="new-password"
                     value={userConfirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
+                    onKeyPress={handleKeyPress}
                   />
                 </FormGroup>
               </Col>
@@ -160,10 +193,10 @@ const SignUp = (props) => {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={toggle}>
+          <Button color="primary" type="submit" onClick={handleSignUpSubmit}>
             Sign Up <FaUserCheck className="icon-signup-submit" />
           </Button>{' '}
-          <Button color="secondary" onClick={toggle}>
+          <Button color="secondary" type="button" onClick={toggle}>
             Cancel
           </Button>
         </ModalFooter>
