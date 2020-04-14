@@ -28,6 +28,8 @@ const SignUp = (props) => {
   const [userPassword, setPassword] = useState('');
   const [userConfirmPassword, setConfirmPassword] = useState('');
   const [validateEmail, setEmailValidation] = useState();
+  const [validateLength, setLengthValidation] = useState();
+  const [validateMatch, setPasswordMatch] = useState();
 
   const toggle = () => setModal(!modal);
 
@@ -78,6 +80,26 @@ const SignUp = (props) => {
       validate = false;
     }
     setEmailValidation(validate);
+  }
+
+  function validateInputLength(e) {
+    let lengthValid;
+    if (e.target.value.length >= 6) {
+      lengthValid = true;
+    } else {
+      lengthValid = false;
+    }
+    setLengthValidation(lengthValid);
+  }
+
+  function validatePasswordMatch(e) {
+    let passwordMatch;
+    if (userPassword === userConfirmPassword) {
+      passwordMatch = true;
+    } else {
+      passwordMatch = false;
+    }
+    setPasswordMatch(passwordMatch);
   }
 
   return (
@@ -146,7 +168,7 @@ const SignUp = (props) => {
                       validateUserEmail(e);
                     }}
                   />
-                  <FormFeedback valid>That's a tasty looking email you've got there.</FormFeedback>
+                  <FormFeedback valid>Consider yourself validated, Email.</FormFeedback>
                 </FormGroup>
               </Col>
               <Col md={6}>
@@ -156,14 +178,20 @@ const SignUp = (props) => {
                     Username
                   </Label>
                   <Input
+                    valid={validateLength}
+                    invalid={!validateLength}
                     type="text"
                     name="username"
                     id="username"
                     placeholder="ex. janeDoe2"
                     autoComplete="username"
                     value={usernameInput}
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                      validateInputLength(e);
+                    }}
                   />
+                  <FormText>username must be 6 or more characters</FormText>
                 </FormGroup>
               </Col>
               <Col md={6}>
@@ -179,6 +207,7 @@ const SignUp = (props) => {
                     id="password"
                     placeholder="********"
                     autoComplete="new-password"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     value={userPassword}
                     onChange={(e) => setPassword(e.target.value)}
                   />
