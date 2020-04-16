@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import React, { useState } from 'react';
+import React, { useState, useHistory } from 'react';
 import {
   Button,
   Modal,
@@ -7,7 +7,9 @@ import {
   ModalBody,
   ModalFooter,
   Form,
+  FormFeedback,
   FormGroup,
+  FormText,
   Input,
   Label,
   Col,
@@ -25,6 +27,9 @@ const SignUp = (props) => {
   const [usernameInput, setUsername] = useState('');
   const [userPassword, setPassword] = useState('');
   const [userConfirmPassword, setConfirmPassword] = useState('');
+  const [validateEmail, setEmailValidation] = useState();
+  const [validateLength, setLengthValidation] = useState();
+  const [validateMatch, setPasswordMatch] = useState();
 
   const toggle = () => setModal(!modal);
 
@@ -33,6 +38,69 @@ const SignUp = (props) => {
       &times;
     </Button>
   );
+
+  const handleClick = () => {
+    props.history.push('/dashboard');
+  };
+
+  async function handleSignUpSubmit() {
+    const data = {
+      firstName: userFirstName,
+      lastName: userLastName,
+      email: userEmail,
+      username: usernameInput,
+      password: userPassword,
+    };
+
+    fetch('/api/users/create/', {
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    // nav to dashboard after signup
+    handleClick();
+  }
+
+  const handleKeyPress = (target) => {
+    if (target.key === 'Enter') {
+      handleSignUpSubmit();
+    }
+  };
+
+  function validateUserEmail(e) {
+    const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let validate;
+    if (emailRex.test(e.target.value) && e.target.value !== '') {
+      validate = true;
+    } else if (e.target.value !== '') {
+      validate = false;
+    }
+    setEmailValidation(validate);
+  }
+
+  function validateInputLength(e) {
+    let lengthValid;
+    if (e.target.value.length >= 6) {
+      lengthValid = true;
+    } else {
+      lengthValid = false;
+    }
+    setLengthValidation(lengthValid);
+  }
+
+  function validatePasswordMatch(e) {
+    let passwordMatch;
+    if (userPassword === userConfirmPassword) {
+      passwordMatch = true;
+    } else {
+      passwordMatch = false;
+    }
+    setPasswordMatch(passwordMatch);
+  }
 
   return (
     <div>
@@ -88,13 +156,19 @@ const SignUp = (props) => {
                     Email
                   </Label>
                   <Input
+                    valid={validateEmail}
+                    invalid={!validateEmail}
                     type="email"
                     name="email"
                     id="email"
                     placeholder="ex. needsjob@gmail.com"
                     value={userEmail}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      validateUserEmail(e);
+                    }}
                   />
+                  <FormFeedback valid>Consider yourself validated, Email.</FormFeedback>
                 </FormGroup>
               </Col>
               <Col md={6}>
@@ -104,14 +178,20 @@ const SignUp = (props) => {
                     Username
                   </Label>
                   <Input
+                    valid={validateLength}
+                    invalid={!validateLength}
                     type="text"
                     name="username"
                     id="username"
                     placeholder="ex. janeDoe2"
                     autoComplete="username"
                     value={usernameInput}
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                      validateInputLength(e);
+                    }}
                   />
+                  <FormText>username must be 6 or more characters</FormText>
                 </FormGroup>
               </Col>
               <Col md={6}>
@@ -127,6 +207,7 @@ const SignUp = (props) => {
                     id="password"
                     placeholder="********"
                     autoComplete="new-password"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     value={userPassword}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -148,6 +229,7 @@ const SignUp = (props) => {
                     autoComplete="new-password"
                     value={userConfirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
+                    onKeyPress={handleKeyPress}
                   />
                 </FormGroup>
               </Col>
@@ -160,10 +242,10 @@ const SignUp = (props) => {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={toggle}>
+          <Button color="primary" type="submit" onClick={handleSignUpSubmit}>
             Sign Up <FaUserCheck className="icon-signup-submit" />
           </Button>{' '}
-          <Button color="secondary" onClick={toggle}>
+          <Button color="secondary" type="button" onClick={toggle}>
             Cancel
           </Button>
         </ModalFooter>

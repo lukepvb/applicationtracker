@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormText, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import { MdMail, MdTrackChanges } from 'react-icons/md';
 import { FaLock } from 'react-icons/fa';
@@ -21,7 +21,7 @@ const Login = (props) => {
     const data = { email: userEmail, password: userPassword };
     event.preventDefault();
 
-    fetch('/api/users/login', {
+    fetch('/api/users/login/', {
       method: 'post',
       headers: {
         Accept: 'application/json',
@@ -51,6 +51,7 @@ const Login = (props) => {
             value={userEmail}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <FormText>&nbsp; input your username or email address</FormText>
         </FormGroup>
         <br />
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
@@ -65,15 +66,16 @@ const Login = (props) => {
             value={userPassword}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <FormText>&nbsp; *immediately encrypted for extra security</FormText>
         </FormGroup>
         <br />
         <div id="login-button">
-          <Button color="primary" type="button" onClick={handleLoginSubmit}>
+          <Button color="primary" type="submit" onClick={handleLoginSubmit}>
             Submit <FiSend className="icon-submit" />
           </Button>
         </div>
       </Form>
-      <SignUp />
+      <SignUp history={history} />
     </div>
   );
 };
