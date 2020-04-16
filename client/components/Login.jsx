@@ -51,7 +51,7 @@ const Login = (props) => {
             value={userEmail}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <FormText>&nbsp; input your username or email address</FormText>
+          <FormText>&nbsp; Input your username or email address</FormText>
         </FormGroup>
         <br />
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
@@ -66,7 +66,9 @@ const Login = (props) => {
             value={userPassword}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <FormText>&nbsp; *immediately encrypted for extra security</FormText>
+          <FormText>
+            &nbsp; <a href="/password-reset">Forgot your password?</a>
+          </FormText>
         </FormGroup>
         <br />
         <div id="login-button">
