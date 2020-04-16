@@ -29,6 +29,7 @@ const SignUp = (props) => {
   const [userConfirmPassword, setConfirmPassword] = useState('');
   const [validateEmail, setEmailValidation] = useState();
   const [validateLength, setLengthValidation] = useState();
+  const [validateLengthPW, setPasswordLength] = useState();
   const [validateMatch, setPasswordMatch] = useState();
 
   const toggle = () => setModal(!modal);
@@ -92,9 +93,19 @@ const SignUp = (props) => {
     setLengthValidation(lengthValid);
   }
 
+  function validatePasswordLength(e) {
+    let lengthValid;
+    if (e.target.value.length >= 6) {
+      lengthValid = true;
+    } else {
+      lengthValid = false;
+    }
+    setPasswordLength(lengthValid);
+  }
+
   function validatePasswordMatch(e) {
     let passwordMatch;
-    if (userPassword === userConfirmPassword) {
+    if (userPassword.toString() === e.target.value) {
       passwordMatch = true;
     } else {
       passwordMatch = false;
@@ -157,7 +168,6 @@ const SignUp = (props) => {
                   </Label>
                   <Input
                     valid={validateEmail}
-                    invalid={!validateEmail}
                     type="email"
                     name="email"
                     id="email"
@@ -168,7 +178,8 @@ const SignUp = (props) => {
                       validateUserEmail(e);
                     }}
                   />
-                  <FormFeedback valid>Consider yourself validated, Email.</FormFeedback>
+                  <FormText>&nbsp;please input valid email address</FormText>
+                  <FormFeedback valid>&nbsp;Consider yourself validated, Email</FormFeedback>
                 </FormGroup>
               </Col>
               <Col md={6}>
@@ -179,7 +190,6 @@ const SignUp = (props) => {
                   </Label>
                   <Input
                     valid={validateLength}
-                    invalid={!validateLength}
                     type="text"
                     name="username"
                     id="username"
@@ -191,7 +201,8 @@ const SignUp = (props) => {
                       validateInputLength(e);
                     }}
                   />
-                  <FormText>username must be 6 or more characters</FormText>
+                  <FormText>&nbsp;username must be 6 or more characters</FormText>
+                  <FormFeedback valid>&nbsp;Sicc username, {userFirstName}</FormFeedback>
                 </FormGroup>
               </Col>
               <Col md={6}>
@@ -202,6 +213,7 @@ const SignUp = (props) => {
                     Password
                   </Label>
                   <Input
+                    valid={validateLengthPW}
                     type="password"
                     name="password"
                     id="password"
@@ -209,8 +221,12 @@ const SignUp = (props) => {
                     autoComplete="new-password"
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     value={userPassword}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      validatePasswordLength(e);
+                    }}
                   />
+                  <FormText>&nbsp;password must be 6 or more characters</FormText>
                 </FormGroup>
               </Col>
 
@@ -222,15 +238,20 @@ const SignUp = (props) => {
                     Confirm Password
                   </Label>
                   <Input
+                    valid={validateMatch}
                     type="password"
                     name="password-confirm"
                     id="password-confirm"
                     placeholder="********"
                     autoComplete="new-password"
                     value={userConfirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      validatePasswordMatch(e);
+                    }}
                     onKeyPress={handleKeyPress}
                   />
+                  <FormText>&nbsp;passwords must match</FormText>
                 </FormGroup>
               </Col>
             </Row>
