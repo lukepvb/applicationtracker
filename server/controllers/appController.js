@@ -1,4 +1,4 @@
-const App = require('../models/AppModel');
+const User = require('../models/UserModel');
 
 const appController = {};
 
@@ -12,35 +12,33 @@ appController.createApp = (req, res, next) => {
     status,
     salary,
     contact,
-    dubDown,
     notes,
     dateSubmitted,
     followUp,
   } = req.body;
 
-  appController
-    .create({
-      company,
-      location,
-      role,
-      status,
-      salary,
-      contact,
-      dubDown,
-      notes,
-      dateSubmitted,
-      followUp,
-    })
-    .then((newApp) => {
-      res.locals.newApp = newApp;
-      return next();
-    })
-    .catch((err) => {
-      return next({
-        log: `ERROR appController.createApp: ERROR ${err}`,
-        message: `ERROR: appController.createApp: ERROR see server log for details`,
-      });
-    });
+  console.log('In appController, before .create');
+  console.log(res.locals.user._id);
+  const id = res.locals.user._id;
+
+  res.locals.user.apps.push({
+    company,
+    location,
+    role,
+    status,
+    salary,
+    contact,
+    notes,
+    dateSubmitted,
+    followUp,
+  });
+
+  const user = res.locals.user;
+
+  User.findByIdAndUpdate(id, user, { new: true }, (err, newApps) => {
+    if (err) return res.status(500).send(err);
+    return res.send(newApps);
+  });
 };
 
 /* Update App */

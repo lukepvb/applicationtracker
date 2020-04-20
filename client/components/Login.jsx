@@ -28,7 +28,7 @@ const Login = (props) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-    });
+    }).then((res) => props.handleUserData(res));
 
     // invoke handleClick to navigate to dashboard after form submission
     // TODO: Control flow here to avoid moving to dashboard without successful login

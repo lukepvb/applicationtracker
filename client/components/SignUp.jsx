@@ -111,6 +111,7 @@ const SignUp = (props) => {
       setInputClicked(false);
     } else {
       passwordMatch = false;
+      setInputClicked(true);
     }
     setPasswordMatch(passwordMatch);
   }
@@ -261,7 +262,7 @@ const SignUp = (props) => {
                     }}
                     onKeyPress={handleKeyPress}
                   />
-                  <FormText>&nbsp;passwords must match</FormText>
+                  <FormFeedback invalid>&nbsp;passwords must match</FormFeedback>
                 </FormGroup>
               </Col>
             </Row>

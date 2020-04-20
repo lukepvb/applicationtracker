@@ -2,6 +2,20 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+// create appSchema
+const appSchema = new Schema({
+  company: { type: String, required: true },
+  location: { type: String, required: true },
+  role: { type: String, required: true },
+  status: { type: String, required: true },
+  salary: Number,
+  contact: String,
+  dubDown: { type: Boolean, default: false },
+  notes: String,
+  dateSubmitted: { type: Date, default: Date.now },
+  followUp: Date,
+});
+
 // sets a schema for the 'user' collection
 const userSchema = new Schema({
   firstName: { type: String, required: true },
@@ -9,7 +23,7 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  apps: Array,
+  apps: [appSchema],
 });
 
 // creates a model for the 'user' collection that will be part of the export
