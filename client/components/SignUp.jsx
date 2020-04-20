@@ -31,6 +31,7 @@ const SignUp = (props) => {
   const [validateLength, setLengthValidation] = useState();
   const [validateLengthPW, setPasswordLength] = useState();
   const [validateMatch, setPasswordMatch] = useState();
+  const [inputClicked, setInputClicked] = useState();
 
   const toggle = () => setModal(!modal);
 
@@ -105,12 +106,17 @@ const SignUp = (props) => {
 
   function validatePasswordMatch(e) {
     let passwordMatch;
-    if (userPassword.toString() === e.target.value) {
+    if (userPassword === e.target.value) {
       passwordMatch = true;
+      setInputClicked(false);
     } else {
       passwordMatch = false;
     }
     setPasswordMatch(passwordMatch);
+  }
+
+  function inputClick(e) {
+    setInputClicked(true);
   }
 
   return (
@@ -239,6 +245,7 @@ const SignUp = (props) => {
                   </Label>
                   <Input
                     valid={validateMatch}
+                    invalid={inputClicked}
                     type="password"
                     name="password-confirm"
                     id="password-confirm"
@@ -248,6 +255,9 @@ const SignUp = (props) => {
                     onChange={(e) => {
                       setConfirmPassword(e.target.value);
                       validatePasswordMatch(e);
+                    }}
+                    onFocus={(e) => {
+                      inputClick(e);
                     }}
                     onKeyPress={handleKeyPress}
                   />
