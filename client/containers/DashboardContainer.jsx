@@ -10,7 +10,7 @@ const DashboardContainer = (props) => {
 
       <div className="dash-main">
         <Header />
-        <AppsContainer />
+        <AppsContainer user={props.user} />
       </div>
       <div className="dash-footer"></div>
     </div>
