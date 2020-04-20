@@ -7,11 +7,11 @@ userController.userExists = (req, res, next) => {
   const { email } = req.body;
 
   // check database to see if user already exists
-  User.find({ email })
+  User.findOne({ email })
     .exec()
     .then((userData) => {
       res.locals.exists = false;
-      if (userData.length === 1) {
+      if (userData) {
         const exists = true;
         res.locals.exists = exists;
         res.locals.user = userData;
