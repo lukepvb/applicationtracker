@@ -10,6 +10,7 @@ import SignUp from './SignUp';
 const Login = (props) => {
   const [userEmail, setEmail] = useState('');
   const [userPassword, setPassword] = useState('');
+  const [user, setUser] = useState(props.user);
 
   const history = useHistory();
 
@@ -28,7 +29,7 @@ const Login = (props) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-    }).then((res) => props.handleUserData(res));
+    }).then((res) => props.handleUserData(res.json()));
 
     // invoke handleClick to navigate to dashboard after form submission
     // TODO: Control flow here to avoid moving to dashboard without successful login
