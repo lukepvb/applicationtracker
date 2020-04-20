@@ -10,6 +10,12 @@ import Data from '../components/Data';
 
 const App = (props) => {
   const [modal, setModal] = useState(false);
+  const [user, setUser] = useState();
+
+  const handleUserData = (e) => {
+    setUser(e);
+    console.log(user);
+  };
 
   const toggle = () => setModal(!modal);
 
@@ -17,8 +23,15 @@ const App = (props) => {
     <Router>
       <Switch>
         <div className="router">
-          <Route exact path="/" component={Login} />
-          <Route path="/dashboard" component={DashboardContainer} />
+          <Route
+            exact
+            path="/"
+            render={(handleUserData) => <Login handleUserData={handleUserData} />}
+          />
+          <Route
+            path="/dashboard"
+            render={(handleUserData) => <DashboardContainer handleUserData={handleUserData} />}
+          />
           <Route path="/dashboard/newApp" component={NewApp} />
           <Route path="/data" component={Data} />
         </div>

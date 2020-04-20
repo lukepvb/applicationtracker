@@ -17,7 +17,7 @@ authController.hashPassword = (req, res, next) => {
 authController.comparePassword = (req, res, next) => {
   console.log('Made it into authController.comparePassword');
   const { password } = req.body;
-  const hash = res.locals.user[0].password;
+  const hash = res.locals.user.password;
   console.log(password);
   bcrypt.compare(password, hash, (err, result) => {
     if (result == true) {
