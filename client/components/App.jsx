@@ -10,10 +10,10 @@ import Data from '../components/Data';
 
 const App = (props) => {
   const [modal, setModal] = useState(false);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
 
-  const handleUserData = (e) => {
-    setUser(e);
+  const handleUserData = (userData) => {
+    setUser(userData);
     console.log(user);
   };
 
@@ -26,12 +26,9 @@ const App = (props) => {
           <Route
             exact
             path="/"
-            render={(handleUserData) => <Login handleUserData={handleUserData} />}
+            render={() => <Login handleUserData={handleUserData} user={user} />}
           />
-          <Route
-            path="/dashboard"
-            render={(handleUserData) => <DashboardContainer handleUserData={handleUserData} />}
-          />
+          <Route path="/dashboard" render={() => <DashboardContainer user={user} />} />
           <Route path="/dashboard/newApp" component={NewApp} />
           <Route path="/data" component={Data} />
         </div>
