@@ -11,6 +11,8 @@ const appSchema = new Schema({
   salary: Number,
   contact: String,
   dubDown: { type: Boolean, default: false },
+  stage: { type: String, default: 'Research' },
+  lastUpdate: Date,
   notes: String,
   dateSubmitted: { type: Date, default: Date.now },
   followUp: Date,
