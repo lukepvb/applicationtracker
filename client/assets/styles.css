@@ -238,7 +238,7 @@ label {
 .button-new-app {
   border-radius: 0.75em;
   color: white;
-  border-color: rgb(255, 94, 0);
+  border-color: rgba(0, 123, 255, 0.5);
   border-width: 0.3em;
   background-color: dodgerblue;
   box-shadow: 11px 19px 28px -10px rgba(156, 150, 156, 1);
