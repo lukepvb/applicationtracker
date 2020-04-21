@@ -2,9 +2,14 @@
   box-sizing: border-box;
 }
 
-.router {
-  display: flex;
+#root {
+  width: 100%;
+  height: 100%;
   justify-content: center;
+  display: block;
+}
+
+.router {
   width: 100%;
 }
 
@@ -17,18 +22,25 @@ body.modal-open .login-container {
 }
 
 /* main login container styling */
-.login-container {
+.login-main {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 10%;
+}
+
+.login {
+  justify-content: center;
   border: solid;
   border-color: rgb(89, 88, 88);
   box-shadow: 11px 19px 28px -10px rgba(156, 150, 156, 1);
   padding: 5%;
-  margin-top: 10%;
   border-radius: 15px;
   width: max-content;
   height: max-content;
 }
 
-.login-container label {
+.login label {
   font-weight: normal;
 }
 
@@ -226,7 +238,7 @@ label {
 .button-new-app {
   border-radius: 0.75em;
   color: white;
-  border-color: rgb(255, 94, 0);
+  border-color: rgba(0, 123, 255, 0.5);
   border-width: 0.3em;
   background-color: dodgerblue;
   box-shadow: 11px 19px 28px -10px rgba(156, 150, 156, 1);
@@ -238,4 +250,10 @@ label {
   margin-left: 2em;
   margin-top: 0.5em;
   color: crimson;
+}
+
+/* New App Styling */
+.icon-newApp {
+  margin-bottom: 0.1em;
+  margin-right: 0.3em;
 }

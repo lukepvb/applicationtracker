@@ -1,7 +1,7 @@
 import React from 'react';
 import NavHeader from '../components/NavHeader';
 import Header from '../components/Header';
-import AppsContainer from '../containers/AppsContainer';
+import AppsContainer from './AppsContainer';
 
 const DashboardContainer = (props) => {
   return (
@@ -9,10 +9,10 @@ const DashboardContainer = (props) => {
       <NavHeader />
 
       <div className="dash-main">
-        <Header name={props.user.firstName} />
+        <Header name={props.user.firstName} history={props.history} />
         <AppsContainer user={props.user} />
       </div>
-      <div className="dash-footer"></div>
+      <div className="dash-footer" />
     </div>
   );
 };
