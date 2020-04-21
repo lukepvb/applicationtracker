@@ -10,7 +10,6 @@ import SignUp from './SignUp';
 const Login = (props) => {
   const [userEmail, setEmail] = useState('');
   const [userPassword, setPassword] = useState('');
-  const [user, setUser] = useState(props.user);
 
   const history = useHistory();
 
@@ -19,7 +18,7 @@ const Login = (props) => {
   };
 
   async function handleLoginSubmit(event) {
-    const data = { email: userEmail, password: userPassword };
+    const postData = { email: userEmail, password: userPassword };
     event.preventDefault();
 
     fetch('/api/users/login/', {
@@ -28,7 +27,7 @@ const Login = (props) => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(postData),
     })
       .then((res) => {
         return res.json();
@@ -41,7 +40,7 @@ const Login = (props) => {
   }
 
   return (
-    <div className="login-container">
+    <div className="login">
       <MdTrackChanges className="icon-tracker" />
       <Form>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">

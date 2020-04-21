@@ -12,8 +12,9 @@ import {
   Col,
   Row,
 } from 'reactstrap';
+import { useHistory } from 'react-router-dom';
 import { IoMdStats } from 'react-icons/io';
-import { FaExternalLinkAlt, FaUserAlt, FaEdit, FaRegBuilding, FaListOl } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaUserAlt, FaRegBuilding, FaListOl } from 'react-icons/fa';
 import { TiLocationOutline } from 'react-icons/ti';
 import { GiReceiveMoney } from 'react-icons/gi';
 import { MdSave, MdList, MdDateRange, MdSpeakerNotes, MdComputer } from 'react-icons/md';
@@ -35,9 +36,11 @@ const NewApp = (props) => {
 
   const toggle = () => setModal(!modal);
 
+  let history = useHistory();
+
   const handleClick = () => {
     toggle();
-    props.history.push('/dashboard');
+    history.push('/dashboard');
   };
 
   // formatting for suggesting current date
@@ -71,7 +74,7 @@ const NewApp = (props) => {
 
   return (
     <div>
-      <Modal isOpen={modal} toggle={toggle} className={className}>
+      <Modal isOpen={modal} className={className}>
         <ModalHeader toggle={toggle} close={closeBtn}>
           <MdList className="icon-newApp" />
           Application
@@ -148,7 +151,7 @@ const NewApp = (props) => {
                   value={salary}
                   onChange={(e) => setSalary(e.target.value)}
                 >
-                  <option>Select Range</option>
+                  <option>Select</option>
                   <option>Under 80k</option>
                   <option>80k-90k</option>
                   <option>90k-100k</option>

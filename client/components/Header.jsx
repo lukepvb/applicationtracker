@@ -1,8 +1,8 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Jumbotron, Button, Input } from 'reactstrap';
 import { MdAddCircle } from 'react-icons/md';
 import { TiArrowForwardOutline } from 'react-icons/ti';
-import { useHistory } from 'react-router-dom';
 import Avatar from 'react-avatar';
 
 const Header = (props) => {
@@ -15,7 +15,7 @@ const Header = (props) => {
     <div>
       <Jumbotron>
         <h1 className="display-3">
-          <Avatar className="avatar" size={160} round={true} />
+          <Avatar className="avatar" size={160} round />
           Hello, {props.name}!
         </h1>
         <p className="lead">
