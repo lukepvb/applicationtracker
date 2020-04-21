@@ -7,27 +7,16 @@ import {
   ModalBody,
   ModalFooter,
   Form,
-  FormGroup,
   Input,
   Label,
   Col,
   Row,
 } from 'reactstrap';
 import { IoMdStats } from 'react-icons/io';
-import {
-  FaUserEdit,
-  FaUserLock,
-  FaUserCheck,
-  FaLock,
-  FaUserCircle,
-  FaEdit,
-  FaRegBuilding,
-  FaListOl,
-} from 'react-icons/fa';
+import { FaExternalLinkAlt, FaUserAlt, FaEdit, FaRegBuilding, FaListOl } from 'react-icons/fa';
 import { TiLocationOutline } from 'react-icons/ti';
 import { GiReceiveMoney } from 'react-icons/gi';
-import { MdSave, MdList, MdDateRange, MdSpeakerNotes } from 'react-icons/md';
-import { useHistory } from 'react-router-dom';
+import { MdSave, MdList, MdDateRange, MdSpeakerNotes, MdComputer } from 'react-icons/md';
 
 const NewApp = (props) => {
   const { buttonLabel, className } = props;
@@ -40,6 +29,8 @@ const NewApp = (props) => {
   const [lastUpdate, setLastUpdate] = useState('');
   const [status, setStatus] = useState('In Progress');
   const [stage, setStage] = useState('Research');
+  const [contact, setContact] = useState('');
+  const [url, setUrl] = useState('');
   const [notes, setNotes] = useState('');
 
   const toggle = () => setModal(!modal);
@@ -59,13 +50,15 @@ const NewApp = (props) => {
     nowMonth = `0${nowMonth}`;
   }
   const nowDate = curDate.getDate();
-  // control flow for start date formatting - only update when empty
+  // storing formatted date in a variable for use in startedOn/lastUpdate
+  const formattedDate = `${nowYear}-${nowMonth}-${nowDate}`;
+  // control flow for start date formatting - only updates when empty
   if (startedOn === '') {
-    setStartedOn(`${nowYear}-${nowMonth}-${nowDate}`);
+    setStartedOn(formattedDate);
   }
-  // control flow for last update formatting - same as above
+  // control flow for lastUpdate formatting - same as above
   if (lastUpdate === '') {
-    setLastUpdate(`${nowYear}-${nowMonth}-${nowDate}`);
+    setLastUpdate(formattedDate);
   }
 
   // **** TO DO - Make sure to account for handleSubmit and handleClick ***** //
@@ -80,7 +73,7 @@ const NewApp = (props) => {
     <div>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle} close={closeBtn}>
-          <MdList className="icon-application" />
+          <MdList className="icon-newApp" />
           Application
         </ModalHeader>
         <ModalBody>
@@ -88,8 +81,10 @@ const NewApp = (props) => {
             <Row>
               <Col>
                 <Label for="company">
-                  <FaRegBuilding className="icon-company" />
-                  Company:
+                  <span>
+                    <FaRegBuilding className="icon-newApp" />
+                    Company:
+                  </span>
                 </Label>
                 <Input
                   type="text"
@@ -101,7 +96,7 @@ const NewApp = (props) => {
               </Col>
               <Col>
                 <Label for="role">
-                  <FaUserCircle className="icon-username" />
+                  <MdComputer className="icon-newApp" />
                   Role:
                 </Label>
                 <Input
@@ -114,7 +109,7 @@ const NewApp = (props) => {
               </Col>
               <Col>
                 <Label for="started">
-                  <MdDateRange className="icon-date" />
+                  <MdDateRange className="icon-newApp" />
                   Started On:
                 </Label>
                 <Input
@@ -130,7 +125,7 @@ const NewApp = (props) => {
             <Row>
               <Col>
                 <Label for="location">
-                  <TiLocationOutline className="icon-location" />
+                  <TiLocationOutline className="icon-newApp" />
                   Location:
                 </Label>
                 <Input
@@ -143,7 +138,7 @@ const NewApp = (props) => {
               </Col>
               <Col>
                 <Label for="salary">
-                  <GiReceiveMoney className="icon-salary" />
+                  <GiReceiveMoney className="icon-newApp" />
                   Salary:
                 </Label>
                 <Input
@@ -153,7 +148,7 @@ const NewApp = (props) => {
                   value={salary}
                   onChange={(e) => setSalary(e.target.value)}
                 >
-                  <option></option>
+                  <option>Select Range</option>
                   <option>Under 80k</option>
                   <option>80k-90k</option>
                   <option>90k-100k</option>
@@ -167,7 +162,7 @@ const NewApp = (props) => {
               <Col>
                 <Label for="last-updated">
                   {' '}
-                  <MdDateRange className="icon-date" />
+                  <MdDateRange className="icon-newApp" />
                   Last Updated:
                 </Label>
                 <Input
@@ -183,7 +178,7 @@ const NewApp = (props) => {
             <Row>
               <Col>
                 <Label for="status">
-                  <IoMdStats className="icon-status" />
+                  <IoMdStats className="icon-newApp" />
                   Status:
                 </Label>
                 <Input
@@ -200,7 +195,7 @@ const NewApp = (props) => {
               </Col>
               <Col>
                 <Label for="status">
-                  <FaListOl className="icon-stage" />
+                  <FaListOl className="icon-newApp" />
                   Stage:
                 </Label>
                 <Input
@@ -224,8 +219,36 @@ const NewApp = (props) => {
             <br />
             <Row>
               <Col>
+                <Label for="url">
+                  <FaExternalLinkAlt className="icon-newApp" />
+                  URL:
+                </Label>
+                <Input
+                  type="text"
+                  name="url"
+                  className="url"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                />
+              </Col>
+              <Col>
+                <Label for="contact">
+                  <FaUserAlt className="icon-newApp" />
+                  Primary Contact:
+                </Label>
+                <Input
+                  type="text"
+                  name="contact"
+                  className="contact"
+                  value={contact}
+                  onChange={(e) => setContact(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
                 <Label for="notes">
-                  <MdSpeakerNotes className="icon-notes" />
+                  <MdSpeakerNotes className="icon-newApp" />
                   Notes:
                 </Label>
                 <Input

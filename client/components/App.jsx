@@ -20,9 +20,9 @@ const App = (props) => {
   const toggle = () => setModal(!modal);
 
   return (
-    <Router>
-      <Switch>
-        <div className="router">
+    <div className="router">
+      <Router>
+        <Switch>
           <Route
             exact
             path="/"
@@ -31,9 +31,9 @@ const App = (props) => {
           <Route path="/dashboard" render={() => <DashboardContainer user={user} />} />
           <Route path="/dashboard/newApp" component={NewApp} />
           <Route path="/data" component={Data} />
-        </div>
-      </Switch>
-    </Router>
+        </Switch>
+      </Router>
+    </div>
   );
 };
 

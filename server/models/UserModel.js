@@ -16,6 +16,7 @@ const appSchema = new Schema({
   notes: String,
   dateSubmitted: { type: Date, default: Date.now },
   followUp: Date,
+  url: String,
 });
 
 // sets a schema for the 'user' collection

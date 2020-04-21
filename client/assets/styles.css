@@ -239,3 +239,9 @@ label {
   margin-top: 0.5em;
   color: crimson;
 }
+
+/* New App Styling */
+.icon-newApp {
+  margin-bottom: 0.1em;
+  margin-right: 0.3em;
+}
