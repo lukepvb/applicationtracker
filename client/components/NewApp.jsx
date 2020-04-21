@@ -43,6 +43,40 @@ const NewApp = (props) => {
     history.push('/dashboard');
   };
 
+  async function handleAppSubmit(event) {
+    event.preventDefault();
+    const newAppData = {
+      company,
+      role,
+      startedOn,
+      location,
+      salary,
+      lastUpdate,
+      status,
+      stage,
+      url,
+      contact,
+      notes,
+    };
+    const postData = { userId: props.user._id, newApp: newAppData };
+    console.log(postData, 'line 62 NewApp.jsx');
+    fetch('/api/apps/create/', {
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(postData),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => props.handleUserData(data));
+
+    // invoke handleClick to navigate to dashboard after form submission
+    // TODO: Control flow here to avoid moving to dashboard without successful login
+  }
+
   // formatting for suggesting current date
   const curDate = new Date();
   const nowYear = curDate.getFullYear();
@@ -266,7 +300,7 @@ const NewApp = (props) => {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={handleClick}>
+          <Button color="primary" type="submit" onClick={handleAppSubmit}>
             Save <MdSave className="icon-save" />
           </Button>{' '}
           <Button color="secondary" onClick={handleClick}>

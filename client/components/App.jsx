@@ -28,7 +28,7 @@ const App = (props) => {
             )}
           />
           <Route path="/dashboard" render={() => <DashboardContainer user={user} />} />
-          <Route exact path="/dashboard/newApp" render={() => <NewApp />} />
+          <Route exact path="/dashboard/newApp" render={() => <NewApp user={user} />} />
           <Route path="/data" component={Data} />
         </>
       </Switch>

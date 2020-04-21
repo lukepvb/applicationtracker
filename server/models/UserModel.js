@@ -5,18 +5,18 @@ const { Schema } = mongoose;
 // create appSchema
 const appSchema = new Schema({
   company: { type: String, required: true },
-  location: { type: String, required: true },
   role: { type: String, required: true },
-  status: { type: String, required: true },
-  salary: Number,
-  contact: String,
-  dubDown: { type: Boolean, default: false },
-  stage: { type: String, default: 'Research' },
-  lastUpdate: Date,
-  notes: String,
   dateSubmitted: { type: Date, default: Date.now },
-  followUp: Date,
+  location: { type: String, required: true },
+  salary: Number,
+  lastUpdate: Date,
+  status: { type: String, required: true },
+  stage: { type: String, default: 'Research' },
   url: String,
+  contact: String,
+  notes: String,
+  dubDown: { type: Boolean, default: false },
+  followUp: { type: Boolean, default: false },
 });
 
 // sets a schema for the 'user' collection
