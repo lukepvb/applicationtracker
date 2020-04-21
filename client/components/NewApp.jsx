@@ -7,6 +7,7 @@ import {
   ModalBody,
   ModalFooter,
   Form,
+  FormGroup,
   Input,
   Label,
   Col,
@@ -33,6 +34,8 @@ const NewApp = (props) => {
   const [contact, setContact] = useState('');
   const [url, setUrl] = useState('');
   const [notes, setNotes] = useState('');
+  const [dubDown, setDubDown] = useState(Boolean);
+  const [followUp, setFollowUp] = useState(Boolean);
 
   const toggle = () => setModal(!modal);
 
@@ -57,6 +60,8 @@ const NewApp = (props) => {
       url,
       contact,
       notes,
+      dubDown,
+      followUp,
     };
     const postData = { userId: props.user._id, newApp: newAppData };
     console.log(postData, 'line 62 NewApp.jsx');
@@ -295,6 +300,34 @@ const NewApp = (props) => {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                 />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <FormGroup check>
+                  <Label check>
+                    <Input
+                      type="checkbox"
+                      className="dub-down"
+                      checked={dubDown}
+                      onChange={(e) => setDubDown(e.target.checked)}
+                    />
+                    &nbsp;Doubled Down
+                  </Label>
+                </FormGroup>
+              </Col>
+              <Col>
+                <FormGroup check>
+                  <Label check>
+                    <Input
+                      type="checkbox"
+                      className="follow-up"
+                      checked={followUp}
+                      onChange={(e) => setFollowUp(e.target.checked)}
+                    />
+                    &nbsp;Followed Up
+                  </Label>
+                </FormGroup>
               </Col>
             </Row>
           </Form>
