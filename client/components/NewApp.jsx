@@ -34,22 +34,39 @@ const NewApp = (props) => {
   const [modal, setModal] = useState(true);
   const [company, setCompany] = useState('');
   const [role, setRole] = useState('');
-  const [startedOn, setStartedOn] = useState(Date);
+  const [startedOn, setStartedOn] = useState('');
   const [location, setLocation] = useState('');
   const [salary, setSalary] = useState(0);
-  const [lastUpdate, setLastUpdate] = useState(Date);
+  const [lastUpdate, setLastUpdate] = useState('');
   const [status, setStatus] = useState('In Progress');
   const [stage, setStage] = useState('Research');
   const [notes, setNotes] = useState('');
-
-  let history = useHistory();
 
   const toggle = () => setModal(!modal);
 
   const handleClick = () => {
     toggle();
-    history.push('/dashboard');
+    props.history.push('/dashboard');
   };
+
+  // formatting for suggesting current date
+  const curDate = new Date();
+  const nowYear = curDate.getFullYear();
+  // .getMonth starts at 0th index, so add 1 before evaluating format
+  let nowMonth = curDate.getMonth() + 1;
+  // format does not default to double digit integer
+  if (nowMonth < 10) {
+    nowMonth = `0${nowMonth}`;
+  }
+  const nowDate = curDate.getDate();
+  // control flow for start date formatting - only update when empty
+  if (startedOn === '') {
+    setStartedOn(`${nowYear}-${nowMonth}-${nowDate}`);
+  }
+  // control flow for last update formatting - same as above
+  if (lastUpdate === '') {
+    setLastUpdate(`${nowYear}-${nowMonth}-${nowDate}`);
+  }
 
   // **** TO DO - Make sure to account for handleSubmit and handleClick ***** //
 
