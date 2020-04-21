@@ -16,8 +16,7 @@ const Header = (props) => {
       <Jumbotron>
         <h1 className="display-3">
           <Avatar className="avatar" size={160} round={true} />
-          Hello, Luke and Jason
-          {props.name}!
+          Hello, {props.name}!
         </h1>
         <p className="lead">
           This simple app is intended to help add structure to your application process -

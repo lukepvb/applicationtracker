@@ -32,6 +32,15 @@ import { useHistory } from 'react-router-dom';
 const NewApp = (props) => {
   const { buttonLabel, className } = props;
   const [modal, setModal] = useState(true);
+  const [company, setCompany] = useState('');
+  const [role, setRole] = useState('');
+  const [startedOn, setStartedOn] = useState(Date);
+  const [location, setLocation] = useState('');
+  const [salary, setSalary] = useState(0);
+  const [lastUpdate, setLastUpdate] = useState(Date);
+  const [status, setStatus] = useState('In Progress');
+  const [stage, setStage] = useState('Research');
+  const [notes, setNotes] = useState('');
 
   let history = useHistory();
 
@@ -65,27 +74,39 @@ const NewApp = (props) => {
                   <FaRegBuilding className="icon-company" />
                   Company:
                 </Label>
-                <Input type="text" name="company" className="company">
-                  {props.companyName}
-                </Input>
+                <Input
+                  type="text"
+                  name="company"
+                  className="company"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                />
               </Col>
               <Col>
                 <Label for="role">
                   <FaUserCircle className="icon-username" />
                   Role:
                 </Label>
-                <Input type="text" name="role" className="role">
-                  {props.companyRole}
-                </Input>
+                <Input
+                  type="text"
+                  name="role"
+                  className="role"
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                />
               </Col>
               <Col>
                 <Label for="started">
                   <MdDateRange className="icon-date" />
                   Started On:
                 </Label>
-                <Input type="date" name="started" className="started">
-                  {props.startedOn}
-                </Input>
+                <Input
+                  type="date"
+                  name="started"
+                  className="started"
+                  value={startedOn}
+                  onChange={(e) => setStartedOn(e.target.value)}
+                />
               </Col>
             </Row>
             <br />
@@ -95,16 +116,26 @@ const NewApp = (props) => {
                   <TiLocationOutline className="icon-location" />
                   Location:
                 </Label>
-                <Input type="text" name="location" className="location">
-                  {props.companyLocation}
-                </Input>
+                <Input
+                  type="text"
+                  name="location"
+                  className="location"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                />
               </Col>
               <Col>
                 <Label for="salary">
                   <GiReceiveMoney className="icon-salary" />
                   Salary:
                 </Label>
-                <Input type="select" name="salary" className="salary">
+                <Input
+                  type="select"
+                  name="salary"
+                  className="salary"
+                  value={salary}
+                  onChange={(e) => setSalary(e.target.value)}
+                >
                   <option></option>
                   <option>Under 80k</option>
                   <option>80k-90k</option>
@@ -122,9 +153,13 @@ const NewApp = (props) => {
                   <MdDateRange className="icon-date" />
                   Last Updated:
                 </Label>
-                <Input type="date" name="last-updated" className="last-updated">
-                  {props.lastUpdated}
-                </Input>
+                <Input
+                  type="date"
+                  name="last-updated"
+                  className="last-updated"
+                  value={lastUpdate}
+                  onChange={(e) => setLastUpdate(e.target.value)}
+                />
               </Col>
             </Row>
             <br />
@@ -134,7 +169,13 @@ const NewApp = (props) => {
                   <IoMdStats className="icon-status" />
                   Status:
                 </Label>
-                <Input type="select" name="status" className="status">
+                <Input
+                  type="select"
+                  name="status"
+                  className="status"
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                >
                   <option>In Progress</option>
                   <option>Complete</option>
                   <option>Rejected</option>
@@ -145,7 +186,13 @@ const NewApp = (props) => {
                   <FaListOl className="icon-stage" />
                   Stage:
                 </Label>
-                <Input type="select" name="status" className="status">
+                <Input
+                  type="select"
+                  name="status"
+                  className="status"
+                  value={stage}
+                  onChange={(e) => setStage(e.target.value)}
+                >
                   <option>Research</option>
                   <option>App Submitted</option>
                   <option>Follow-up</option>
@@ -164,9 +211,13 @@ const NewApp = (props) => {
                   <MdSpeakerNotes className="icon-notes" />
                   Notes:
                 </Label>
-                <Input type="textarea" name="notes" className="notes">
-                  {props.companyNotes}
-                </Input>
+                <Input
+                  type="textarea"
+                  name="notes"
+                  className="notes"
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                />
               </Col>
             </Row>
           </Form>
