@@ -9,7 +9,7 @@ const DashboardContainer = (props) => {
       <NavHeader />
 
       <div className="dash-main">
-        <Header name={props.user.firstName} history={props.history} />
+        <Header name={props.user.firstName} />
         <AppsContainer user={props.user} />
       </div>
       <div className="dash-footer" />
