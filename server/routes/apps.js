@@ -5,7 +5,7 @@ const userController = require('../controllers/userController');
 
 const router = express.Router();
 /* /api/apps/ route */
-router.post('/create', userController.userExists, appController.createApp, (req, res) => {
+router.post('/create', appController.createApp, (req, res) => {
   res.status(200).json(res.locals.newApp);
 });
 

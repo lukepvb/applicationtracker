@@ -1,4 +1,5 @@
 const User = require('../models/UserModel');
+const App = require('../models/AppModel');
 
 const appController = {};
 
@@ -7,37 +8,49 @@ const appController = {};
 appController.createApp = (req, res, next) => {
   const {
     company,
-    location,
     role,
-    status,
+    startedOn,
+    location,
     salary,
+    lastUpdate,
+    status,
+    stage,
+    url,
     contact,
     notes,
-    dateSubmitted,
+    dubDown,
     followUp,
-  } = req.body;
+  } = req.body.newApp;
 
   console.log('In appController, before .create');
-  console.log(res.locals.user._id);
-  const id = res.locals.user._id;
+  const id = req.body.userId;
+  console.log(id);
 
-  res.locals.user.apps.push({
-    company,
-    location,
-    role,
-    status,
-    salary,
-    contact,
-    notes,
-    dateSubmitted,
-    followUp,
+  const newApp = new App({
+    company: company,
+    role: role,
+    dateSubmitted: startedOn,
+    location: location,
+    salary: salary,
+    lastUpdate: lastUpdate,
+    status: status,
+    stage: stage,
+    url: url,
+    contact: contact,
+    notes: notes,
+    dubDown: dubDown,
+    followUp: followUp,
   });
 
-  const user = res.locals.user;
+  console.log('This is our newApp', newApp);
 
-  User.findByIdAndUpdate(id, user, { new: true }, (err, newApps) => {
+  User.findById(id, (err, userDoc) => {
+    console.log(userDoc);
     if (err) return res.status(500).send(err);
-    return res.send(newApps);
+    userDoc.apps.push(newApp);
+    userDoc.save();
+    console.log('after newApp has been pushed', userDoc);
+    return res.status(201).send(userDoc);
   });
 };
 
