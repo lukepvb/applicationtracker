@@ -10,7 +10,7 @@ const DashboardContainer = (props) => {
 
       <div className="dash-main">
         <Header name={props.user.firstName} history={props.history} />
-        <AppsContainer user={props.user} />
+        <AppsContainer handleAppId={props.handleAppId} user={props.user} />
       </div>
       <div className="dash-footer" />
     </div>

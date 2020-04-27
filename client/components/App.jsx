@@ -9,10 +9,16 @@ import Data from './Data';
 
 const App = (props) => {
   const [user, setUser] = useState({});
+  const [appId, setAppId] = useState('');
 
   const handleUserData = (userData) => {
     setUser(userData);
     console.log(user);
+  };
+
+  const handleAppId = (updateId) => {
+    setAppId(updateId);
+    console.log(appId);
   };
 
   return (
@@ -26,11 +32,19 @@ const App = (props) => {
               <LoginContainer handleUserData={handleUserData} user={user} className="router" />
             )}
           />
-          <Route path="/dashboard" render={() => <DashboardContainer user={user} />} />
+          <Route
+            path="/dashboard"
+            render={() => <DashboardContainer handleAppId={handleAppId} user={user} />}
+          />
           <Route
             exact
             path="/dashboard/newApp"
             render={() => <NewApp handleUserData={handleUserData} user={user} />}
+          />
+          <Route
+            exact
+            path="/dashboard/updateApp"
+            render={() => <NewApp appId={appId} handleUserData={handleUserData} user={user} />}
           />
           <Route path="/data" component={Data} />
         </>

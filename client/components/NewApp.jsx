@@ -23,6 +23,7 @@ import { MdSave, MdList, MdDateRange, MdSpeakerNotes, MdComputer } from 'react-i
 const NewApp = (props) => {
   const { buttonLabel, className } = props;
   const [modal, setModal] = useState(true);
+  const [appId, setAppId] = useState(props.appId);
   const [company, setCompany] = useState('');
   const [role, setRole] = useState('');
   const [startedOn, setStartedOn] = useState('');
@@ -36,6 +37,29 @@ const NewApp = (props) => {
   const [notes, setNotes] = useState('');
   const [dubDown, setDubDown] = useState(Boolean);
   const [followUp, setFollowUp] = useState(Boolean);
+  const [appFilled, setAppFilled] = useState(false);
+
+  if (props.appId && !appFilled) {
+    const apps = props.user.apps;
+    for (let i = 0; i < apps.length; i++) {
+      const curApp = apps[i];
+      if (props.appId === apps[i]._id) {
+        setCompany(curApp.company);
+        setRole(curApp.role);
+        // setStartedOn()
+        setLocation(curApp.location);
+        setSalary(curApp.salary);
+        setStatus(curApp.status);
+        setStage(curApp.stage);
+        setUrl(curApp.url);
+        setContact(curApp.contact);
+        setNotes(curApp.notes);
+        setDubDown(curApp.dubDown);
+        setFollowUp(curApp.followUp);
+        setAppFilled(true);
+      }
+    }
+  }
 
   const toggle = () => setModal(!modal);
 
