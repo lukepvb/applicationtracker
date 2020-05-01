@@ -27,6 +27,7 @@ const AppsContainer = (props) => {
             companyName={curJob.company}
             companyRole={curJob.role}
             startedOn={curJob.dateSubmitted}
+            lastUpdate={curJob.lastUpdate}
             companyLocation={curJob.location}
             companySalary={curJob.salary}
             companyStatus={curJob.status}

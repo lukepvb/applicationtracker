@@ -33,7 +33,7 @@ const JobAppContainer = (props) => {
               startedOn={props.startedOn}
               companyLocation={props.companyLocation}
               companySalary={props.companySalary}
-              lastUpdated={props.lastUpdated}
+              lastUpdate={props.lastUpdate}
               companyStatus={props.companyStatus}
               companyNotes={props.companyNotes}
               appId={props.appId}
