@@ -103,6 +103,7 @@ const NewApp = (props) => {
       .then((data) => props.handleUserData(data));
 
     // invoke handleClick to navigate to dashboard after form submission
+    handleClick();
     // TODO: Control flow here to avoid moving to dashboard without successful login
   }
 

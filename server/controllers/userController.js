@@ -8,7 +8,7 @@ userController.userExists = (req, res, next) => {
   const { email } = req.body;
 
   // check database to see if user already exists
-  User.findOne({ email }, ['firstName', 'lastName', '_id', 'email', 'username'])
+  User.findOne({ email }, ['firstName', 'lastName', '_id', 'email', 'username', 'apps'])
     .exec()
     .then((userData) => {
       res.locals.exists = false;
