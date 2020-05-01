@@ -31,6 +31,8 @@ const AppsContainer = (props) => {
             companyStatus={curJob.status}
             companyNotes={curJob.notes}
             dubDown={curJob.dubDown}
+            handleAppId={props.handleAppId}
+            appId={curJob._id}
           />
         </ListGroupItem>
       );
