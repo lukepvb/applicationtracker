@@ -103,6 +103,7 @@ const NewApp = (props) => {
       .then((data) => props.handleUserData(data));
 
     // invoke handleClick to navigate to dashboard after form submission
+    handleClick();
     // TODO: Control flow here to avoid moving to dashboard without successful login
   }
 
@@ -115,7 +116,11 @@ const NewApp = (props) => {
   if (nowMonth < 10) {
     nowMonth = `0${nowMonth}`;
   }
-  const nowDate = curDate.getDate();
+  let nowDate = curDate.getDate();
+  // format does not default to double digit number
+  if (nowDate < 10) {
+    nowDate = `0${nowDate}`;
+  }
   // storing formatted date in a variable for use in startedOn/lastUpdate
   const formattedDate = `${nowYear}-${nowMonth}-${nowDate}`;
   // control flow for start date formatting - only updates when empty
