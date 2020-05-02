@@ -72,6 +72,7 @@ const NewApp = (props) => {
 
   async function handleAppSubmit(event) {
     event.preventDefault();
+
     const newAppData = {
       company,
       role,
@@ -87,20 +88,33 @@ const NewApp = (props) => {
       dubDown,
       followUp,
     };
-    const postData = { userId: props.user._id, newApp: newAppData };
-    console.log(postData, 'line 62 NewApp.jsx');
-    fetch('/api/apps/create/', {
-      method: 'post',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(postData),
-    })
-      .then((res) => {
-        return res.json();
+
+    const postData = { userId: props.user._id, newApp: newAppData, appId: props.appId };
+
+    if (!appFilled) {
+      console.log(postData, 'line 62 NewApp.jsx');
+      fetch('/api/apps/create/', {
+        method: 'post',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
       })
-      .then((data) => props.handleUserData(data));
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => props.handleUserData(data));
+    } else {
+      fetch('/api/apps/update', {
+        method: 'put',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+      });
+    }
 
     // invoke handleClick to navigate to dashboard after form submission
     handleClick();

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-// create appSchema
+// // create appSchema
 // const appSchema = new Schema({
 //   company: { type: String, required: true },
 //   role: { type: String, required: true },

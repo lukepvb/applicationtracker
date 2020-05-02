@@ -8,7 +8,7 @@ const appSchema = new Schema({
   role: { type: String, required: true },
   dateSubmitted: { type: Date, default: Date.now },
   location: { type: String, required: true },
-  salary: Number,
+  salary: String,
   lastUpdate: Date,
   status: { type: String, required: true },
   stage: { type: String, default: 'Research' },
