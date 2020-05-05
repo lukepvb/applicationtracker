@@ -35,6 +35,8 @@ const JobAppContainer = (props) => {
               companySalary={props.companySalary}
               lastUpdate={props.lastUpdate}
               companyStatus={props.companyStatus}
+              companyUrl={props.companyUrl}
+              companyContact={props.companyContact}
               companyNotes={props.companyNotes}
               appId={props.appId}
             />
