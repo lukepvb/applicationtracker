@@ -43,6 +43,10 @@ const JobApp = (props) => {
     dateFormat(lastUpdate, 'update');
   }
 
+  /* Format href properly to account for http:// so it will send to external source  
+  - or instruct someone to use a specific format when they are entering the info - let's talk about this one */
+  const href = `http://${props.companyUrl}`;
+
   return (
     <div className="app-fields">
       <Row>
@@ -108,9 +112,10 @@ const JobApp = (props) => {
             <FaExternalLinkAlt className="icon-newApp" />
             URL:
           </Label>
-          <p name="url" className="url">
-            {props.companyUrl}
-          </p>
+          <br />
+          <a href={href} name="url" className="url">
+            {href}
+          </a>
         </Col>
         <Col>
           <GiReceiveMoney className="icon-newApp" />
