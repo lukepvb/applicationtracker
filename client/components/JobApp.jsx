@@ -113,7 +113,7 @@ const JobApp = (props) => {
             URL:
           </Label>
           <br />
-          <a href={href} name="url" className="url">
+          <a href={href} target="_blank" name="url" className="url">
             {href}
           </a>
         </Col>
