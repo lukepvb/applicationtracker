@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import JobApp from '../components/JobApp';
 import { useHistory } from 'react-router-dom';
+import { FaRegTrashAlt, FaEdit } from 'react-icons/fa';
 
 const JobAppContainer = (props) => {
   const [isOpen, setIsOpen] = useState(props.isOpen);
@@ -40,8 +41,13 @@ const JobAppContainer = (props) => {
               companyNotes={props.companyNotes}
               appId={props.appId}
             />
-            <Button onClick={handleClick}>Edit</Button>
-            <Button>Delete</Button>
+            <Button onClick={handleClick}>
+              <FaEdit className="icon-edit" /> Edit
+            </Button>
+            <Button color="danger" onClick={handleAppDelete}>
+              <FaRegTrashAlt className="icon-trash" />
+              Delete
+            </Button>
           </CardBody>
         </Card>
       </Collapse>

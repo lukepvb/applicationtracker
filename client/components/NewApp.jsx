@@ -93,7 +93,7 @@ const NewApp = (props) => {
 
     if (!appFilled) {
       console.log(postData, 'line 62 NewApp.jsx');
-      fetch('/api/apps/create/', {
+      fetch('/api/apps/create', {
         method: 'post',
         headers: {
           Accept: 'application/json',

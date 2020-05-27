@@ -110,6 +110,16 @@ just playing around */
 
 /** signup icons **/
 
+.icon-trash {
+  margin-bottom: 0.2em;
+  margin-right: 0.3em;
+}
+
+.icon-edit {
+  margin-bottom: 0.2em;
+  margin-right: 0.1em;
+}
+
 .icon-signup {
   margin-bottom: 0.1em;
   margin-right: 0.3em;
