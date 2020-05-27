@@ -13,4 +13,9 @@ router.put('/update', appController.updateApp, (req, res) => {
   res.sendStatus(200);
 });
 
+router.delete('/delete', appController.deleteApp, (req, res) => {
+  console.log('App deleted!');
+  res.sendStatus(202);
+});
+
 module.exports = router;
