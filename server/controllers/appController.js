@@ -79,7 +79,7 @@ appController.updateApp = (req, res, next) => {
 
   const updateObj = req.body.newApp;
 
-  console.log(updateObj);
+  console.log('appController updateObj', updateObj);
 
   User.update(
     { _id: parentId, apps: { $elemMatch: { _id: subId } } },
