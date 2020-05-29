@@ -17,7 +17,7 @@ const Login = (props) => {
     history.push('/dashboard');
   };
 
-  async function handleLoginSubmit() {
+  async function handleLoginSubmit(event) {
     const postData = { email: userEmail, password: userPassword };
     event.preventDefault();
 
