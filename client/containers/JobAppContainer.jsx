@@ -44,7 +44,7 @@ const JobAppContainer = (props) => {
             <Button onClick={handleClick}>
               <FaEdit className="icon-edit" /> Edit
             </Button>
-            <Button color="danger" onClick={handleAppDelete}>
+            <Button color="danger">
               <FaRegTrashAlt className="icon-trash" />
               Delete
             </Button>

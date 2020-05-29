@@ -89,6 +89,10 @@ const NewApp = (props) => {
       followUp,
     };
 
+    /** Checking condition to see if the app exists. If it doesn't, we create a new application. If it does, we are going
+     * to update it (POST or PUT)
+     */
+
     const postData = { userId: props.user._id, newApp: newAppData, appId: props.appId };
 
     if (!appFilled) {
@@ -107,13 +111,17 @@ const NewApp = (props) => {
         .then((data) => props.handleUserData(data));
     } else {
       fetch('/api/apps/update', {
-        method: 'put',
+        method: 'post',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(postData),
-      });
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => props.handleUserData(data));
     }
 
     // invoke handleClick to navigate to dashboard after form submission

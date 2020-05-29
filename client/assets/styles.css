@@ -67,6 +67,7 @@ body.modal-open .login-container {
 .sign-up {
   color: dodgerblue;
   border: none;
+  background-color: white;
 }
 
 /* mouse over link */
