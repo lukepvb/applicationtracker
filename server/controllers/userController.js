@@ -72,12 +72,14 @@ userController.getAllUsers = (req, res, next) => {
 
 /* Find a specific user by ID */
 userController.getUserById = (req, res, next) => {
-  const { userId } = req.params;
+  const { userId } = req.body;
+
+  console.log(userId, 'This is line 77 in userController');
 
   User.findById(userId)
     .exec()
-    .then((specificUser) => {
-      res.locals.specificUser = specificUser;
+    .then((userData) => {
+      res.locals.userData = userData;
       return next();
     })
     .catch((err) => {

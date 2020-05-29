@@ -13,7 +13,6 @@ const AppsContainer = (props) => {
 
   // console.log(props.user.apps);
 
-  // const fillJobAppsList = () => {
   if (props.user.apps) {
     const userApps = props.user.apps;
     console.log('Inside renderApps', props.user);
@@ -41,13 +40,7 @@ const AppsContainer = (props) => {
         </ListGroupItem>
       );
     }
-    //   setAppsRendered(true);
-    // }
   }
-
-  // useEffect(() => {
-  //   fillJobAppsList();
-  // }, [jobAppsList]);
 
   return (
     <div className="apps-container">

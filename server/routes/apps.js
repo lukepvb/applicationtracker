@@ -9,8 +9,9 @@ router.post('/create', appController.createApp, (req, res) => {
   res.status(200).json(res.locals.newApp);
 });
 
-router.put('/update', appController.updateApp, (req, res) => {
-  res.sendStatus(200);
+router.post('/update', appController.updateApp, userController.getUserById, (req, res) => {
+  console.log('SubDocument updated! - line 13 apps.js');
+  res.status(200).json(res.locals.userData);
 });
 
 router.delete('/delete', appController.deleteApp, (req, res) => {
