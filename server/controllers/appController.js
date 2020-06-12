@@ -54,7 +54,7 @@ appController.updateApp = (req, res, next) => {
   const { userId } = req.body;
   const { appId } = req.body;
 
-  /** Grab the current inputed data for the application to display **/
+  /** Grab the current input data for the application to display **/
   // const {
   //   company,
   //   role,
@@ -81,7 +81,7 @@ appController.updateApp = (req, res, next) => {
 
   console.log('appController updateObj', updateObj);
 
-  User.update(
+  User.updateOne(
     { _id: parentId, apps: { $elemMatch: { _id: subId } } },
     {
       $set: {

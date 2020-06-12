@@ -70,7 +70,7 @@ const NewApp = (props) => {
     history.push('/dashboard');
   };
 
-  async function handleAppSubmit(event) {
+  async function handleAppSubmit(event, update = false) {
     event.preventDefault();
     const newAppData = {
       company,
@@ -88,8 +88,15 @@ const NewApp = (props) => {
       followUp
     };
     const postData = { userId: props.user._id, newApp: newAppData };
-    console.log(postData, 'line 62 NewApp.jsx');
-    fetch('/api/apps/create/', {
+
+    // control flow sets url to update rather than create if updating existing apps
+    let appURL = '/api/apps/create/';
+    if (update) {
+      appURL = '/api/apps/update/';
+      console.log(postData, 'line 62 NewApp.jsx');
+    }
+
+    fetch(appURL, {
       method: 'post',
       headers: {
         Accept: 'application/json',
@@ -374,7 +381,13 @@ const NewApp = (props) => {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" type="submit" onClick={handleAppSubmit}>
+          <Button
+            color="primary"
+            type="submit"
+            onClick={(e) => {
+              handleAppSubmit(e, appFilled);
+            }}
+          >
             Save <MdSave className="icon-save" />
           </Button>{' '}
           <Button color="secondary" onClick={handleClick}>
