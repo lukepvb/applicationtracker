@@ -11,7 +11,7 @@ import {
   Input,
   Label,
   Col,
-  Row,
+  Row
 } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import { IoMdStats } from 'react-icons/io';
@@ -72,7 +72,6 @@ const NewApp = (props) => {
 
   async function handleAppSubmit(event) {
     event.preventDefault();
-
     const newAppData = {
       company,
       role,
@@ -86,44 +85,35 @@ const NewApp = (props) => {
       contact,
       notes,
       dubDown,
-      followUp,
+      followUp
     };
-
-    /** Checking condition to see if the app exists. If it doesn't, we create a new application. If it does, we are going
-     * to update it (POST or PUT)
-     */
-
-    const postData = { userId: props.user._id, newApp: newAppData, appId: props.appId };
-
-    if (!appFilled) {
-      console.log(postData, 'line 62 NewApp.jsx');
-      fetch('/api/apps/create', {
-        method: 'post',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postData),
+    const postData = { userId: props.user._id, newApp: newAppData };
+    console.log(postData, 'line 62 NewApp.jsx');
+    fetch('/api/apps/create/', {
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(postData)
+    })
+      .then((res) => {
+        return res.json();
       })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => props.handleUserData(data));
-    } else {
-      fetch('/api/apps/update', {
-        method: 'post',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postData),
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => props.handleUserData(data));
+      .then((data) => props.handleUserData(data));
+
+    /* take the current user object, isolate apps array, iterate over
+      checking for a match based on props.appId, update it in user object,
+      handleUserData(props.user)
+      */
+    for (let i = 0; i < props.user.apps; i += 1) {
+      let curApp = props.user.apps[i];
+      if (curApp._id == props.appId) {
+        curApp = newAppData;
+      }
     }
 
+    props.handleUserData(props.user);
     // invoke handleClick to navigate to dashboard after form submission
     handleClick();
     // TODO: Control flow here to avoid moving to dashboard without successful login
