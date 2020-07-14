@@ -39,6 +39,7 @@ const NewApp = (props) => {
   const [followUp, setFollowUp] = useState(Boolean);
   const [appFilled, setAppFilled] = useState(false);
 
+  // This piece fills the NewApp component with current app data that being edited
   if (props.appId && !appFilled) {
     const apps = props.user.apps;
     for (let i = 0; i < apps.length; i++) {
@@ -87,13 +88,13 @@ const NewApp = (props) => {
       dubDown,
       followUp
     };
-    const postData = { userId: props.user._id, newApp: newAppData };
+    const postData = { userId: props.user._id, appId: props.appId, newApp: newAppData };
 
     // control flow sets url to update rather than create if updating existing apps
     let appURL = '/api/apps/create/';
     if (update) {
       appURL = '/api/apps/update/';
-      console.log(postData, 'line 62 NewApp.jsx');
+      console.log(postData, 'UPDATE NewApp.jsx');
     }
 
     fetch(appURL, {
@@ -104,10 +105,10 @@ const NewApp = (props) => {
       },
       body: JSON.stringify(postData)
     })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => props.handleUserData(data));
+      .then((res) => res.json())
+      // .then((data) => props.handleUserData(data))
+      .then((data) => console.log('data in newApp', data))
+      .catch((err) => console.log(err));
 
     /* take the current user object, isolate apps array, iterate over
       checking for a match based on props.appId, update it in user object,

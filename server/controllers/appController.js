@@ -39,8 +39,6 @@ appController.createApp = (req, res, next) => {
     followUp: followUp
   });
 
-  console.log('This is our newApp', newApp);
-
   User.findById(userId, (err, userDoc) => {
     if (err) return res.status(500).send(err);
     userDoc.apps.unshift(newApp);
@@ -54,38 +52,16 @@ appController.updateApp = (req, res, next) => {
   const { userId } = req.body;
   const { appId } = req.body;
 
-  /** Grab the current input data for the application to display **/
-  // const {
-  //   company,
-  //   role,
-  //   startedOn,
-  //   location,
-  //   salary,
-  //   lastUpdate,
-  //   status,
-  //   stage,
-  //   url,
-  //   contact,
-  //   notes,
-  //   dubDown,
-  //   followUp,
-  // } = req.body.newApp;
-
-  const parentId = userId;
-  const subId = appId;
-
-  // console.log(parentId);
-  // console.log(subId);
-
   const updateObj = req.body.newApp;
 
-  console.log('appController updateObj', updateObj);
+  // To retain same subdocument ID, you must inject current subdoc ID into updateObj
+  updateObj._id = appId;
 
   User.updateOne(
-    { _id: parentId, apps: { $elemMatch: { _id: subId } } },
+    { _id: userId, apps: { $elemMatch: { _id: appId } } },
     {
       $set: {
-        'apps.$.company': updateObj.company
+        'apps.$': updateObj
       }
     },
     {
@@ -93,9 +69,7 @@ appController.updateApp = (req, res, next) => {
       overwrite: true,
       runValidators: true
     }
-  )
-    .exec()
-    .then();
+  ).exec();
   return next();
 };
 
