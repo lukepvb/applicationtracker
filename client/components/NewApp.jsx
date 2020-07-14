@@ -105,14 +105,9 @@ const NewApp = (props) => {
       },
       body: JSON.stringify(postData)
     })
-      .then((res) => {
-        console.log('this is res in NewApp', res.json());
-        // return res.json();
-      })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => props.handleUserData(data))
+      .then((res) => res.json())
+      // .then((data) => props.handleUserData(data))
+      .then((data) => console.log('data in newApp', data))
       .catch((err) => console.log(err));
 
     /* take the current user object, isolate apps array, iterate over

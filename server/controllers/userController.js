@@ -23,7 +23,7 @@ userController.userExists = (req, res, next) => {
     .catch((err) => {
       return next({
         log: `ERROR: userController.verifyUser: ERROR ${err}`,
-        message: `ERROR: userController.verifyUser: ERROR see server log for details`,
+        message: `ERROR: userController.verifyUser: ERROR see server log for details`
       });
     });
 };
@@ -38,7 +38,7 @@ userController.createUser = (req, res, next) => {
     username,
     email,
     password,
-    apps: [],
+    apps: []
   })
     .then((newUser) => {
       res.locals.newUser = newUser;
@@ -48,7 +48,7 @@ userController.createUser = (req, res, next) => {
     .catch((err) => {
       return next({
         log: `ERROR: userController.createUser: ERROR ${err}`,
-        message: `ERROR: userController.createUser: ERROR see server log for details`,
+        message: `ERROR: userController.createUser: ERROR see server log for details`
       });
     });
 };
@@ -65,7 +65,7 @@ userController.getAllUsers = (req, res, next) => {
     .catch((err) => {
       return next({
         log: `ERROR: userController.getAllUsers: ERROR: ${err}`,
-        message: `ERROR: userController.getAllUsers: ERROR see server log for details`,
+        message: `ERROR: userController.getAllUsers: ERROR see server log for details`
       });
     });
 };
@@ -77,14 +77,14 @@ userController.getUserById = (req, res, next) => {
   User.findById(userId)
     .exec()
     .then((userData) => {
-      res.locals.userData = userData;
-      console.log('userController - res.locals.userData', res.locals.userData);
+      res.locals.user = userData;
+      console.log('userController - res.locals.user', res.locals.user);
       return next();
     })
     .catch((err) => {
       return next({
         log: `ERROR: userController.getUserById: ERROR: ${err}`,
-        message: `ERROR: userController.getUserById: ERROR: ${err}`,
+        message: `ERROR: userController.getUserById: ERROR: ${err}`
       });
     });
 };
@@ -109,7 +109,7 @@ userController.deleteUser = (req, res, next) => {
     .catch((err) => {
       return next({
         log: `ERROR: userController.deleteUser: ERROR: ${err}`,
-        message: `ERROR: userController.deleteUser: ERROR: see server log for details`,
+        message: `ERROR: userController.deleteUser: ERROR: see server log for details`
       });
     });
 };

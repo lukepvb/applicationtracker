@@ -39,8 +39,6 @@ appController.createApp = (req, res, next) => {
     followUp: followUp
   });
 
-  console.log('This is our newApp', newApp);
-
   User.findById(userId, (err, userDoc) => {
     if (err) return res.status(500).send(err);
     userDoc.apps.unshift(newApp);
@@ -71,9 +69,7 @@ appController.updateApp = (req, res, next) => {
       overwrite: true,
       runValidators: true
     }
-  )
-    .exec()
-    .then();
+  ).exec();
   return next();
 };
 
