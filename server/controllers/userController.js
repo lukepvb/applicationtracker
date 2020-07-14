@@ -74,12 +74,11 @@ userController.getAllUsers = (req, res, next) => {
 userController.getUserById = (req, res, next) => {
   const { userId } = req.body;
 
-  console.log(userId, 'This is line 77 in userController');
-
   User.findById(userId)
     .exec()
     .then((userData) => {
       res.locals.userData = userData;
+      console.log('userController - res.locals.userData', res.locals.userData);
       return next();
     })
     .catch((err) => {

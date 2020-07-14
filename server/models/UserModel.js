@@ -8,7 +8,7 @@ const appSchema = new Schema({
   role: { type: String, required: true },
   dateSubmitted: { type: Date, default: Date.now },
   location: { type: String, required: true },
-  salary: Number,
+  salary: String,
   lastUpdate: Date,
   status: { type: String, required: true },
   stage: { type: String, default: 'Research' },
@@ -16,7 +16,7 @@ const appSchema = new Schema({
   contact: String,
   notes: String,
   dubDown: { type: Boolean, default: false },
-  followUp: { type: Boolean, default: false },
+  followUp: { type: Boolean, default: false }
 });
 
 // sets a schema for the 'user' collection
@@ -26,7 +26,7 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  apps: [appSchema],
+  apps: [appSchema]
 });
 
 // creates a model for the 'user' collection that will be part of the export
