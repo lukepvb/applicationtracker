@@ -86,18 +86,21 @@ const NewApp = (props) => {
       contact,
       notes,
       dubDown,
-      followUp
+      followUp,
     };
     const postData = { userId: props.user._id, appId: props.appId, newApp: newAppData };
 
     // control flow sets url to update rather than create if updating existing apps
     let appURL = '/api/apps/create/';
+
+
     if (update) {
       appURL = '/api/apps/update/';
       console.log(postData, 'UPDATE NewApp.jsx');
+
     }
 
-    fetch(appURL, {
+    await fetch(appURL, {
       method: 'post',
       headers: {
         Accept: 'application/json',
@@ -106,22 +109,30 @@ const NewApp = (props) => {
       body: JSON.stringify(postData)
     })
       .then((res) => res.json())
-      // .then((data) => props.handleUserData(data))
-      .then((data) => console.log('data in newApp', data))
+      .then((data) => props.handleUserData(data))
       .catch((err) => console.log(err));
 
     /* take the current user object, isolate apps array, iterate over
       checking for a match based on props.appId, update it in user object,
       handleUserData(props.user)
       */
-    for (let i = 0; i < props.user.apps; i += 1) {
+
+
+    for (let i = 0; i < props.user.apps.length; i += 1) {
       let curApp = props.user.apps[i];
+      console.log('inside of for loop before handleUserData', curApp)
       if (curApp._id == props.appId) {
-        curApp = newAppData;
+        props.user.apps[i] = newAppData;
+        props.user.apps[i]._id = appId;
+        props.handleUserData(props.user);
+        break
       }
+
     }
 
-    props.handleUserData(props.user);
+    // setTimeout(function () { props.handleUserData(props.user); }, 2000);
+    console.log('this is the updated user props.user, line 133', props.user)
+    setAppFilled(false);
     // invoke handleClick to navigate to dashboard after form submission
     handleClick();
     // TODO: Control flow here to avoid moving to dashboard without successful login

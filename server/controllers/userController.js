@@ -89,11 +89,6 @@ userController.getUserById = (req, res, next) => {
     });
 };
 
-/* Update user */
-userController.updateUser = (req, res, next) => {
-  // will come back to this update method later
-  // think we need to use .findByIdAndUpdate()
-};
 
 /* Delete user */
 userController.deleteUser = (req, res, next) => {

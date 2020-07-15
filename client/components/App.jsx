@@ -34,7 +34,7 @@ const App = (props) => {
           />
           <Route
             path="/dashboard"
-            render={() => <DashboardContainer handleAppId={handleAppId} user={user} />}
+            render={() => <DashboardContainer handleUserData={handleUserData} handleAppId={handleAppId} user={user} />}
           />
           <Route
             exact
