@@ -16,7 +16,6 @@ const JobApp = (props) => {
   console.log(props);
 
   const dateFormat = (dateRaw, str) => {
-    // for (let i = 0; i <= 1; i += 1) {
     console.log(dateRaw);
     if (dateRaw) {
       const justDate = dateRaw.split('T')[0];

@@ -25,9 +25,9 @@ const Login = (props) => {
       method: 'post',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(postData),
+      body: JSON.stringify(postData)
     })
       .then((res) => {
         return res.json();

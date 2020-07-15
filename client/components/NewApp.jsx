@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 import 'bootstrap/dist/css/bootstrap.css';
 import React, { useState } from 'react';
 import {
@@ -47,7 +48,6 @@ const NewApp = (props) => {
       if (appId === apps[i]._id) {
         setCompany(curApp.company);
         setRole(curApp.role);
-        // setStartedOn()
         setLocation(curApp.location);
         setSalary(curApp.salary);
         setStatus(curApp.status);
@@ -57,7 +57,35 @@ const NewApp = (props) => {
         setNotes(curApp.notes);
         setDubDown(curApp.dubDown);
         setFollowUp(curApp.followUp);
+
+        // formats dates for filling NewApp component when editing an application
+        function dateFormat(dateRaw) {
+          console.log('DATERAW!!!!!', dateRaw);
+          if (dateRaw) {
+            const formattedDate = dateRaw.split('T')[0];
+            // const splitDate = justDate.split('-');
+            // const year = splitDate.shift();
+            // splitDate.push(year);
+            // const formattedDate = splitDate.join('-');
+            console.log('FORMATTEDDATE!!!!!', formattedDate);
+            return formattedDate;
+          }
+        }
+
+        const startFill = dateFormat(curApp.dateSubmitted);
+        const lastUpdateDate = dateFormat(curApp.lastUpdate);
+        console.log('STARTED ON', startFill);
+        setStartedOn(startFill);
+        console.log('LAST UPDATE', lastUpdateDate);
+        setLastUpdate(lastUpdateDate);
         setAppFilled(true);
+
+        // date formatting
+        // const startDate = curApp.dateSubmitted.split('T')[0];
+        // console.log('startDate!!!!!!!!', startDate);
+
+        // const startDate = setStartedOn(startDate);
+        // setLastUpdate(updateDate);
       }
     }
   }
@@ -87,18 +115,16 @@ const NewApp = (props) => {
       contact,
       notes,
       dubDown,
-      followUp,
+      followUp
     };
     const postData = { userId: props.user._id, appId: appId, newApp: newAppData };
 
     // control flow sets url to update rather than create if updating existing apps
     let appURL = '/api/apps/create/';
 
-
     if (update) {
       appURL = '/api/apps/update/';
       console.log(postData, 'UPDATE NewApp.jsx');
-
     }
 
     await fetch(appURL, {
@@ -120,28 +146,17 @@ const NewApp = (props) => {
       */
     for (let i = 0; i < props.user.apps.length; i += 1) {
       let curApp = props.user.apps[i];
-      if (curApp._id === appId) {
-        props.user.apps[i] = newAppData;
-        props.user.apps[i]._id = appId;
-        break;
-      }
-
-
-
-    for (let i = 0; i < props.user.apps.length; i += 1) {
-      let curApp = props.user.apps[i];
-      console.log('inside of for loop before handleUserData', curApp)
+      console.log('inside of for loop before handleUserData', curApp);
       if (curApp._id == props.appId) {
         props.user.apps[i] = newAppData;
         props.user.apps[i]._id = appId;
         props.handleUserData(props.user);
-        break
+        break;
       }
-
     }
 
     // setTimeout(function () { props.handleUserData(props.user); }, 2000);
-    console.log('this is the updated user props.user, line 133', props.user)
+    console.log('this is the updated user props.user, line 133', props.user);
     setAppFilled(false);
     // invoke handleClick to navigate to dashboard after form submission
     handleClick();
@@ -149,6 +164,7 @@ const NewApp = (props) => {
   }
 
   // formatting for suggesting current date
+  // if (!appFilled) {
   const curDate = new Date();
   const nowYear = curDate.getFullYear();
   // .getMonth starts at 0th index, so add 1 before evaluating format
@@ -172,7 +188,7 @@ const NewApp = (props) => {
   if (lastUpdate === '') {
     setLastUpdate(formattedDate);
   }
-
+  // }
   // **** TO DO - Make sure to account for handleSubmit and handleClick ***** //
 
   const closeBtn = (
