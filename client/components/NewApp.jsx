@@ -40,11 +40,11 @@ const NewApp = (props) => {
   const [appFilled, setAppFilled] = useState(false);
 
   // This piece fills the NewApp component with current app data that being edited
-  if (props.appId && !appFilled) {
+  if (appId && !appFilled) {
     const apps = props.user.apps;
     for (let i = 0; i < apps.length; i++) {
       const curApp = apps[i];
-      if (props.appId === apps[i]._id) {
+      if (appId === apps[i]._id) {
         setCompany(curApp.company);
         setRole(curApp.role);
         // setStartedOn()
@@ -68,6 +68,7 @@ const NewApp = (props) => {
 
   const handleClick = () => {
     toggle();
+    setAppFilled(false);
     history.push('/dashboard');
   };
 
@@ -88,7 +89,7 @@ const NewApp = (props) => {
       dubDown,
       followUp
     };
-    const postData = { userId: props.user._id, appId: props.appId, newApp: newAppData };
+    const postData = { userId: props.user._id, appId: appId, newApp: newAppData };
 
     // control flow sets url to update rather than create if updating existing apps
     let appURL = '/api/apps/create/';
@@ -97,7 +98,7 @@ const NewApp = (props) => {
       console.log(postData, 'UPDATE NewApp.jsx');
     }
 
-    fetch(appURL, {
+    await fetch(appURL, {
       method: 'post',
       headers: {
         Accept: 'application/json',
@@ -106,18 +107,24 @@ const NewApp = (props) => {
       body: JSON.stringify(postData)
     })
       .then((res) => res.json())
-      // .then((data) => props.handleUserData(data))
-      .then((data) => console.log('data in newApp', data))
+      .then((data) => props.handleUserData(data))
+      // .then((data) => console.log('data in newApp', data))
       .catch((err) => console.log(err));
 
     /* take the current user object, isolate apps array, iterate over
       checking for a match based on props.appId, update it in user object,
       handleUserData(props.user)
       */
-    for (let i = 0; i < props.user.apps; i += 1) {
+    for (let i = 0; i < props.user.apps.length; i += 1) {
       let curApp = props.user.apps[i];
-      if (curApp._id == props.appId) {
-        curApp = newAppData;
+      if (curApp._id === appId) {
+        props.user.apps[i] = newAppData;
+        props.user.apps[i]._id = appId;
+        break;
+      }
+      // control flow for adding appId to current updates
+      if (update) {
+        props.user.apps;
       }
     }
 
