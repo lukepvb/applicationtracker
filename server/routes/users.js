@@ -13,4 +13,8 @@ router.post('/login', userController.userExists, authController.comparePassword,
   res.status(200).json(res.locals.user);
 });
 
+router.post('/dashboard', userController.getUserById, (req, res) => {
+  res.status(200).json(res.locals.user);
+});
+
 module.exports = router;
