@@ -111,17 +111,13 @@ const NewApp = (props) => {
     })
       .then((res) => res.json())
       .then((data) => props.handleUserData(data))
-<<<<<<< HEAD
       // .then((data) => console.log('data in newApp', data))
-=======
->>>>>>> a48dc2130756619cae63a4a74a8348b6a4cffc68
       .catch((err) => console.log(err));
 
     /* take the current user object, isolate apps array, iterate over
       checking for a match based on props.appId, update it in user object,
       handleUserData(props.user)
       */
-<<<<<<< HEAD
     for (let i = 0; i < props.user.apps.length; i += 1) {
       let curApp = props.user.apps[i];
       if (curApp._id === appId) {
@@ -129,10 +125,7 @@ const NewApp = (props) => {
         props.user.apps[i]._id = appId;
         break;
       }
-      // control flow for adding appId to current updates
-      if (update) {
-        props.user.apps;
-=======
+
 
 
     for (let i = 0; i < props.user.apps.length; i += 1) {
@@ -143,7 +136,6 @@ const NewApp = (props) => {
         props.user.apps[i]._id = appId;
         props.handleUserData(props.user);
         break
->>>>>>> a48dc2130756619cae63a4a74a8348b6a4cffc68
       }
 
     }
