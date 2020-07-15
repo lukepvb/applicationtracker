@@ -87,15 +87,18 @@ const NewApp = (props) => {
       contact,
       notes,
       dubDown,
-      followUp
+      followUp,
     };
     const postData = { userId: props.user._id, appId: appId, newApp: newAppData };
 
     // control flow sets url to update rather than create if updating existing apps
     let appURL = '/api/apps/create/';
+
+
     if (update) {
       appURL = '/api/apps/update/';
       console.log(postData, 'UPDATE NewApp.jsx');
+
     }
 
     await fetch(appURL, {
@@ -108,13 +111,17 @@ const NewApp = (props) => {
     })
       .then((res) => res.json())
       .then((data) => props.handleUserData(data))
+<<<<<<< HEAD
       // .then((data) => console.log('data in newApp', data))
+=======
+>>>>>>> a48dc2130756619cae63a4a74a8348b6a4cffc68
       .catch((err) => console.log(err));
 
     /* take the current user object, isolate apps array, iterate over
       checking for a match based on props.appId, update it in user object,
       handleUserData(props.user)
       */
+<<<<<<< HEAD
     for (let i = 0; i < props.user.apps.length; i += 1) {
       let curApp = props.user.apps[i];
       if (curApp._id === appId) {
@@ -125,10 +132,25 @@ const NewApp = (props) => {
       // control flow for adding appId to current updates
       if (update) {
         props.user.apps;
+=======
+
+
+    for (let i = 0; i < props.user.apps.length; i += 1) {
+      let curApp = props.user.apps[i];
+      console.log('inside of for loop before handleUserData', curApp)
+      if (curApp._id == props.appId) {
+        props.user.apps[i] = newAppData;
+        props.user.apps[i]._id = appId;
+        props.handleUserData(props.user);
+        break
+>>>>>>> a48dc2130756619cae63a4a74a8348b6a4cffc68
       }
+
     }
 
-    props.handleUserData(props.user);
+    // setTimeout(function () { props.handleUserData(props.user); }, 2000);
+    console.log('this is the updated user props.user, line 133', props.user)
+    setAppFilled(false);
     // invoke handleClick to navigate to dashboard after form submission
     handleClick();
     // TODO: Control flow here to avoid moving to dashboard without successful login
