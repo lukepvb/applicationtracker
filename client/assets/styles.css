@@ -268,3 +268,7 @@ label {
   margin-bottom: 0.1em;
   margin-right: 0.3em;
 }
+
+.app-status {
+  margin-left: .3rem;
+}

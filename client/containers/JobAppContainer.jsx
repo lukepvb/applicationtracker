@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Collapse, Button, CardBody, Card } from 'reactstrap';
+import { Collapse, Button, CardBody, Card, Badge } from 'reactstrap';
 import JobApp from '../components/JobApp';
 import { useHistory } from 'react-router-dom';
 import { FaRegTrashAlt, FaEdit } from 'react-icons/fa';
@@ -47,10 +47,23 @@ const JobAppContainer = (props) => {
   }
 
 
+  let color;
+  // if the company status is equal to 'Complete', set status to primary
+  if (props.companyStatus === 'Complete') {
+    color = 'success';
+  } else if (props.companyStatus === 'In Progress') {
+    color = 'warning';
+  } else {
+    color = 'danger';
+  }
+  // if value is equal to 'In Progress', set status to warning
+  // if value is equal to 'Rejected', set status to danger
+
+
   return (
     <div className="job-app-container">
       <Button color="primary" size="lg" onClick={toggle} block>
-        {props.companyName}
+        {`${props.companyName}   `}< Badge className="app-status" color={color}>&nbsp;&nbsp;</Badge>
       </Button>
       <Collapse isOpen={isOpen}>
         <Card>
@@ -83,7 +96,7 @@ const JobAppContainer = (props) => {
           </CardBody>
         </Card>
       </Collapse>
-    </div>
+    </div >
   );
 };
 
