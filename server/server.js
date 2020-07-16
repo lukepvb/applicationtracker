@@ -10,7 +10,12 @@ const app = express();
 const db = require('./config/keys').mongoURI;
 
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(db, {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+  })
   .then(() => console.log('MongoDB connected...'))
   .catch((err) => console.log('Error connecting to the database', err));
 
@@ -46,7 +51,7 @@ app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 400,
-    message: { err: 'An error occurred' },
+    message: { err: 'An error occurred' }
   };
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.log);
