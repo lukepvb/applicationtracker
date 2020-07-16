@@ -19,6 +19,8 @@ const AppsContainer = (props) => {
     for (let i = 0; i < userApps.length; i += 1) {
       const curJob = userApps[i];
 
+      console.log('This is curJob in AppsContainer, line 22', curJob);
+
       jobAppsList.push(
         <ListGroupItem key={i} tag="button" onClick={toggle}>
           <JobAppContainer

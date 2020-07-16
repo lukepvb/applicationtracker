@@ -59,14 +59,13 @@ const NewApp = (props) => {
         setFollowUp(curApp.followUp);
 
         // formats dates for filling NewApp component when editing an application
+
+        // create another conditional to d
         function dateFormat(dateRaw) {
           console.log('DATERAW!!!!!', dateRaw);
           if (dateRaw) {
             const formattedDate = dateRaw.split('T')[0];
-            // const splitDate = justDate.split('-');
-            // const year = splitDate.shift();
-            // splitDate.push(year);
-            // const formattedDate = splitDate.join('-');
+
             console.log('FORMATTEDDATE!!!!!', formattedDate);
             return formattedDate;
           }
@@ -148,7 +147,6 @@ const NewApp = (props) => {
       }
     }
 
-    // setTimeout(function () { props.handleUserData(props.user); }, 2000);
     console.log('this is the updated user props.user, line 133', props.user);
     setAppFilled(false);
     // invoke handleClick to navigate to dashboard after form submission
