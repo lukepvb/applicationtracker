@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Col, Row, Button, Label, Input } from 'reactstrap';
-import { FaExternalLinkAlt, FaUserAlt, FaRegBuilding, FaListOl } from 'react-icons/fa';
+import React from 'react';
+import { Col, Row, Label } from 'reactstrap';
+import { FaExternalLinkAlt, FaUserAlt, FaRegBuilding } from 'react-icons/fa';
 import { MdSave, MdList, MdDateRange, MdSpeakerNotes, MdComputer } from 'react-icons/md';
 import { TiLocationOutline } from 'react-icons/ti';
 import { GiReceiveMoney } from 'react-icons/gi';

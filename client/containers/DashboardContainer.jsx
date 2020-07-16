@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import NavHeader from '../components/NavHeader';
 import Header from '../components/Header';
 import AppsContainer from './AppsContainer';
