@@ -7,40 +7,13 @@ import { GiReceiveMoney } from 'react-icons/gi';
 import { IoMdStats } from 'react-icons/io';
 
 const JobApp = (props) => {
-  // format date
-  const [startedOn, setStartedOn] = useState(props.startedOn);
-  const [lastUpdate, setLastUpdate] = useState(props.lastUpdate);
-  const [startFormat, setStartFormat] = useState(false);
-  const [updateFormat, setUpdateFormat] = useState(false);
-
-  console.log(props);
-
-  const dateFormat = (dateRaw, str) => {
-    console.log(dateRaw);
-    if (dateRaw) {
-      const justDate = dateRaw.split('T')[0];
-      const splitDate = justDate.split('-');
-      const year = splitDate.shift();
-      splitDate.push(year);
-      const formattedDate = splitDate.join('-');
-      console.log(formattedDate);
-      if (str === 'start') {
-        setStartedOn(formattedDate);
-        setStartFormat(true);
-      } else {
-        setLastUpdate(formattedDate);
-        setUpdateFormat(true);
-      }
-    }
+  const handleDate = (date) => {
+    const splitDate = date.split('T')[0].split('-');
+    const year = splitDate.shift();
+    splitDate.push(year);
+    const formattedDate = splitDate.join('-');
+    return formattedDate;
   };
-
-  if (!startFormat) {
-    dateFormat(startedOn, 'start');
-  }
-
-  if (!updateFormat) {
-    dateFormat(lastUpdate, 'update');
-  }
 
   /* Format href properly to account for http:// so it will send to external source  
   - or instruct someone to use a specific format when they are entering the info - let's talk about this one */
@@ -78,7 +51,7 @@ const JobApp = (props) => {
           <MdDateRange className="icon-newApp" />
           <Label for="started">Started On:</Label>
           <p name="started" className="started">
-            {startedOn}
+            {handleDate(props.startedOn)}
           </p>
         </Col>
         <Col>
@@ -92,7 +65,7 @@ const JobApp = (props) => {
           <MdDateRange className="icon-newApp" />
           <Label for="last-updated">Last Updated:</Label>
           <p name="last-updated" className="last-updated">
-            {lastUpdate}
+            {handleDate(props.lastUpdate)}
           </p>
         </Col>
       </Row>

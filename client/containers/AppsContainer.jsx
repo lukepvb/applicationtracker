@@ -4,22 +4,15 @@ import JobAppContainer from './JobAppContainer';
 
 const AppsContainer = (props) => {
   const [isOpen, setCard] = useState(false);
-  const [appsRendered, setAppsRendered] = useState(false);
 
   const toggle = () => setCard(!isOpen);
 
   const jobAppsList = [];
-  // TO-DO: Render ListGroupItems based on array of props.apps
-
-  // console.log(props.user.apps);
-
+  // Render ListGroupItems based on array of props.apps
   if (props.user.apps) {
     const userApps = props.user.apps;
-    console.log('Inside renderApps', props.user);
     for (let i = 0; i < userApps.length; i += 1) {
       const curJob = userApps[i];
-
-      console.log('This is curJob in AppsContainer, line 22', curJob);
 
       jobAppsList.push(
         <ListGroupItem key={i} tag="button" onClick={toggle}>
@@ -38,6 +31,8 @@ const AppsContainer = (props) => {
             dubDown={curJob.dubDown}
             handleAppId={props.handleAppId}
             appId={curJob._id}
+            user={props.user}
+            handleUserData={props.handleUserData}
           />
         </ListGroupItem>
       );

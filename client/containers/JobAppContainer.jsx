@@ -11,12 +11,54 @@ const JobAppContainer = (props) => {
 
   let history = useHistory();
 
-  const handleClick = () => {
+  const handleEdit = () => {
     toggle();
     props.handleAppId(props.appId);
     console.log(props.appId);
     history.push('/dashboard/updateApp');
   };
+
+  async function handleDelete(event) {
+    props.handleAppId(props.appId);
+    console.log(props.appId);
+    // fetch request to delete app from user doc in db
+    event.preventDefault();
+
+    const deleteData = { userId: props.user._id, appId: props.appId };
+
+    // control flow sets url to update rather than create if updating existing apps
+    const appURL = '/api/apps/delete/';
+
+    await fetch(appURL, {
+      method: 'delete',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(deleteData)
+    })
+      .then((res) => res.json())
+      .then((data) => props.handleUserData(data))
+      .catch((err) => console.log(err));
+
+    /* take the current user object, isolate apps array, iterate over
+        checking for a match based on props.appId, update it in user object,
+        handleUserData(props.user)
+        */
+    // for (let i = 0; i < props.user.apps.length; i += 1) {
+    //   let curApp = props.user.apps[i];
+    //   console.log('inside of for loop before handleUserData', curApp);
+    //   if (curApp._id == props.appId) {
+    //     props.user.apps[i] = newAppData;
+    //     props.user.apps[i]._id = appId;
+    //     props.handleUserData(props.user);
+    //     break;
+    //   }
+    // }
+
+    // handle user data with updated user doc
+    history.push('/dashboard');
+  }
 
   // TO-DO: destructure props and place in CardBody fields
 
@@ -41,10 +83,15 @@ const JobAppContainer = (props) => {
               companyNotes={props.companyNotes}
               appId={props.appId}
             />
-            <Button onClick={handleClick}>
+            <Button onClick={handleEdit}>
               <FaEdit className="icon-edit" /> Edit
             </Button>
-            <Button color="danger">
+            <Button
+              color="danger"
+              onClick={(e) => {
+                handleDelete(e);
+              }}
+            >
               <FaRegTrashAlt className="icon-trash" />
               Delete
             </Button>

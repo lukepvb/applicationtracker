@@ -59,27 +59,18 @@ const NewApp = (props) => {
         setFollowUp(curApp.followUp);
 
         // formats dates for filling NewApp component when editing an application
-
-        // create another conditional to d
         function dateFormat(dateRaw) {
-          console.log('DATERAW!!!!!', dateRaw);
           if (dateRaw) {
             const formattedDate = dateRaw.split('T')[0];
-
-            console.log('FORMATTEDDATE!!!!!', formattedDate);
             return formattedDate;
           }
         }
 
         const startFill = dateFormat(curApp.dateSubmitted);
         const lastUpdateDate = dateFormat(curApp.lastUpdate);
-        console.log('STARTED ON', startFill);
         setDateSubmitted(startFill);
-        console.log('LAST UPDATE', lastUpdateDate);
         setLastUpdate(lastUpdateDate);
         setAppFilled(true);
-
-
       }
     }
   }
@@ -118,7 +109,6 @@ const NewApp = (props) => {
 
     if (update) {
       appURL = '/api/apps/update/';
-      console.log(postData, 'UPDATE NewApp.jsx');
     }
 
     await fetch(appURL, {
@@ -131,7 +121,6 @@ const NewApp = (props) => {
     })
       .then((res) => res.json())
       .then((data) => props.handleUserData(data))
-      // .then((data) => console.log('data in newApp', data))
       .catch((err) => console.log(err));
 
     /* take the current user object, isolate apps array, iterate over
@@ -149,7 +138,6 @@ const NewApp = (props) => {
       }
     }
 
-    console.log('this is the updated user props.user, line 133', props.user);
     setAppFilled(false);
     // invoke handleClick to navigate to dashboard after form submission
     handleClick();
