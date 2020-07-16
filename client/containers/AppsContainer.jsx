@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import JobAppContainer from './JobAppContainer';
 
 const AppsContainer = (props) => {
   const [isOpen, setCard] = useState(false);
-
   const toggle = () => setCard(!isOpen);
+
+
+
 
   const jobAppsList = [];
   // Render ListGroupItems based on array of props.apps
@@ -41,7 +43,7 @@ const AppsContainer = (props) => {
 
   return (
     <div className="apps-container">
-      <h1>Your Applications</h1>
+      <h1>{`Your Applications (${props.count})`}</h1>
       <div className="apps-list-group">
         <ListGroup>{jobAppsList}</ListGroup>
       </div>

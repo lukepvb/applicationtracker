@@ -18,8 +18,9 @@ const Login = (props) => {
   };
 
   async function handleLoginSubmit(event) {
-    const postData = { email: userEmail, password: userPassword };
     event.preventDefault();
+    const postData = { email: userEmail, password: userPassword };
+
 
     fetch('/api/users/login/', {
       method: 'post',

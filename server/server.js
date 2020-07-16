@@ -18,7 +18,6 @@ mongoose
 const PORT = process.env.PORT || 3000;
 
 // require routers
-const router = require('./routes/api');
 const userRouter = require('./routes/users');
 const appRouter = require('./routes/apps');
 

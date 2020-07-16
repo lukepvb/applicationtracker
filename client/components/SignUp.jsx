@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import React, { useState, useHistory } from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Modal,
@@ -15,11 +15,11 @@ import {
   Col,
   Row,
 } from 'reactstrap';
-import { FaUserEdit, FaUserLock, FaUserCheck, FaLock, FaUserCircle, FaEdit } from 'react-icons/fa';
+import { FaUserLock, FaUserCheck, FaLock, FaUserCircle, FaEdit } from 'react-icons/fa';
 import { MdMail } from 'react-icons/md';
 
 const SignUp = (props) => {
-  const { buttonLabel, className } = props;
+  const { className } = props;
   const [modal, setModal] = useState(false);
   const [userFirstName, setFirstName] = useState('');
   const [userLastName, setLastName] = useState('');

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Collapse, Button, CardBody, Card } from 'reactstrap';
+import { Collapse, Button, CardBody, Card, Badge } from 'reactstrap';
 import JobApp from '../components/JobApp';
 import { useHistory } from 'react-router-dom';
 import { FaRegTrashAlt, FaEdit } from 'react-icons/fa';
@@ -42,31 +42,28 @@ const JobAppContainer = (props) => {
       .then((data) => props.handleUserData(data))
       .catch((err) => console.log(err));
 
-    /* take the current user object, isolate apps array, iterate over
-        checking for a match based on props.appId, update it in user object,
-        handleUserData(props.user)
-        */
-    // for (let i = 0; i < props.user.apps.length; i += 1) {
-    //   let curApp = props.user.apps[i];
-    //   console.log('inside of for loop before handleUserData', curApp);
-    //   if (curApp._id == props.appId) {
-    //     props.user.apps[i] = newAppData;
-    //     props.user.apps[i]._id = appId;
-    //     props.handleUserData(props.user);
-    //     break;
-    //   }
-    // }
-
-    // handle user data with updated user doc
+    // navigate back to dashboard when complete
     history.push('/dashboard');
   }
 
-  // TO-DO: destructure props and place in CardBody fields
+
+  let color;
+  // if the company status is equal to 'Complete', set status to primary
+  if (props.companyStatus === 'Complete') {
+    color = 'success';
+  } else if (props.companyStatus === 'In Progress') {
+    color = 'warning';
+  } else {
+    color = 'danger';
+  }
+  // if value is equal to 'In Progress', set status to warning
+  // if value is equal to 'Rejected', set status to danger
+
 
   return (
     <div className="job-app-container">
       <Button color="primary" size="lg" onClick={toggle} block>
-        {props.companyName}
+        {`${props.companyName}   `}< Badge className="app-status" color={color}>&nbsp;&nbsp;</Badge>
       </Button>
       <Collapse isOpen={isOpen}>
         <Card>
@@ -99,7 +96,7 @@ const JobAppContainer = (props) => {
           </CardBody>
         </Card>
       </Collapse>
-    </div>
+    </div >
   );
 };
 
