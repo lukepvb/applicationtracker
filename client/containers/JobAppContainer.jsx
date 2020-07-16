@@ -6,6 +6,10 @@ import { FaRegTrashAlt, FaEdit } from 'react-icons/fa';
 
 const JobAppContainer = (props) => {
   const [isOpen, setIsOpen] = useState(props.isOpen);
+  const [startedOn, setStartedOn] = useState(props.startedOn);
+  const [lastUpdate, setLastUpdate] = useState(props.lastUpdate);
+  const [startFormat, setStartFormat] = useState(false);
+  const [updateFormat, setUpdateFormat] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -19,6 +23,33 @@ const JobAppContainer = (props) => {
   };
 
   // TO-DO: destructure props and place in CardBody fields
+
+  const dateFormat = (dateRaw, str) => {
+    console.log(dateRaw);
+    if (dateRaw) {
+      const justDate = dateRaw.split('T')[0];
+      const splitDate = justDate.split('-');
+      const year = splitDate.shift();
+      splitDate.push(year);
+      const formattedDate = splitDate.join('-');
+      console.log(formattedDate);
+      if (str === 'start') {
+        setStartedOn(formattedDate);
+        setStartFormat(true);
+      } else {
+        setLastUpdate(formattedDate);
+        setUpdateFormat(true);
+      }
+    }
+  };
+
+  if (!startFormat) {
+    dateFormat(startedOn, 'start');
+  }
+
+  if (!updateFormat) {
+    dateFormat(lastUpdate, 'update');
+  }
 
   return (
     <div className="job-app-container">

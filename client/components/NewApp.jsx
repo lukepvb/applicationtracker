@@ -27,7 +27,7 @@ const NewApp = (props) => {
   const [appId, setAppId] = useState(props.appId);
   const [company, setCompany] = useState('');
   const [role, setRole] = useState('');
-  const [startedOn, setStartedOn] = useState('');
+  const [dateSubmitted, setDateSubmitted] = useState('');
   const [location, setLocation] = useState('');
   const [salary, setSalary] = useState(0);
   const [lastUpdate, setLastUpdate] = useState('');
@@ -75,17 +75,10 @@ const NewApp = (props) => {
         const startFill = dateFormat(curApp.dateSubmitted);
         const lastUpdateDate = dateFormat(curApp.lastUpdate);
         console.log('STARTED ON', startFill);
-        setStartedOn(startFill);
+        setDateSubmitted(startFill);
         console.log('LAST UPDATE', lastUpdateDate);
         setLastUpdate(lastUpdateDate);
         setAppFilled(true);
-
-        // date formatting
-        // const startDate = curApp.dateSubmitted.split('T')[0];
-        // console.log('startDate!!!!!!!!', startDate);
-
-        // const startDate = setStartedOn(startDate);
-        // setLastUpdate(updateDate);
       }
     }
   }
@@ -105,7 +98,7 @@ const NewApp = (props) => {
     const newAppData = {
       company,
       role,
-      startedOn,
+      dateSubmitted,
       location,
       salary,
       lastUpdate,
@@ -164,31 +157,31 @@ const NewApp = (props) => {
   }
 
   // formatting for suggesting current date
-  // if (!appFilled) {
-  const curDate = new Date();
-  const nowYear = curDate.getFullYear();
-  // .getMonth starts at 0th index, so add 1 before evaluating format
-  let nowMonth = curDate.getMonth() + 1;
-  // format does not default to double digit integer
-  if (nowMonth < 10) {
-    nowMonth = `0${nowMonth}`;
+  if (!appId) {
+    const curDate = new Date();
+    const nowYear = curDate.getFullYear();
+    // .getMonth starts at 0th index, so add 1 before evaluating format
+    let nowMonth = curDate.getMonth() + 1;
+    // format does not default to double digit integer
+    if (nowMonth < 10) {
+      nowMonth = `0${nowMonth}`;
+    }
+    let nowDate = curDate.getDate();
+    // format does not default to double digit number
+    if (nowDate < 10) {
+      nowDate = `0${nowDate}`;
+    }
+    // storing formatted date in a variable for use in startedOn/lastUpdate
+    const formattedDate = `${nowYear}-${nowMonth}-${nowDate}`;
+    // control flow for start date formatting - only updates when empty
+    if (dateSubmitted === '') {
+      setDateSubmitted(formattedDate);
+    }
+    // control flow for lastUpdate formatting - same as above
+    if (lastUpdate === '') {
+      setLastUpdate(formattedDate);
+    }
   }
-  let nowDate = curDate.getDate();
-  // format does not default to double digit number
-  if (nowDate < 10) {
-    nowDate = `0${nowDate}`;
-  }
-  // storing formatted date in a variable for use in startedOn/lastUpdate
-  const formattedDate = `${nowYear}-${nowMonth}-${nowDate}`;
-  // control flow for start date formatting - only updates when empty
-  if (startedOn === '') {
-    setStartedOn(formattedDate);
-  }
-  // control flow for lastUpdate formatting - same as above
-  if (lastUpdate === '') {
-    setLastUpdate(formattedDate);
-  }
-  // }
   // **** TO DO - Make sure to account for handleSubmit and handleClick ***** //
 
   const closeBtn = (
@@ -244,8 +237,8 @@ const NewApp = (props) => {
                   type="date"
                   name="started"
                   className="started"
-                  value={startedOn}
-                  onChange={(e) => setStartedOn(e.target.value)}
+                  value={dateSubmitted}
+                  onChange={(e) => setDateSubmitted(e.target.value)}
                 />
               </Col>
             </Row>

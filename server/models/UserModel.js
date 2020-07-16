@@ -6,7 +6,7 @@ const { Schema } = mongoose;
 const appSchema = new Schema({
   company: { type: String, required: true },
   role: { type: String, required: true },
-  dateSubmitted: { type: Date, default: Date.now },
+  dateSubmitted: Date,
   location: { type: String, required: true },
   salary: String,
   lastUpdate: Date,
