@@ -10,7 +10,7 @@ appController.createApp = (req, res, next) => {
   const {
     company,
     role,
-    startedOn,
+    dateSubmitted,
     location,
     salary,
     lastUpdate,
@@ -26,7 +26,7 @@ appController.createApp = (req, res, next) => {
   const newApp = new App({
     company: company,
     role: role,
-    dateSubmitted: startedOn,
+    dateSubmitted: dateSubmitted,
     location: location,
     salary: salary,
     lastUpdate: lastUpdate,
