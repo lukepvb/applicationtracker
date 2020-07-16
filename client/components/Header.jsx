@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Jumbotron, Button, Input } from 'reactstrap';
+import { Jumbotron, Button } from 'reactstrap';
 import { MdAddCircle } from 'react-icons/md';
 import { TiArrowForwardOutline } from 'react-icons/ti';
 import Avatar from 'react-avatar';

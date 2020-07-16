@@ -78,6 +78,9 @@ appController.deleteApp = (req, res, next) => {
   const { appId, userId } = req.body;
   console.log('req.body:', appId);
 
+
+  /* Multiple options for deleting app below */
+
   // User.findOne({ 'apps._id': appId }, function(err, result) {
   //   result.apps.id(appId).remove();
   //   result.save();

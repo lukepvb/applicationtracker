@@ -4,7 +4,7 @@ const userController = {};
 
 /* Check to see if a User exists in the database */
 userController.userExists = (req, res, next) => {
-  console.log('line 7, in userController.userExists');
+
   const { email } = req.body;
 
   // check database to see if user already exists
@@ -16,7 +16,6 @@ userController.userExists = (req, res, next) => {
         const exists = true;
         res.locals.exists = exists;
         res.locals.user = userData;
-        console.log(res.locals.user, 'User exists');
         return next();
       }
     })
@@ -42,7 +41,6 @@ userController.createUser = (req, res, next) => {
   })
     .then((newUser) => {
       res.locals.newUser = newUser;
-      console.log('New User added to the Database!');
       return next();
     })
     .catch((err) => {
@@ -78,7 +76,6 @@ userController.getUserById = (req, res, next) => {
     .exec()
     .then((userData) => {
       res.locals.user = userData;
-      console.log('userController - res.locals.user', res.locals.user);
       return next();
     })
     .catch((err) => {

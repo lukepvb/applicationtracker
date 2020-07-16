@@ -42,26 +42,10 @@ const JobAppContainer = (props) => {
       .then((data) => props.handleUserData(data))
       .catch((err) => console.log(err));
 
-    /* take the current user object, isolate apps array, iterate over
-        checking for a match based on props.appId, update it in user object,
-        handleUserData(props.user)
-        */
-    // for (let i = 0; i < props.user.apps.length; i += 1) {
-    //   let curApp = props.user.apps[i];
-    //   console.log('inside of for loop before handleUserData', curApp);
-    //   if (curApp._id == props.appId) {
-    //     props.user.apps[i] = newAppData;
-    //     props.user.apps[i]._id = appId;
-    //     props.handleUserData(props.user);
-    //     break;
-    //   }
-    // }
-
-    // handle user data with updated user doc
+    // navigate back to dashboard when complete
     history.push('/dashboard');
   }
 
-  // TO-DO: destructure props and place in CardBody fields
 
   return (
     <div className="job-app-container">

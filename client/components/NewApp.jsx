@@ -22,9 +22,8 @@ import { GiReceiveMoney } from 'react-icons/gi';
 import { MdSave, MdList, MdDateRange, MdSpeakerNotes, MdComputer } from 'react-icons/md';
 
 const NewApp = (props) => {
-  const { buttonLabel, className } = props;
+  const { className, appId } = props;
   const [modal, setModal] = useState(true);
-  const [appId, setAppId] = useState(props.appId);
   const [company, setCompany] = useState('');
   const [role, setRole] = useState('');
   const [dateSubmitted, setDateSubmitted] = useState('');
@@ -39,6 +38,20 @@ const NewApp = (props) => {
   const [dubDown, setDubDown] = useState(Boolean);
   const [followUp, setFollowUp] = useState(Boolean);
   const [appFilled, setAppFilled] = useState(false);
+
+
+
+
+  const toggle = () => setModal(!modal);
+
+  let history = useHistory();
+
+  const handleClick = () => {
+    toggle();
+    setAppFilled(false);
+    history.push('/dashboard');
+  };
+
 
   // This piece fills the NewApp component with current app data that being edited
   if (appId && !appFilled) {
@@ -74,16 +87,6 @@ const NewApp = (props) => {
       }
     }
   }
-
-  const toggle = () => setModal(!modal);
-
-  let history = useHistory();
-
-  const handleClick = () => {
-    toggle();
-    setAppFilled(false);
-    history.push('/dashboard');
-  };
 
   async function handleAppSubmit(event, update = false) {
     event.preventDefault();
