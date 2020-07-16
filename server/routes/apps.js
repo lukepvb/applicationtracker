@@ -14,9 +14,11 @@ router.post('/update', appController.updateApp, userController.getUserById, (req
   res.status(200).json(res.locals.user);
 });
 
-router.delete('/delete', appController.deleteApp, (req, res) => {
-  console.log('App deleted!');
-  res.sendStatus(202);
+router.delete('/delete', appController.deleteApp, userController.getUserById, (req, res) => {
+  if (res.locals.appDeleted) {
+    console.log('App deleted!');
+  }
+  res.status(202).json(res.locals.user);
 });
 
 module.exports = router;

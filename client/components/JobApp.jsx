@@ -7,6 +7,14 @@ import { GiReceiveMoney } from 'react-icons/gi';
 import { IoMdStats } from 'react-icons/io';
 
 const JobApp = (props) => {
+  const handleDate = (date) => {
+    const splitDate = date.split('T')[0].split('-');
+    const year = splitDate.shift();
+    splitDate.push(year);
+    const formattedDate = splitDate.join('-');
+    return formattedDate;
+  };
+
   /* Format href properly to account for http:// so it will send to external source  
   - or instruct someone to use a specific format when they are entering the info - let's talk about this one */
   const href = `http://${props.companyUrl}`;
@@ -43,7 +51,7 @@ const JobApp = (props) => {
           <MdDateRange className="icon-newApp" />
           <Label for="started">Started On:</Label>
           <p name="started" className="started">
-            {props.startedOn}
+            {handleDate(props.startedOn)}
           </p>
         </Col>
         <Col>
@@ -57,7 +65,7 @@ const JobApp = (props) => {
           <MdDateRange className="icon-newApp" />
           <Label for="last-updated">Last Updated:</Label>
           <p name="last-updated" className="last-updated">
-            {props.lastUpdate}
+            {handleDate(props.lastUpdate)}
           </p>
         </Col>
       </Row>

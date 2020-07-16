@@ -75,13 +75,17 @@ appController.updateApp = (req, res, next) => {
 
 /* Delete App */
 appController.deleteApp = (req, res, next) => {
-  const { appId } = req.params;
+  const { appId, userId } = req.body;
+  console.log('req.body:', appId);
 
-  App.findByIdAndDelete(appId)
-    .exec()
-    .then((app) => {
-      App.delete(app);
-      res.locals.userDeleted = true;
+  // User.findOne({ 'apps._id': appId }, function(err, result) {
+  //   result.apps.id(appId).remove();
+  //   result.save();
+  // });
+
+  User.findOneAndUpdate({ _id: userId }, { $pull: { apps: { _id: appId } } }, { new: true })
+    .then(() => {
+      res.locals.appDeleted = true;
       return next();
     })
     .catch((err) => {
