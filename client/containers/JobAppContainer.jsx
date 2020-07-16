@@ -19,6 +19,7 @@ const JobAppContainer = (props) => {
   };
 
   async function handleDelete(event) {
+    toggle();
     props.handleAppId(props.appId);
     console.log(props.appId);
     // fetch request to delete app from user doc in db
