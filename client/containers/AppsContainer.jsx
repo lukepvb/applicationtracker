@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { ListGroup, ListGroupItem, Badge } from 'reactstrap';
 import JobAppContainer from './JobAppContainer';
 
 const AppsContainer = (props) => {
@@ -43,7 +43,13 @@ const AppsContainer = (props) => {
 
   return (
     <div className="apps-container">
-      <h1>{`Your Applications (${props.count})`}</h1>
+
+      <h1 className='your-apps' >{`Your Applications (${props.yourAppsCount})`}</h1>
+      <span className='inline-text'>
+        <h3 className='legend'><Badge color='warning'>{`In Progress (${props.inProgressCount})`} </Badge></h3>
+        <h3 className='legend'><Badge color='success'>{`Completed (${props.completedCount})`} </Badge></h3>
+        <h3 className='legend'><Badge color='danger'>{`Rejected (${props.rejectedCount})`} </Badge></h3>
+      </span>
       <div className="apps-list-group">
         <ListGroup>{jobAppsList}</ListGroup>
       </div>
