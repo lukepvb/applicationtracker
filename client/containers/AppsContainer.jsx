@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { ListGroup, ListGroupItem, Button } from 'reactstrap';
 import JobAppContainer from './JobAppContainer';
 
 const AppsContainer = (props) => {
@@ -10,9 +10,11 @@ const AppsContainer = (props) => {
 
 
   const jobAppsList = [];
+
   // Render ListGroupItems based on array of props.apps
   if (props.user.apps) {
-    const userApps = props.user.apps;
+
+    const userApps = props.filteredAppsRender;
     for (let i = 0; i < userApps.length; i += 1) {
       const curJob = userApps[i];
 
@@ -43,7 +45,13 @@ const AppsContainer = (props) => {
 
   return (
     <div className="apps-container">
-      <h1>{`Your Applications (${props.count})`}</h1>
+
+      <h1 className='your-apps' >{`Your Applications (${props.yourAppsCount})`}</h1>
+      <span className='inline-text'>
+        <h3 className='legend'><Button name='In Progress' onClick={(e) => props.handleAppsFilter(e.target.name)} color='warning'>{`In Progress (${props.inProgressCount})`} </Button></h3>
+        <h3 className='legend'><Button name='Completed' onClick={(e) => props.handleAppsFilter(e.target.name)} color='success'>{`Completed (${props.completedCount})`} </Button></h3>
+        <h3 className='legend'><Button name='Rejected' onClick={(e) => props.handleAppsFilter(e.target.name)} color='danger'>{`Rejected (${props.rejectedCount})`} </Button></h3>
+      </span>
       <div className="apps-list-group">
         <ListGroup>{jobAppsList}</ListGroup>
       </div>
