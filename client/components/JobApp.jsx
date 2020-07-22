@@ -101,9 +101,10 @@ const JobApp = (props) => {
         <Col>
           <MdSpeakerNotes className="icon-newApp" />
           <Label for="notes">Notes:</Label>
-          <p name="notes" className="notes">
+          <br />
+          <textarea disabled name="notes" className="notes">
             {props.companyNotes}
-          </p>
+          </textarea>
         </Col>
       </Row>
     </div>

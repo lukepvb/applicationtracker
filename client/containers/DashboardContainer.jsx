@@ -20,13 +20,7 @@ const DashboardContainer = (props) => {
 
   const [flag, setFlag] = useState(false);
 
-
-
-
   const [filteredAppsRender, setFilteredAppsRender] = useState(props.user.apps);
-
-
-
 
   /* Below we handle the filtering of different apps 
    to be passed down to AppsContainer */
@@ -36,7 +30,6 @@ const DashboardContainer = (props) => {
       setInProgressClicked(true);
       setCompletedClicked(false);
       setRejectedClicked(false);
-
 
       setFilteredAppsRender(inProgressRender);
     } else if (status === 'In Progress' && inProgressClicked === true) {
@@ -64,36 +57,51 @@ const DashboardContainer = (props) => {
       setRejectedClicked(false);
       setFilteredAppsRender(props.user.apps);
     }
-  }
-
-
+  };
 
   /* This is where we are setting the different counts of applications */
 
   if (props.user.apps && !flag) {
-    setYourAppsCount(props.user.apps.length)
+    setYourAppsCount(props.user.apps.length);
     setFilteredAppsRender(props.user.apps);
 
-    const appsInProgress = props.user.apps.filter(app => app.status === 'In Progress');
+    const appsInProgress = props.user.apps.filter((app) => app.status === 'In Progress');
     setInProgressCount(appsInProgress.length);
     setInProgressRender(appsInProgress);
 
-    const appsCompleted = props.user.apps.filter(app => app.status === 'Complete');
+    const appsCompleted = props.user.apps.filter((app) => app.status === 'Complete');
     setCompletedCount(appsCompleted.length);
     setCompletedRender(appsCompleted);
 
-    const appsRejected = props.user.apps.filter(app => app.status === 'Rejected');
+    const appsRejected = props.user.apps.filter((app) => app.status === 'Rejected');
     setRejectedCount(appsRejected.length);
     setRejectedRender(appsRejected);
-
-
 
     setFlag(true);
   }
 
   if (props.user.apps && flag) {
     if (props.user.apps.length !== yourAppsCount) {
-      setYourAppsCount(props.user.apps.length)
+      setYourAppsCount(props.user.apps.length);
+      setFilteredAppsRender(props.user.apps);
+    }
+
+    const appsInProgress = props.user.apps.filter((app) => app.status === 'In Progress');
+    if (appsInProgress.length !== inProgressCount) {
+      setInProgressCount(appsInProgress.length);
+      setInProgressRender(appsInProgress);
+    }
+
+    const appsCompleted = props.user.apps.filter((app) => app.status === 'Complete');
+    if (appsCompleted.length !== completedCount) {
+      setCompletedCount(appsCompleted.length);
+      setCompletedRender(appsCompleted);
+    }
+
+    const appsRejected = props.user.apps.filter((app) => app.status === 'Rejected');
+    if (appsRejected.length !== rejectedCount) {
+      setRejectedCount(appsRejected.length);
+      setRejectedRender(appsRejected);
     }
   }
 
@@ -113,7 +121,6 @@ const DashboardContainer = (props) => {
           rejectedCount={rejectedCount}
           handleAppsFilter={handleAppsFilter}
           filteredAppsRender={filteredAppsRender}
-
         />
       </div>
       <div className="dash-footer" />

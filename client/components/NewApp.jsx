@@ -39,19 +39,15 @@ const NewApp = (props) => {
   const [followUp, setFollowUp] = useState(Boolean);
   const [appFilled, setAppFilled] = useState(false);
 
-
-
-
   const toggle = () => setModal(!modal);
 
   let history = useHistory();
 
   const handleClick = () => {
     toggle();
-    setAppFilled(false);
+    // setAppFilled(true);
     history.push('/dashboard');
   };
-
 
   // This piece fills the NewApp component with current app data that being edited
   if (appId && !appFilled) {
