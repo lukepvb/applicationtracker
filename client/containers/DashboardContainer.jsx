@@ -90,18 +90,27 @@ const DashboardContainer = (props) => {
     if (appsInProgress.length !== inProgressCount) {
       setInProgressCount(appsInProgress.length);
       setInProgressRender(appsInProgress);
+      setInProgressClicked(true);
+      setCompletedClicked(false);
+      setRejectedClicked(false);
     }
 
     const appsCompleted = props.user.apps.filter((app) => app.status === 'Complete');
     if (appsCompleted.length !== completedCount) {
       setCompletedCount(appsCompleted.length);
       setCompletedRender(appsCompleted);
+      setInProgressClicked(false);
+      setRejectedClicked(false);
+      setCompletedClicked(true);
     }
 
     const appsRejected = props.user.apps.filter((app) => app.status === 'Rejected');
     if (appsRejected.length !== rejectedCount) {
       setRejectedCount(appsRejected.length);
       setRejectedRender(appsRejected);
+      setInProgressClicked(false);
+      setCompletedClicked(false);
+      setRejectedClicked(true);
     }
   }
 
