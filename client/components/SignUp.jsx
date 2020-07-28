@@ -13,7 +13,7 @@ import {
   Input,
   Label,
   Col,
-  Row,
+  Row
 } from 'reactstrap';
 import { FaUserLock, FaUserCheck, FaLock, FaUserCircle, FaEdit } from 'react-icons/fa';
 import { MdMail } from 'react-icons/md';
@@ -51,17 +51,21 @@ const SignUp = (props) => {
       lastName: userLastName,
       email: userEmail,
       username: usernameInput,
-      password: userPassword,
+      password: userPassword
     };
 
     fetch('/api/users/create/', {
       method: 'post',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data),
-    });
+      body: JSON.stringify(data)
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => props.handleUserData(data));
 
     // nav to dashboard after signup
     handleClick();

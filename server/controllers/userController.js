@@ -4,11 +4,17 @@ const userController = {};
 
 /* Check to see if a User exists in the database */
 userController.userExists = (req, res, next) => {
-
   const { email } = req.body;
 
   // check database to see if user already exists
-  User.findOne({ email }, ['firstName', 'lastName', '_id', 'email', 'username', 'apps'])
+  User.findOne({ $or: [{ email: email }, { username: email }] }, [
+    'firstName',
+    'lastName',
+    '_id',
+    'email',
+    'username',
+    'apps'
+  ])
     .exec()
     .then((userData) => {
       res.locals.exists = false;
@@ -85,7 +91,6 @@ userController.getUserById = (req, res, next) => {
       });
     });
 };
-
 
 /* Delete user */
 userController.deleteUser = (req, res, next) => {
