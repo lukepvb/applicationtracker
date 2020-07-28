@@ -21,7 +21,6 @@ const Login = (props) => {
     event.preventDefault();
     const postData = { email: userEmail, password: userPassword };
 
-
     fetch('/api/users/login/', {
       method: 'post',
       headers: {
@@ -82,7 +81,7 @@ const Login = (props) => {
           </Button>
         </div>
       </Form>
-      <SignUp history={history} />
+      <SignUp handleUserData={props.handleUserData} history={history} />
     </div>
   );
 };
