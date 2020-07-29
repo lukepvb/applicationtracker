@@ -19,4 +19,9 @@ router.delete('/delete', appController.deleteApp, userController.getUserById, (r
   res.status(202).json(res.locals.user);
 });
 
+router.post('/favorite', appController.updateFavorite, userController.getUserById, (req, res) => {
+  res.status(200).json(res.locals.user);
+  console.log('this is updated res.locals.user', res.locals.user);
+});
+
 module.exports = router;

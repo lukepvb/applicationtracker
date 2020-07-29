@@ -37,6 +37,7 @@ const AppsContainer = (props) => {
             appId={curJob._id}
             user={props.user}
             handleUserData={props.handleUserData}
+            isFav={curJob.favorite}
           />
         </ListGroupItem>
       );
