@@ -3,9 +3,15 @@ import { Collapse, Button, CardBody, Card, Badge } from 'reactstrap';
 import JobApp from '../components/JobApp';
 import { useHistory } from 'react-router-dom';
 import { FaRegTrashAlt, FaEdit } from 'react-icons/fa';
+import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
+import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as regStar } from '@fortawesome/free-regular-svg-icons';
+
 
 const JobAppContainer = (props) => {
   const [isOpen, setIsOpen] = useState(props.isOpen);
+  const [fav, setFav] = useState(props.isFav);
+
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -17,6 +23,8 @@ const JobAppContainer = (props) => {
     console.log(props.appId);
     history.push('/dashboard/updateApp');
   };
+
+
 
   async function handleDelete(event) {
     toggle();
@@ -51,20 +59,59 @@ const JobAppContainer = (props) => {
   // if the company status is equal to 'Complete', set status to primary
   if (props.companyStatus === 'Complete') {
     color = 'success';
+    // if value is equal to 'In Progress', set status to warning
   } else if (props.companyStatus === 'In Progress') {
     color = 'warning';
+    // if value is equal to 'Rejected', set status to danger
   } else {
     color = 'danger';
   }
-  // if value is equal to 'In Progress', set status to warning
-  // if value is equal to 'Rejected', set status to danger
+
+  // 
+  const favToggle = () => {
+    setFav(!fav);
+  }
+
+  // this is where we are creating favClicked functionality, then running handleUserData
+  async function favClicked(app) {
+    console.log('This is id from favClicked, line 72 JobAppContainer', app);
+    favToggle();
+    // May need to troubleshoot this piece below
+    const favoriteData = { userId: props.user._id, appId: props.appId, favStatus: fav };
+    console.log('This is the favorite data', favoriteData);
+
+    const appFavURL = '/api/apps/favorite/';
+
+    await fetch(appFavURL, {
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(favoriteData)
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+
+  }
+
+  // this is where we will create a FavIcon to render depending on whether it is pressed or not
+  let FavIcon;
+  if (fav) FavIcon = (<span className="favIcon"><FAIcon onClick={() => favClicked()} icon={solidStar} style={{ color: 'steelblue' }} /></span>);
+  else FavIcon = (<span className="favIcon"><FAIcon onClick={() => favClicked()} icon={regStar} /></span>);
+
+
 
 
   return (
     <div className="job-app-container">
       <Button color="primary" size="lg" onClick={toggle} block>
         {`${props.companyName}   `}< Badge className="app-status" color={color}>&nbsp;&nbsp;</Badge>
+
       </Button>
+      <div>{FavIcon}</div>
+
       <Collapse isOpen={isOpen}>
         <Card>
           <CardBody>

@@ -97,6 +97,39 @@ appController.deleteApp = (req, res, next) => {
         message: `ERROR: appController.deleteApp: ERROR: see server log for details`
       });
     });
+
+
 };
+
+/* Update the favorite status for a specific app */
+
+appController.updateFavorite = (req, res, next) => {
+  const { userId } = req.body;
+  const { appId } = req.body;
+  const { favStatus } = req.body;
+
+
+  // To retain same subdocument ID, you must inject current subdoc ID into updateObj
+  //updateObj._id = appId;
+
+
+  User.updateOne(
+    { _id: userId, apps: { $elemMatch: { _id: appId } } },
+    {
+      $set: {
+        'apps.$.favorite': !favStatus
+      }
+    },
+    {
+      new: false,
+      overwrite: true,
+      runValidators: true
+    }
+  ).exec();
+  return next();
+};
+
+
+
 
 module.exports = appController;

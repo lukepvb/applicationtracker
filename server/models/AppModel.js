@@ -16,7 +16,8 @@ const appSchema = new Schema({
   contact: String,
   notes: String,
   dubDown: { type: Boolean, default: false },
-  followUp: { type: Boolean, default: false }
+  followUp: { type: Boolean, default: false },
+  favorite: { type: Boolean, default: false }
 });
 
 // creates a model for the 'user' collection that will be part of the export
