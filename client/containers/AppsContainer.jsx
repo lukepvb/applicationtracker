@@ -15,7 +15,7 @@ const AppsContainer = (props) => {
       const curJob = userApps[i];
 
       jobAppsList.push(
-        <ListGroupItem key={i} tag="button" onClick={toggle}>
+        <ListGroupItem key={curJob._id} tag="button" onClick={toggle}>
           <JobAppContainer
             isOpen={isOpen}
             companyName={curJob.company}
@@ -34,6 +34,7 @@ const AppsContainer = (props) => {
             user={props.user}
             handleUserData={props.handleUserData}
             isFav={curJob.favorite}
+            handleAppsFilter={props.handleAppsFilter}
           />
         </ListGroupItem>
       );
@@ -69,6 +70,16 @@ const AppsContainer = (props) => {
             color="danger"
           >
             {`Rejected (${props.rejectedCount})`}{' '}
+          </Button>
+        </h3>
+        <h3 className="legend">
+          <Button
+            outline
+            name="Favorites"
+            onClick={(e) => props.handleAppsFilter(e.target.name)}
+            color="warning"
+          >
+            {`Favorites (${props.favCount})`}{' '}
           </Button>
         </h3>
       </span>

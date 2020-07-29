@@ -121,7 +121,13 @@ appController.updateFavorite = (req, res, next) => {
       runValidators: true
     }
   ).exec();
-  return next();
+
+  // setTimeout to allow db to catch up before we query by user's ID
+
+  setTimeout(() => {
+    console.log('updated?!');
+    return next();
+  }, 1000);
 };
 
 module.exports = appController;

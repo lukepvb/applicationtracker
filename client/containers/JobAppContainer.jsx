@@ -18,7 +18,7 @@ const JobAppContainer = (props) => {
   const handleEdit = () => {
     toggle();
     props.handleAppId(props.appId);
-    console.log(props.appId);
+    props.handleAppsFilter('Reset');
     history.push('/dashboard/updateApp');
   };
 
@@ -64,14 +64,14 @@ const JobAppContainer = (props) => {
 
   //
   const favToggle = () => {
+    console.log('fav before: ', fav);
     setFav(!fav);
   };
 
   // this is where we are creating favClicked functionality, then running handleUserData
   async function favClicked(app) {
     console.log('This is id from favClicked, line 72 JobAppContainer', app);
-    favToggle();
-    // May need to troubleshoot this piece below
+
     const favoriteData = { userId: props.user._id, appId: props.appId, favStatus: fav };
     console.log('This is the favorite data', favoriteData);
 
@@ -86,8 +86,12 @@ const JobAppContainer = (props) => {
       body: JSON.stringify(favoriteData)
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => props.handleUserData(data))
       .catch((err) => console.log(err));
+
+    // resets flag in DashboardContainer in order to repopulate/rerender apps
+    // props.flagToggle();
+    favToggle();
   }
 
   // this is where we will create a FavIcon to render depending on whether it is pressed or not
@@ -105,6 +109,7 @@ const JobAppContainer = (props) => {
       </span>
     );
 
+  console.log('fav after: ', fav);
   return (
     <div className="job-app-container">
       <span className="buttonFavCombo">
