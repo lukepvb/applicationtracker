@@ -37,6 +37,7 @@ const NewApp = (props) => {
   const [notes, setNotes] = useState('');
   const [dubDown, setDubDown] = useState(Boolean);
   const [followUp, setFollowUp] = useState(Boolean);
+  const [favorite, setFavorite] = useState(Boolean);
   const [appFilled, setAppFilled] = useState(false);
 
   const toggle = () => setModal(!modal);
@@ -66,6 +67,7 @@ const NewApp = (props) => {
         setNotes(curApp.notes);
         setDubDown(curApp.dubDown);
         setFollowUp(curApp.followUp);
+        setFavorite(curApp.favorite);
 
         // formats dates for filling NewApp component when editing an application
         function dateFormat(dateRaw) {
@@ -99,7 +101,8 @@ const NewApp = (props) => {
       contact,
       notes,
       dubDown,
-      followUp
+      followUp,
+      favorite
     };
     const postData = { userId: props.user._id, appId: appId, newApp: newAppData };
 

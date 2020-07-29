@@ -18,6 +18,10 @@ const DashboardContainer = (props) => {
   const [rejectedRender, setRejectedRender] = useState([]);
   const [rejectedClicked, setRejectedClicked] = useState(false);
 
+  const [favCount, setFavCount] = useState(0);
+  const [favRender, setFavRender] = useState([]);
+  const [favFilterClicked, setFavFilterClicked] = useState(false);
+
   const [flag, setFlag] = useState(false);
 
   const [filteredAppsRender, setFilteredAppsRender] = useState(props.user.apps);
@@ -25,11 +29,22 @@ const DashboardContainer = (props) => {
   /* Below we handle the filtering of different apps 
    to be passed down to AppsContainer */
   const handleAppsFilter = (status) => {
+    // status "Reset" was implemented to reset app filters upon clicking edit
+    if (status === 'Reset') {
+      setInProgressClicked(false);
+      setCompletedClicked(false);
+      setRejectedClicked(false);
+      setFavFilterClicked(false);
+
+      setFilteredAppsRender(props.user.apps);
+    }
+
     // This is where we will toggle the button (true or false) to determine which filtered apps are rendered //
     if (status === 'In Progress' && inProgressClicked === false) {
       setInProgressClicked(true);
       setCompletedClicked(false);
       setRejectedClicked(false);
+      setFavFilterClicked(false);
 
       setFilteredAppsRender(inProgressRender);
     } else if (status === 'In Progress' && inProgressClicked === true) {
@@ -41,6 +56,7 @@ const DashboardContainer = (props) => {
       setInProgressClicked(false);
       setRejectedClicked(false);
       setCompletedClicked(true);
+      setFavFilterClicked(false);
 
       setFilteredAppsRender(completedRender);
     } else if (status === 'Completed' && completedClicked === true) {
@@ -52,9 +68,24 @@ const DashboardContainer = (props) => {
       setInProgressClicked(false);
       setCompletedClicked(false);
       setRejectedClicked(true);
+      setFavFilterClicked(false);
+
       setFilteredAppsRender(rejectedRender);
     } else if (status === 'Rejected' && rejectedClicked === true) {
       setRejectedClicked(false);
+      setFilteredAppsRender(props.user.apps);
+    }
+
+    // this is where favorites are rendered
+    if (status === 'Favorites' && favFilterClicked === false) {
+      setInProgressClicked(false);
+      setCompletedClicked(false);
+      setRejectedClicked(false);
+      setFavFilterClicked(true);
+
+      setFilteredAppsRender(favRender);
+    } else if (status === 'Favorites' && favFilterClicked === true) {
+      setFavFilterClicked(false);
       setFilteredAppsRender(props.user.apps);
     }
   };
@@ -77,6 +108,10 @@ const DashboardContainer = (props) => {
     setRejectedCount(appsRejected.length);
     setRejectedRender(appsRejected);
 
+    const appsFavorited = props.user.apps.filter((app) => app.favorite === true);
+    setFavCount(appsFavorited.length);
+    setFavRender(appsFavorited);
+
     setFlag(true);
   }
 
@@ -93,6 +128,7 @@ const DashboardContainer = (props) => {
       setInProgressClicked(true);
       setCompletedClicked(false);
       setRejectedClicked(false);
+      setFavFilterClicked(false);
     }
 
     const appsCompleted = props.user.apps.filter((app) => app.status === 'Complete');
@@ -102,6 +138,7 @@ const DashboardContainer = (props) => {
       setInProgressClicked(false);
       setRejectedClicked(false);
       setCompletedClicked(true);
+      setFavFilterClicked(false);
     }
 
     const appsRejected = props.user.apps.filter((app) => app.status === 'Rejected');
@@ -111,6 +148,43 @@ const DashboardContainer = (props) => {
       setInProgressClicked(false);
       setCompletedClicked(false);
       setRejectedClicked(true);
+      setFavFilterClicked(false);
+    }
+
+    const appsFavorited = props.user.apps.filter((app) => app.favorite === true);
+    const appsInProgressAlt = props.user.apps.filter((app) => app.status === 'In Progress');
+    const appsCompletedAlt = props.user.apps.filter((app) => app.status === 'Complete');
+    const appsRejectedAlt = props.user.apps.filter((app) => app.status === 'Rejected');
+
+    if (appsFavorited.length !== favCount) {
+      setFilteredAppsRender(props.user.apps);
+
+      setFavCount(appsFavorited.length);
+      setFavRender(appsFavorited);
+      setInProgressClicked(false);
+      setCompletedClicked(false);
+      setRejectedClicked(false);
+      setFavFilterClicked(true);
+
+      // this is how we rerender the proper status for each job app under favorites
+    } else if (appsInProgressAlt.length !== inProgressCount) {
+      setInProgressCount(appsInProgressAlt.length);
+      setInProgressRender(appsInProgressAlt);
+      // rebuilding the favRender after changing an app's status
+      const appsFavorited = props.user.apps.filter((app) => app.favorite === true);
+      setFavRender(appsFavorited);
+    } else if (appsCompletedAlt.length !== completedCount) {
+      setCompletedCount(appsCompletedAlt.length);
+      setCompletedRender(appsCompletedAlt);
+      // rebuilding the favRender after changing an app's status
+      const appsFavorited = props.user.apps.filter((app) => app.favorite === true);
+      setFavRender(appsFavorited);
+    } else if (appsRejectedAlt.length !== rejectedCount) {
+      setRejectedCount(appsRejectedAlt.length);
+      setRejectedRender(appsRejectedAlt);
+      // rebuilding the favRender after changing an app's status
+      const appsFavorited = props.user.apps.filter((app) => app.favorite === true);
+      setFavRender(appsFavorited);
     }
   }
 
@@ -128,6 +202,7 @@ const DashboardContainer = (props) => {
           inProgressCount={inProgressCount}
           completedCount={completedCount}
           rejectedCount={rejectedCount}
+          favCount={favCount}
           handleAppsFilter={handleAppsFilter}
           filteredAppsRender={filteredAppsRender}
         />
