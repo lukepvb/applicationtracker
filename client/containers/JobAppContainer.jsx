@@ -7,11 +7,9 @@ import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regStar } from '@fortawesome/free-regular-svg-icons';
 
-
 const JobAppContainer = (props) => {
   const [isOpen, setIsOpen] = useState(props.isOpen);
   const [fav, setFav] = useState(props.isFav);
-
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -23,8 +21,6 @@ const JobAppContainer = (props) => {
     console.log(props.appId);
     history.push('/dashboard/updateApp');
   };
-
-
 
   async function handleDelete(event) {
     toggle();
@@ -54,7 +50,6 @@ const JobAppContainer = (props) => {
     history.push('/dashboard');
   }
 
-
   let color;
   // if the company status is equal to 'Complete', set status to primary
   if (props.companyStatus === 'Complete') {
@@ -67,10 +62,10 @@ const JobAppContainer = (props) => {
     color = 'danger';
   }
 
-  // 
+  //
   const favToggle = () => {
     setFav(!fav);
-  }
+  };
 
   // this is where we are creating favClicked functionality, then running handleUserData
   async function favClicked(app) {
@@ -93,24 +88,34 @@ const JobAppContainer = (props) => {
       .then((res) => res.json())
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
-
   }
 
   // this is where we will create a FavIcon to render depending on whether it is pressed or not
   let FavIcon;
-  if (fav) FavIcon = (<span className="favIcon"><FAIcon onClick={() => favClicked()} icon={solidStar} style={{ color: 'steelblue' }} /></span>);
-  else FavIcon = (<span className="favIcon"><FAIcon onClick={() => favClicked()} icon={regStar} /></span>);
-
-
-
+  if (fav)
+    FavIcon = (
+      <span className="favIcon">
+        <FAIcon onClick={() => favClicked()} icon={solidStar} style={{ color: 'steelblue' }} />
+      </span>
+    );
+  else
+    FavIcon = (
+      <span className="favIcon">
+        <FAIcon onClick={() => favClicked()} icon={regStar} />
+      </span>
+    );
 
   return (
     <div className="job-app-container">
-      <Button color="primary" size="lg" onClick={toggle} block>
-        {`${props.companyName}   `}< Badge className="app-status" color={color}>&nbsp;&nbsp;</Badge>
-
-      </Button>
-      <div>{FavIcon}</div>
+      <span className="buttonFavCombo">
+        <Button color="primary" size="lg" onClick={toggle} block>
+          {`${props.companyName}   `}
+          <Badge className="app-status" color={color}>
+            &nbsp;&nbsp;
+          </Badge>
+        </Button>
+        {FavIcon}
+      </span>
 
       <Collapse isOpen={isOpen}>
         <Card>
@@ -143,7 +148,7 @@ const JobAppContainer = (props) => {
           </CardBody>
         </Card>
       </Collapse>
-    </div >
+    </div>
   );
 };
 

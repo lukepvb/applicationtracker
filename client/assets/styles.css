@@ -294,3 +294,16 @@ label {
 .notes {
   width: 65%;
 }
+
+/* favIcon styling in Job App */
+.favIcon {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: auto 0;
+  margin-left: 2%;
+}
+
+.buttonFavCombo {
+  display: flex;
+}
