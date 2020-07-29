@@ -78,7 +78,6 @@ appController.deleteApp = (req, res, next) => {
   const { appId, userId } = req.body;
   console.log('req.body:', appId);
 
-
   /* Multiple options for deleting app below */
 
   // User.findOne({ 'apps._id': appId }, function(err, result) {
@@ -97,8 +96,6 @@ appController.deleteApp = (req, res, next) => {
         message: `ERROR: appController.deleteApp: ERROR: see server log for details`
       });
     });
-
-
 };
 
 /* Update the favorite status for a specific app */
@@ -108,10 +105,8 @@ appController.updateFavorite = (req, res, next) => {
   const { appId } = req.body;
   const { favStatus } = req.body;
 
-
   // To retain same subdocument ID, you must inject current subdoc ID into updateObj
   //updateObj._id = appId;
-
 
   User.updateOne(
     { _id: userId, apps: { $elemMatch: { _id: appId } } },
@@ -128,8 +123,5 @@ appController.updateFavorite = (req, res, next) => {
   ).exec();
   return next();
 };
-
-
-
 
 module.exports = appController;
