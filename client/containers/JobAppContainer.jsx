@@ -65,6 +65,7 @@ const JobAppContainer = (props) => {
   const favToggle = () => {
     console.log('fav before: ', fav);
     setFav(!fav);
+    props.resetAppArrays();
   };
 
   // this is where we are creating favClicked functionality, then running handleUserData

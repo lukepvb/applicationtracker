@@ -26,9 +26,27 @@ const DashboardContainer = (props) => {
 
   const [filteredAppsRender, setFilteredAppsRender] = useState(props.user.apps);
 
+
+
+  const resetAppArrays = () => {
+
+    setFilteredAppsRender(props.user.apps);
+
+    const appsFavorited = props.user.apps.filter((app) => app.favorite === true);
+    const appsInProgressAlt = props.user.apps.filter((app) => app.status === 'In Progress');
+    const appsCompletedAlt = props.user.apps.filter((app) => app.status === 'Complete');
+    const appsRejectedAlt = props.user.apps.filter((app) => app.status === 'Rejected');
+
+    setFavRender(appsFavorited);
+    setInProgressRender(appsInProgressAlt);
+    setCompletedRender(appsCompletedAlt);
+    setRejectedRender(appsRejectedAlt);
+  }
+
   /* Below we handle the filtering of different apps 
-   to be passed down to AppsContainer */
+     to be passed down to AppsContainer */
   const handleAppsFilter = (status) => {
+    resetAppArrays();
     // status "Reset" was implemented to reset app filters upon clicking edit
     if (status === 'Reset') {
       setInProgressClicked(false);
@@ -37,6 +55,7 @@ const DashboardContainer = (props) => {
       setFavFilterClicked(false);
 
       setFilteredAppsRender(props.user.apps);
+
     }
 
     // This is where we will toggle the button (true or false) to determine which filtered apps are rendered //
@@ -47,6 +66,8 @@ const DashboardContainer = (props) => {
       setFavFilterClicked(false);
 
       setFilteredAppsRender(inProgressRender);
+
+
     } else if (status === 'In Progress' && inProgressClicked === true) {
       setInProgressClicked(false);
       setFilteredAppsRender(props.user.apps);
@@ -70,6 +91,7 @@ const DashboardContainer = (props) => {
       setRejectedClicked(true);
       setFavFilterClicked(false);
 
+      // ** need to repopulate the rejectedRender array
       setFilteredAppsRender(rejectedRender);
     } else if (status === 'Rejected' && rejectedClicked === true) {
       setRejectedClicked(false);
@@ -84,6 +106,7 @@ const DashboardContainer = (props) => {
       setFavFilterClicked(true);
 
       setFilteredAppsRender(favRender);
+
     } else if (status === 'Favorites' && favFilterClicked === true) {
       setFavFilterClicked(false);
       setFilteredAppsRender(props.user.apps);
@@ -92,6 +115,8 @@ const DashboardContainer = (props) => {
 
   /* This is where we are setting the different counts of applications */
 
+  // This is the initial dashboard render with their counts - we set a flag to true so that it goes into 
+  // another conditional below if any applications have been added (checks against the length)
   if (props.user.apps && !flag) {
     setYourAppsCount(props.user.apps.length);
     setFilteredAppsRender(props.user.apps);
@@ -115,41 +140,42 @@ const DashboardContainer = (props) => {
     setFlag(true);
   }
 
+
+  // If apps have been added or changed since original render, we will enter this conditional
   if (props.user.apps && flag) {
+
     if (props.user.apps.length !== yourAppsCount) {
       setYourAppsCount(props.user.apps.length);
-      setFilteredAppsRender(props.user.apps);
+      resetAppArrays();
+
     }
 
     const appsInProgress = props.user.apps.filter((app) => app.status === 'In Progress');
     if (appsInProgress.length !== inProgressCount) {
       setInProgressCount(appsInProgress.length);
-      setInProgressRender(appsInProgress);
-      setInProgressClicked(true);
-      setCompletedClicked(false);
-      setRejectedClicked(false);
-      setFavFilterClicked(false);
+      resetAppArrays();
+
+
+
     }
 
     const appsCompleted = props.user.apps.filter((app) => app.status === 'Complete');
     if (appsCompleted.length !== completedCount) {
       setCompletedCount(appsCompleted.length);
-      setCompletedRender(appsCompleted);
-      setInProgressClicked(false);
-      setRejectedClicked(false);
-      setCompletedClicked(true);
-      setFavFilterClicked(false);
+      resetAppArrays();
+
+
     }
 
     const appsRejected = props.user.apps.filter((app) => app.status === 'Rejected');
     if (appsRejected.length !== rejectedCount) {
       setRejectedCount(appsRejected.length);
-      setRejectedRender(appsRejected);
-      setInProgressClicked(false);
-      setCompletedClicked(false);
-      setRejectedClicked(true);
-      setFavFilterClicked(false);
+      resetAppArrays();
+
+
     }
+
+    /* Below is to fix the status of an app if it is in the favorites and has been changed */
 
     const appsFavorited = props.user.apps.filter((app) => app.favorite === true);
     const appsInProgressAlt = props.user.apps.filter((app) => app.status === 'In Progress');
@@ -158,33 +184,20 @@ const DashboardContainer = (props) => {
 
     if (appsFavorited.length !== favCount) {
       setFilteredAppsRender(props.user.apps);
-
+      resetAppArrays();
       setFavCount(appsFavorited.length);
-      setFavRender(appsFavorited);
-      setInProgressClicked(false);
-      setCompletedClicked(false);
-      setRejectedClicked(false);
-      setFavFilterClicked(true);
+      setFavFilterClicked(true); // not sure why this needs to be here, but it does (come back to this)
 
       // this is how we rerender the proper status for each job app under favorites
     } else if (appsInProgressAlt.length !== inProgressCount) {
       setInProgressCount(appsInProgressAlt.length);
-      setInProgressRender(appsInProgressAlt);
-      // rebuilding the favRender after changing an app's status
-      const appsFavorited = props.user.apps.filter((app) => app.favorite === true);
-      setFavRender(appsFavorited);
+      resetAppArrays();
     } else if (appsCompletedAlt.length !== completedCount) {
       setCompletedCount(appsCompletedAlt.length);
-      setCompletedRender(appsCompletedAlt);
-      // rebuilding the favRender after changing an app's status
-      const appsFavorited = props.user.apps.filter((app) => app.favorite === true);
-      setFavRender(appsFavorited);
+      resetAppArrays();
     } else if (appsRejectedAlt.length !== rejectedCount) {
       setRejectedCount(appsRejectedAlt.length);
-      setRejectedRender(appsRejectedAlt);
-      // rebuilding the favRender after changing an app's status
-      const appsFavorited = props.user.apps.filter((app) => app.favorite === true);
-      setFavRender(appsFavorited);
+      resetAppArrays();
     }
   }
 
@@ -205,6 +218,7 @@ const DashboardContainer = (props) => {
           favCount={favCount}
           handleAppsFilter={handleAppsFilter}
           filteredAppsRender={filteredAppsRender}
+          resetAppArrays={resetAppArrays}
         />
       </div>
       <div className="dash-footer" />

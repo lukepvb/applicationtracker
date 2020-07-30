@@ -102,9 +102,9 @@ const JobApp = (props) => {
           <MdSpeakerNotes className="icon-newApp" />
           <Label for="notes">Notes:</Label>
           <br />
-          <textarea disabled name="notes" className="notes">
-            {props.companyNotes}
-          </textarea>
+          <textarea disabled name="notes" value={props.companyNotes} className="notes" />
+
+
         </Col>
       </Row>
     </div>
