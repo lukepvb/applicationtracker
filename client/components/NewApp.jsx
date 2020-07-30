@@ -23,7 +23,6 @@ import { MdSave, MdList, MdDateRange, MdSpeakerNotes, MdComputer } from 'react-i
 
 const NewApp = (props) => {
   const { className, appId } = props;
-  const [modal, setModal] = useState(true);
   const [company, setCompany] = useState('');
   const [role, setRole] = useState('');
   const [dateSubmitted, setDateSubmitted] = useState('');
@@ -40,14 +39,24 @@ const NewApp = (props) => {
   const [favorite, setFavorite] = useState(Boolean);
   const [appFilled, setAppFilled] = useState(false);
 
-  const toggle = () => setModal(!modal);
-
-  let history = useHistory();
-
-  const handleClick = () => {
-    toggle();
-    // setAppFilled(true);
-    history.push('/dashboard');
+  const clearAppForm = () => {
+    setCompany('');
+    setRole('');
+    setDateSubmitted('');
+    setLocation('');
+    setSalary(0);
+    setLastUpdate('');
+    setStatus('In Progress');
+    setStage('Research');
+    setContact('');
+    setUrl('');
+    setNotes('');
+    setDubDown(false);
+    setFollowUp(false);
+    setFavorite(false);
+    setAppFilled(false);
+    props.handleAppId('');
+    props.handleClick();
   };
 
   // This piece fills the NewApp component with current app data that being edited
@@ -123,8 +132,10 @@ const NewApp = (props) => {
     })
       .then((res) => res.json())
       .then((data) => props.handleUserData(data))
+      .then(() => clearAppForm())
       .catch((err) => console.log(err));
-
+    // STILL DO NOT UNDERSTAND WHY clearAppForm MUST BE INVOKED TWICE - in .then and after
+    clearAppForm();
     /* take the current user object, isolate apps array, iterate over
       checking for a match based on props.appId, update it in user object,
       handleUserData(props.user)
@@ -140,9 +151,6 @@ const NewApp = (props) => {
       }
     }
 
-    setAppFilled(false);
-    // invoke handleClick to navigate to dashboard after form submission
-    handleClick();
     // TODO: Control flow here to avoid moving to dashboard without successful login
   }
 
@@ -175,15 +183,15 @@ const NewApp = (props) => {
   // **** TO DO - Make sure to account for handleSubmit and handleClick ***** //
 
   const closeBtn = (
-    <Button className="close" onClick={handleClick}>
+    <Button className="close" onClick={() => clearAppForm()}>
       &times;
     </Button>
   );
 
   return (
     <div>
-      <Modal isOpen={modal}>
-        <ModalHeader toggle={toggle} close={closeBtn}>
+      <Modal isOpen={props.modal}>
+        <ModalHeader toggle={props.toggle} close={closeBtn}>
           <MdList className="icon-newApp" />
           Application
         </ModalHeader>
@@ -404,13 +412,14 @@ const NewApp = (props) => {
         <ModalFooter>
           <Button
             color="primary"
+            type="submit"
             onClick={(e) => {
               handleAppSubmit(e, appFilled);
             }}
           >
             Save <MdSave className="icon-save" />
           </Button>{' '}
-          <Button color="secondary" onClick={handleClick}>
+          <Button color="secondary" onClick={() => clearAppForm()}>
             Cancel
           </Button>
         </ModalFooter>

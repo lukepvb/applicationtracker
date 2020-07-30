@@ -1,35 +1,36 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import NavHeader from '../components/NavHeader';
 import Header from '../components/Header';
 import AppsContainer from './AppsContainer';
 
 const DashboardContainer = (props) => {
   const [yourAppsCount, setYourAppsCount] = useState(0);
-
   const [inProgressCount, setInProgressCount] = useState(0);
   const [inProgressRender, setInProgressRender] = useState([]);
   const [inProgressClicked, setInProgressClicked] = useState(false);
-
   const [completedCount, setCompletedCount] = useState(0);
   const [completedRender, setCompletedRender] = useState([]);
   const [completedClicked, setCompletedClicked] = useState(false);
-
   const [rejectedCount, setRejectedCount] = useState(0);
   const [rejectedRender, setRejectedRender] = useState([]);
   const [rejectedClicked, setRejectedClicked] = useState(false);
-
   const [favCount, setFavCount] = useState(0);
   const [favRender, setFavRender] = useState([]);
   const [favFilterClicked, setFavFilterClicked] = useState(false);
-
   const [flag, setFlag] = useState(false);
-
   const [filteredAppsRender, setFilteredAppsRender] = useState(props.user.apps);
+  const [modal, setModal] = useState(false);
+  const [appFilled, setAppFilled] = useState(false);
 
+  const toggle = () => setModal(!modal);
 
+  const handleClick = () => {
+    toggle();
+    setAppFilled(false);
+  };
 
   const resetAppArrays = () => {
-
     setFilteredAppsRender(props.user.apps);
 
     const appsFavorited = props.user.apps.filter((app) => app.favorite === true);
@@ -41,7 +42,7 @@ const DashboardContainer = (props) => {
     setInProgressRender(appsInProgressAlt);
     setCompletedRender(appsCompletedAlt);
     setRejectedRender(appsRejectedAlt);
-  }
+  };
 
   /* Below we handle the filtering of different apps 
      to be passed down to AppsContainer */
@@ -55,7 +56,6 @@ const DashboardContainer = (props) => {
       setFavFilterClicked(false);
 
       setFilteredAppsRender(props.user.apps);
-
     }
 
     // This is where we will toggle the button (true or false) to determine which filtered apps are rendered //
@@ -66,8 +66,6 @@ const DashboardContainer = (props) => {
       setFavFilterClicked(false);
 
       setFilteredAppsRender(inProgressRender);
-
-
     } else if (status === 'In Progress' && inProgressClicked === true) {
       setInProgressClicked(false);
       setFilteredAppsRender(props.user.apps);
@@ -106,7 +104,6 @@ const DashboardContainer = (props) => {
       setFavFilterClicked(true);
 
       setFilteredAppsRender(favRender);
-
     } else if (status === 'Favorites' && favFilterClicked === true) {
       setFavFilterClicked(false);
       setFilteredAppsRender(props.user.apps);
@@ -115,7 +112,7 @@ const DashboardContainer = (props) => {
 
   /* This is where we are setting the different counts of applications */
 
-  // This is the initial dashboard render with their counts - we set a flag to true so that it goes into 
+  // This is the initial dashboard render with their counts - we set a flag to true so that it goes into
   // another conditional below if any applications have been added (checks against the length)
   if (props.user.apps && !flag) {
     setYourAppsCount(props.user.apps.length);
@@ -140,39 +137,29 @@ const DashboardContainer = (props) => {
     setFlag(true);
   }
 
-
   // If apps have been added or changed since original render, we will enter this conditional
   if (props.user.apps && flag) {
-
     if (props.user.apps.length !== yourAppsCount) {
       setYourAppsCount(props.user.apps.length);
       resetAppArrays();
-
     }
 
     const appsInProgress = props.user.apps.filter((app) => app.status === 'In Progress');
     if (appsInProgress.length !== inProgressCount) {
       setInProgressCount(appsInProgress.length);
       resetAppArrays();
-
-
-
     }
 
     const appsCompleted = props.user.apps.filter((app) => app.status === 'Complete');
     if (appsCompleted.length !== completedCount) {
       setCompletedCount(appsCompleted.length);
       resetAppArrays();
-
-
     }
 
     const appsRejected = props.user.apps.filter((app) => app.status === 'Rejected');
     if (appsRejected.length !== rejectedCount) {
       setRejectedCount(appsRejected.length);
       resetAppArrays();
-
-
     }
 
     /* Below is to fix the status of an app if it is in the favorites and has been changed */
@@ -206,7 +193,17 @@ const DashboardContainer = (props) => {
       <NavHeader />
 
       <div className="dash-main">
-        <Header name={props.user.firstName} history={props.history} />
+        <Header
+          name={props.user.firstName}
+          history={props.history}
+          user={props.user}
+          handleUserData={props.handleUserData}
+          handleAppId={props.handleAppId}
+          appId={props.appId}
+          handleClick={handleClick}
+          modal={modal}
+          toggle={toggle}
+        />
         <AppsContainer
           handleAppId={props.handleAppId}
           handleUserData={props.handleUserData}
@@ -219,6 +216,9 @@ const DashboardContainer = (props) => {
           handleAppsFilter={handleAppsFilter}
           filteredAppsRender={filteredAppsRender}
           resetAppArrays={resetAppArrays}
+          handleClick={handleClick}
+          modal={modal}
+          toggle={toggle}
         />
       </div>
       <div className="dash-footer" />

@@ -19,7 +19,8 @@ const JobAppContainer = (props) => {
     toggle();
     props.handleAppId(props.appId);
     props.handleAppsFilter('Reset');
-    history.push('/dashboard/updateApp');
+    props.handleClick();
+    // history.push('/dashboard/updateApp');
   };
 
   async function handleDelete(event) {
