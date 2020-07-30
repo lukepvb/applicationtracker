@@ -1,16 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Jumbotron, Button } from 'reactstrap';
 import { MdAddCircle } from 'react-icons/md';
 import { TiArrowForwardOutline } from 'react-icons/ti';
 import Avatar from 'react-avatar';
+import NewApp from './NewApp';
 
 const Header = (props) => {
-  let history = useHistory();
-
-  const handleClick = () => {
-    history.push('/dashboard/newApp');
-  };
   return (
     <div>
       <Jumbotron>
@@ -27,7 +23,17 @@ const Header = (props) => {
           <TiArrowForwardOutline className="jumbo-arrow" size={130} />
         </h4>
         <p className="lead">
-          <Button outline className="button-new-app" color="success" onClick={handleClick}>
+          {/*This is where NewApp should be rendered as a modal instead of this button*/}
+          <NewApp
+            modal={props.modal}
+            toggle={props.toggle}
+            handleClick={props.handleClick}
+            user={props.user}
+            handleUserData={props.handleUserData}
+            handleAppId={props.handleAppId}
+            appId={props.appId}
+          />
+          <Button outline className="button-new-app" color="success" onClick={props.handleClick}>
             <MdAddCircle size={60} />
           </Button>
         </p>

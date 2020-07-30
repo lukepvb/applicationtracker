@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import '../assets/styles.css';
 import LoginContainer from '../containers/LoginContainer';
 import DashboardContainer from '../containers/DashboardContainer';
-import NewApp from './NewApp';
 import Data from './Data';
 
 const App = (props) => {
@@ -13,12 +12,12 @@ const App = (props) => {
 
   const handleUserData = (userData) => {
     setUser(userData);
-    console.log(user);
+    console.log('user ID', user);
   };
 
   const handleAppId = (updateId) => {
     setAppId(updateId);
-    console.log(appId);
+    console.log('app ID', appId);
   };
 
   return (
@@ -37,20 +36,11 @@ const App = (props) => {
             render={() => (
               <DashboardContainer
                 handleUserData={handleUserData}
+                appId={appId}
                 handleAppId={handleAppId}
                 user={user}
               />
             )}
-          />
-          <Route
-            exact
-            path="/dashboard/newApp"
-            render={() => <NewApp handleUserData={handleUserData} user={user} />}
-          />
-          <Route
-            exact
-            path="/dashboard/updateApp"
-            render={() => <NewApp appId={appId} handleUserData={handleUserData} user={user} />}
           />
           <Route path="/data" component={Data} />
         </>
