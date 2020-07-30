@@ -20,21 +20,15 @@ const JobAppContainer = (props) => {
     props.handleAppId(props.appId);
     props.handleAppsFilter('Reset');
     props.handleClick();
-    // history.push('/dashboard/updateApp');
   };
 
   async function handleDelete(event) {
     toggle();
-    props.handleAppId(props.appId);
-    console.log(props.appId);
-    // fetch request to delete app from user doc in db
-    event.preventDefault();
 
+    // fetch request to delete app from user doc in db
     const deleteData = { userId: props.user._id, appId: props.appId };
 
-    // control flow sets url to update rather than create if updating existing apps
     const appURL = '/api/apps/delete/';
-
     await fetch(appURL, {
       method: 'delete',
       headers: {
@@ -47,7 +41,7 @@ const JobAppContainer = (props) => {
       .then((data) => props.handleUserData(data))
       .catch((err) => console.log(err));
 
-    // navigate back to dashboard when complete
+    props.handleAppId('');
     history.push('/dashboard');
   }
 

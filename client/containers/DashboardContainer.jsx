@@ -30,6 +30,10 @@ const DashboardContainer = (props) => {
     setAppFilled(false);
   };
 
+  const handleDelete = () => {
+    setAppFilled(false);
+  };
+
   const resetAppArrays = () => {
     setFilteredAppsRender(props.user.apps);
 
