@@ -127,7 +127,7 @@ appController.updateFavorite = (req, res, next) => {
   setTimeout(() => {
     console.log('updated?!');
     return next();
-  }, 1000);
+  }, 100);
 };
 
 module.exports = appController;

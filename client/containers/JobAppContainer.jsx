@@ -8,7 +8,7 @@ import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regStar } from '@fortawesome/free-regular-svg-icons';
 
 const JobAppContainer = (props) => {
-  const [isOpen, setIsOpen] = useState(props.isOpen);
+  const [isOpen, setIsOpen] = useState(false);
   const [fav, setFav] = useState(props.isFav);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -66,6 +66,7 @@ const JobAppContainer = (props) => {
   const favToggle = () => {
     console.log('fav before: ', fav);
     setFav(!fav);
+    props.resetAppArrays();
   };
 
   // this is where we are creating favClicked functionality, then running handleUserData

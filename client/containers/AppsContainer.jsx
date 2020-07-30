@@ -35,6 +35,7 @@ const AppsContainer = (props) => {
             handleUserData={props.handleUserData}
             isFav={curJob.favorite}
             handleAppsFilter={props.handleAppsFilter}
+            resetAppArrays={props.resetAppArrays}
           />
         </ListGroupItem>
       );

@@ -182,7 +182,7 @@ const NewApp = (props) => {
 
   return (
     <div>
-      <Modal isOpen={modal} className={className}>
+      <Modal isOpen={modal}>
         <ModalHeader toggle={toggle} close={closeBtn}>
           <MdList className="icon-newApp" />
           Application
@@ -404,7 +404,6 @@ const NewApp = (props) => {
         <ModalFooter>
           <Button
             color="primary"
-            type="submit"
             onClick={(e) => {
               handleAppSubmit(e, appFilled);
             }}
