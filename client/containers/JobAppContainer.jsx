@@ -8,7 +8,7 @@ import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regStar } from '@fortawesome/free-regular-svg-icons';
 
 const JobAppContainer = (props) => {
-  const [isOpen, setIsOpen] = useState(props.isOpen);
+  const [isOpen, setIsOpen] = useState(false);
   const [fav, setFav] = useState(props.isFav);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -62,7 +62,6 @@ const JobAppContainer = (props) => {
     color = 'danger';
   }
 
-  //
   const favToggle = () => {
     console.log('fav before: ', fav);
     setFav(!fav);
@@ -89,8 +88,6 @@ const JobAppContainer = (props) => {
       .then((data) => props.handleUserData(data))
       .catch((err) => console.log(err));
 
-    // resets flag in DashboardContainer in order to repopulate/rerender apps
-    // props.flagToggle();
     favToggle();
   }
 
