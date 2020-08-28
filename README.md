@@ -1,5 +1,6 @@
-# applicationtracker
-AppTrack is a full stack, web-app that serves as a management tool for those on the job search
+# AppTrack
+AppTrack is a full stack, management tool for built for people on the job search
 
-Check back soon for updated stills!
+Check back soon for updated stills of various components!
+
 
