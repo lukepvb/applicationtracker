@@ -1,5 +1,5 @@
 # AppTrack
-AppTrack is a full stack, management tool for built for people on the job search. Users can:
+AppTrack is a full stack, management tool built for people on the job search. Users can:
 
 1. Log in or Sign up, depending on if they exist in the database
 2. Keep track of their applications in detail throughout the whole process, including -
