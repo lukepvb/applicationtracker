@@ -12,7 +12,7 @@ import {
   Input,
   Label,
   Col,
-  Row
+  Row,
 } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import { IoMdStats } from 'react-icons/io';
@@ -111,7 +111,7 @@ const NewApp = (props) => {
       notes,
       dubDown,
       followUp,
-      favorite
+      favorite,
     };
     const postData = { userId: props.user._id, appId: appId, newApp: newAppData };
 
@@ -126,9 +126,9 @@ const NewApp = (props) => {
       method: 'post',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(postData)
+      body: JSON.stringify(postData),
     })
       .then((res) => res.json())
       .then((data) => props.handleUserData(data))
@@ -380,7 +380,7 @@ const NewApp = (props) => {
               </Col>
             </Row>
             <Row>
-              <Col>
+              {/* <Col> // I don't think that we need this - seems extraneous, but will leave here in case you want to keep it for any reason
                 <FormGroup check>
                   <Label check>
                     <Input
@@ -405,7 +405,7 @@ const NewApp = (props) => {
                     &nbsp;Followed Up
                   </Label>
                 </FormGroup>
-              </Col>
+              </Col> */}
             </Row>
           </Form>
         </ModalBody>

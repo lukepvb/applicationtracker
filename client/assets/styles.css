@@ -294,7 +294,11 @@ label {
 
 /* Job App Styling */
 .notes {
-  width: 65%;
+  width: 100%;
+}
+
+.edit-button {
+  margin-right: 1%;
 }
 
 /* favIcon styling in Job App */
