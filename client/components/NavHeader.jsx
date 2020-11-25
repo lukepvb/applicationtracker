@@ -29,11 +29,13 @@ const NavHeader = (props) => {
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
-            <NavItem>
+            {/* <NavItem>
               <NavLink onClick={handleClickData}>Data</NavLink>
-            </NavItem>
+            </NavItem> */}
             <NavItem>
-              <NavLink href="https://github.com/lukepvb/applicationtracker">GitHub</NavLink>
+              <NavLink target="_blank" href="https://github.com/lukepvb/applicationtracker">
+                GitHub
+              </NavLink>
             </NavItem>
             <NavItem>
               <NavLink onClick={handleClickLogout}>Logout</NavLink>
