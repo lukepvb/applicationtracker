@@ -33,9 +33,9 @@ const JobAppContainer = (props) => {
       method: 'delete',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(deleteData)
+      body: JSON.stringify(deleteData),
     })
       .then((res) => res.json())
       .then((data) => props.handleUserData(data))
@@ -76,9 +76,9 @@ const JobAppContainer = (props) => {
       method: 'post',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(favoriteData)
+      body: JSON.stringify(favoriteData),
     })
       .then((res) => res.json())
       .then((data) => props.handleUserData(data))
@@ -131,7 +131,7 @@ const JobAppContainer = (props) => {
               companyNotes={props.companyNotes}
               appId={props.appId}
             />
-            <Button onClick={handleEdit}>
+            <Button onClick={handleEdit} className="edit-button">
               <FaEdit className="icon-edit" /> Edit
             </Button>
             <Button
